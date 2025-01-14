@@ -1,12 +1,17 @@
+import { Outlet } from "react-router-dom"
+import Header from "./SharedComponents/Header"
+import Footer from "./SharedComponents/Footer"
 
 
 function App() {
 
   return (
     <>
-      <header></header>
-      <main className="min-h-screen"></main>
-      <footer></footer>
+      <Header />
+      <main className="min-h-screen">
+        <Outlet />
+      </main>
+      <Footer />
     </>
   )
 }
