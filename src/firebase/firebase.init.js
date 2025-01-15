@@ -5,13 +5,13 @@ import { getAuth } from "firebase/auth";
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCrGxq4owJ2iTTXEaV0FqJIj6sjlbkOoJA",
-  authDomain: "pay-per-tasks.firebaseapp.com",
-  projectId: "pay-per-tasks",
-  storageBucket: "pay-per-tasks.firebasestorage.app",
-  messagingSenderId: "314693466534",
-  appId: "1:314693466534:web:4ae34cb8161e0cc317b767",
-  measurementId: "G-LC990WMQTZ",
+  apiKey: import.meta.env.VITE_apiKey,
+  authDomain: import.meta.env.VITE_authDomain,
+  projectId: import.meta.env.VITE_projectId,
+  storageBucket: import.meta.env.VITE_storageBucket,
+  messagingSenderId: import.meta.env.VITE_messagingSenderId,
+  appId: import.meta.env.VITE_appId,
+  measurementId: import.meta.env.VITE_measurementId,
 };
 
 // Initialize Firebase
