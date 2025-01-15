@@ -1,7 +1,17 @@
 import { Link, NavLink } from "react-router-dom";
 import blackLogo from "../assets/images/black-logo.png";
+import useAuth from "../hooks/useAuth";
+import toast from "react-hot-toast";
 
 const Header = () => {
+  const { user, logout, loading } = useAuth();
+  const handleLogOut = () => {
+    logout()
+      .then(() => toast.success("Logged out successfully!"))
+      .catch(({ code }) => toast.error(code));
+  };
+
+  console.log(loading);
   const links = (
     <>
       <li>
@@ -45,17 +55,38 @@ const Header = () => {
           <ul className="menu menu-horizontal px-1">{links}</ul>
         </div>
         <div className="navbar-end gap-4">
-          <div className="join">
-            <Link to='/login' className="btn join-item bg-second-color text-white">
-              Login
-            </Link>
-            <Link className="btn join-item bg-second-color text-white">
-              Register
-            </Link>
-            <Link className="btn join-item bg-main-color">
-              Join As Developer
-            </Link>
-          </div>
+          {loading ? (
+            <div className="flex">
+              <div className="skeleton h-4 w-full"></div>
+              <div className="skeleton h-4 w-full"></div>
+            </div>
+          ) : (
+            <div className="join">
+              {!user ? (
+                <>
+                  <Link
+                    to="/login"
+                    className="btn join-item bg-second-color text-white"
+                  >
+                    Login
+                  </Link>
+                  <Link className="btn join-item bg-second-color text-white">
+                    Register
+                  </Link>
+                </>
+              ) : (
+                <button
+                  onClick={handleLogOut}
+                  className="btn bg-orange-500 join-item"
+                >
+                  Log Out
+                </button>
+              )}
+              <Link className="btn join-item bg-main-color">
+                Join As Developer
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </header>

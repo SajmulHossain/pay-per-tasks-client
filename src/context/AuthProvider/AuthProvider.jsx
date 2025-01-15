@@ -1,20 +1,46 @@
+import { useEffect, useState } from "react";
 import auth from "../../firebase/firebase.init";
 import AuthContext from "./AuthContext";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  signInWithPopup,
+  signOut,
+} from "firebase/auth";
 
 // eslint-disable-next-line react/prop-types
 const AuthProvider = ({ children }) => {
-const googleProvider = new GoogleAuthProvider();
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const googleProvider = new GoogleAuthProvider();
 
+  const signInWithGoogle = () => {
+    setLoading(true);
+    return signInWithPopup(auth, googleProvider);
+  };
 
-const signInWithGoogle = () => {
-  return signInWithPopup(auth, googleProvider);
-}
+  const logout = () => {
+    setLoading(true);
+    return signOut(auth);
+  };
 
-const data = {
-  signInWithGoogle
-}
-  
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setLoading(false);
+      setUser(currentUser);
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
+  const data = {
+    signInWithGoogle,
+    user,
+    loading,
+    logout
+  };
 
   return <AuthContext.Provider value={data}>{children}</AuthContext.Provider>;
 };
