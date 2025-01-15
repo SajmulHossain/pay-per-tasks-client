@@ -2,9 +2,9 @@
 
 const Header = () => {
   return (
-    <div>
+    <header className="bg-second-color">
       this is header
-    </div>
+    </header>
   );
 };
 
