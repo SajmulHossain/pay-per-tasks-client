@@ -8,9 +8,11 @@ import uploadImg from "../../Api/imgbb";
 import toast from "react-hot-toast";
 import { axiosSecureUrl } from "../../hooks/useAxiosSecure";
 import DefaultLoading from "../../components/DefaultLoading";
+import CrudLoading from "../../components/CrudLoading";
 
 const Register = () => {
   const [error, setError] = useState();
+  const [isSignin, setIsSignin] = useState(false);
   const { updateUser, register, user, loading } = useAuth();
 
   if (loading) {
@@ -62,11 +64,18 @@ const Register = () => {
       return setError("Please select your role!");
     }
 
+    setIsSignin(true);
     const imgUrl = await uploadImg(image);
 
     try {
+      let coin = 0;
+      if(role ==='buyer') {
+        coin = 50;
+      } else {
+        coin = 10;
+      }
+
       const result = await register(email, password);
-      console.log(result);
       await updateUser(name, imgUrl);
 
       const user = {
@@ -74,22 +83,27 @@ const Register = () => {
         name: result?.user?.displayName,
         image: result?.user?.photoURL,
         role,
+        coin,
         timeStamp: result?.user?.metadata?.createdAt,
       };
 
       await axiosSecureUrl.post(`/user/${email}`, user);
     } catch (err) {
       toast.error(err.code);
-      console.log(err);
+    } finally {
+      setIsSignin(false);
     }
   };
 
   return (
     <section className="section max-w-screen-lg flex gap-12 items-center overflow-x-hidden">
-      <div data-aos='fade-right' className="flex-1 hidden md:block">
+      <div data-aos="fade-right" className="flex-1 hidden md:block">
         <Lottie animationData={registerLottie} />
       </div>
-      <div data-aos='fade-left' className="flex-1 shadow-2xl rounded bg-main-color/10">
+      <div
+        data-aos="fade-left"
+        className="flex-1 shadow-2xl rounded bg-main-color/10"
+      >
         <form onSubmit={handleRegister} className="p-6 py-10">
           <h1 className="text-3xl mb-8 text-center border-b border-main-color py-2 font-bold">
             Register now!
@@ -175,7 +189,7 @@ const Register = () => {
           </div>
           <div className="form-control mt-6">
             <button className="btn rounded bg-main-color hover:bg-second-color">
-              Login
+              {isSignin ? <CrudLoading /> : "Register"}
             </button>
 
             <p className="text-sm mt-1">

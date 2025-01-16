@@ -9,16 +9,13 @@ export const axiosSecureUrl = axios.create({
 });
 
 const useAxiosSecure = () => {
-  const {logout} = useAuth();
+  const { logout } = useAuth();
   const navigate = useNavigate();
 
-  useEffect(()=>{
+  useEffect(() => {
     axiosSecureUrl.interceptors.response.use(
       (res) => res,
       async (error) => {
-        // toast.error()
-        console.log(error);
-
         if (error.response.status === 401 || error.response.status === 403) {
           logout();
           navigate("/login");
@@ -27,7 +24,7 @@ const useAxiosSecure = () => {
         return Promise.reject(error);
       }
     );
-  },[logout, navigate])
-}
+  }, [logout, navigate]);
+};
 
 export default useAxiosSecure;

@@ -60,7 +60,7 @@ const Header = () => {
           {user && (
             <div className="flex items-center">
               <img
-                className="w-12 h-12 rounded-full"
+                className="w-12 h-12 object-cover rounded-full"
                 referrerPolicy="no-referrer"
                 src={user?.photoURL}
                 alt={`${user?.displayName}'s photo`}

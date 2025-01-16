@@ -10,6 +10,7 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
+import { axiosSecureUrl } from "../../hooks/useAxiosSecure";
 
 // eslint-disable-next-line react/prop-types
 const AuthProvider = ({ children }) => {
@@ -45,9 +46,15 @@ const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      if(currentUser?.email) {
+        setUser(currentUser);
+        await axiosSecureUrl.post('/jwt', {email: currentUser?.email})
+      } else {
+        setUser(currentUser);
+        axiosSecureUrl('/logout')
+      }
       setLoading(false);
-      setUser(currentUser);
     });
 
     return () => {

@@ -17,12 +17,13 @@ const GoogleLogin = () => {
           name: res?.user?.displayName,
           image: res?.user?.photoURL,
           role: "worker",
+          coin: 10,
           timeStamp: res?.user?.metadata.createdAt,
         };
         navigate("/dashboard");
         await axiosSecureUrl.post(`/user/${res.user.email}`, user);
       })
-      .catch(({ code }) => console.log(code));
+      .catch(({ code }) => toast.error(code));
   };
 
   return (
