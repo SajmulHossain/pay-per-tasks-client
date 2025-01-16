@@ -10,8 +10,7 @@ const Header = () => {
       .then(() => toast.success("Logged out successfully!"))
       .catch(({ code }) => toast.error(code));
   };
-
-  console.log(loading);
+  
   const links = (
     <>
       <li>
@@ -55,10 +54,19 @@ const Header = () => {
           <ul className="menu menu-horizontal px-1">{links}</ul>
         </div>
         <div className="navbar-end gap-4">
+          {user && (
+            <div className="flex items-center">
+              <img
+                className="w-12 h-12 rounded-full"
+                referrerPolicy="no-referrer"
+                src={user?.photoURL}
+                alt={`${user?.displayName}'s photo`}
+              />
+            </div>
+          )}
           {loading ? (
-            <div className="flex">
-              <div className="skeleton h-4 w-full"></div>
-              <div className="skeleton h-4 w-full"></div>
+            <div className="flex w-52 flex-col gap-4">
+              <div className="skeleton h-12 w-full"></div>
             </div>
           ) : (
             <div className="join">
@@ -75,12 +83,14 @@ const Header = () => {
                   </Link>
                 </>
               ) : (
-                <button
-                  onClick={handleLogOut}
-                  className="btn bg-orange-500 join-item"
-                >
-                  Log Out
-                </button>
+                <>
+                  <button
+                    onClick={handleLogOut}
+                    className="btn bg-orange-500 join-item"
+                  >
+                    Log Out
+                  </button>
+                </>
               )}
               <Link className="btn join-item bg-main-color">
                 Join As Developer
