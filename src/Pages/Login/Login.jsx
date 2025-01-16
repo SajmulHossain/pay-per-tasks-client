@@ -59,11 +59,11 @@ const Login = () => {
       .catch(({ code }) => toast.error(code));
   };
   return (
-    <section className="section max-w-screen-lg flex gap-12 items-center">
-      <div className="flex-1 hidden md:block">
+    <section className="section overflow-x-hidden max-w-screen-lg flex gap-12 items-center">
+      <div data-aos='fade-right' className="flex-1 hidden md:block">
         <Lottie animationData={loginLottie} />
       </div>
-      <div className="flex-1 shadow-2xl rounded bg-main-color/10">
+      <div data-aos='fade-left' className="flex-1 shadow-2xl rounded bg-main-color/10">
         <form onSubmit={handleLogin} className="p-6 py-10">
           <h1 className="text-3xl mb-8 text-center border-b border-main-color py-2 font-bold">
             Login now!

@@ -66,28 +66,30 @@ const Register = () => {
 
     try {
       const result = await register(email, password);
+      console.log(result);
       await updateUser(name, imgUrl);
 
       const user = {
-        email: result?.email,
-        name: result?.displayName,
-        image: result?.photoURL,
-        role: role,
-        timeStamp: result?.metadata.createdAt,
+        email: result?.user?.email,
+        name: result?.user?.displayName,
+        image: result?.user?.photoURL,
+        role,
+        timeStamp: result?.user?.metadata?.createdAt,
       };
 
       await axiosSecureUrl.post(`/user/${email}`, user);
     } catch (err) {
       toast.error(err.code);
+      console.log(err);
     }
   };
 
   return (
-    <section className="section max-w-screen-lg flex gap-12 items-center">
-      <div className="flex-1 hidden md:block">
+    <section className="section max-w-screen-lg flex gap-12 items-center overflow-x-hidden">
+      <div data-aos='fade-right' className="flex-1 hidden md:block">
         <Lottie animationData={registerLottie} />
       </div>
-      <div className="flex-1 shadow-2xl rounded bg-main-color/10">
+      <div data-aos='fade-left' className="flex-1 shadow-2xl rounded bg-main-color/10">
         <form onSubmit={handleRegister} className="p-6 py-10">
           <h1 className="text-3xl mb-8 text-center border-b border-main-color py-2 font-bold">
             Register now!
@@ -95,31 +97,33 @@ const Register = () => {
 
           {<p className="text-center text-red-500 text-sm mb-4">{error}</p>}
           <div className="space-y-4">
-            <div className="form-control">
-              <label htmlFor="name" className="label">
-                <span className="label-text">Name</span>
-              </label>
-              <input
-                type="text"
-                placeholder="Name"
-                name="name"
-                id="name"
-                className="input rounded input-bordered"
-                required
-              />
-            </div>
-            <div className="form-control">
-              <label htmlFor="email" className="label">
-                <span className="label-text">Email</span>
-              </label>
-              <input
-                type="email"
-                placeholder="Email"
-                name="email"
-                id="email"
-                className="input rounded input-bordered"
-                required
-              />
+            <div className="flex gap-2">
+              <div className="form-control">
+                <label htmlFor="name" className="label">
+                  <span className="label-text">Name</span>
+                </label>
+                <input
+                  type="text"
+                  placeholder="Name"
+                  name="name"
+                  id="name"
+                  className="input rounded input-bordered"
+                  required
+                />
+              </div>
+              <div className="form-control">
+                <label htmlFor="email" className="label">
+                  <span className="label-text">Email</span>
+                </label>
+                <input
+                  type="email"
+                  placeholder="Email"
+                  name="email"
+                  id="email"
+                  className="input rounded input-bordered"
+                  required
+                />
+              </div>
             </div>
             <div className="form-control">
               <label htmlFor="image" className="label">
@@ -146,8 +150,8 @@ const Register = () => {
                 className="select select-bordered w-full"
               >
                 <option disabled>Select Your Role</option>
-                <option value='worker'>Worker</option>
-                <option value='buyer'>Buyer</option>
+                <option value="worker">Worker</option>
+                <option value="buyer">Buyer</option>
               </select>
             </div>
             <div className="form-control">
