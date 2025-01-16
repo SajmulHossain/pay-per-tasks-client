@@ -8,36 +8,16 @@ const Dashboard = () => {
   const links = (
     <>
       <li>
-        <NavLink
-          to="/dashboard"
-          className={({ isActive }) => (isActive ? "bg-main-color" : "")}
-        >
-          Home
-        </NavLink>
+        <NavLink to='home' className={active}>Home</NavLink>
       </li>
       <li>
-        <NavLink
-          to="tasks"
-          className={({ isActive }) => (isActive ? "bg-main-color" : "")}
-        >
-          TaskList
-        </NavLink>
+        <NavLink to='tasks' className={active}>TaskList</NavLink>
       </li>
       <li>
-        <NavLink
-          to="submission"
-          className={({ isActive }) => (isActive ? "bg-main-color" : "")}
-        >
-          My Submissions
-        </NavLink>
+        <NavLink to='submission' className={active}>My Submissions</NavLink>
       </li>
       <li>
-        <NavLink
-          to="withdraw"
-          className={({ isActive }) => (isActive ? "bg-main-color" : "")}
-        >
-          Withdrawals
-        </NavLink>
+        <NavLink to='withdraw' className={active}>Withdrawals</NavLink>
       </li>
     </>
   );

@@ -38,7 +38,7 @@ const routes = createBrowserRouter([
     ),
     children: [
       {
-        path: '/dashboard',
+        path: 'home',
         element: (
           <PrivetRoute>
             <UserHome />
