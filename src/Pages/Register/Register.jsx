@@ -1,5 +1,5 @@
 import GoogleLogin from "../../components/GoogleLogin";
-import registerLottie from '../../assets/lotties/register.json'
+import registerLottie from "../../assets/lotties/register.json";
 import Lottie from "lottie-react";
 import { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
@@ -7,20 +7,27 @@ import useAuth from "../../hooks/useAuth";
 import uploadImg from "../../Api/imgbb";
 import toast from "react-hot-toast";
 import { axiosSecureUrl } from "../../hooks/useAxiosSecure";
-
+import DefaultLoading from "../../components/DefaultLoading";
 
 const Register = () => {
-const [error, setError] = useState();
-const { updateUser ,register, user} = useAuth();
+  const [error, setError] = useState();
+  const { updateUser, register, user, loading } = useAuth();
 
+  if (loading) {
+    return (
+      <div className="min-h-screen flex justify-center items-center">
+        <DefaultLoading />
+      </div>
+    );
+  }
 
-if(user) {
-  return <Navigate to='/dashboard' replace />
-}
+  if (user) {
+    return <Navigate to="/dashboard" replace />;
+  }
 
-  const handleRegister =async e => {
+  const handleRegister = async (e) => {
     e.preventDefault();
-    setError('');
+    setError("");
 
     const form = e.target;
 
@@ -29,7 +36,6 @@ if(user) {
     const image = form.image.files[0];
     const name = form.name.value;
     const role = form.role.value;
-
 
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
@@ -48,35 +54,33 @@ if(user) {
       );
     }
 
-    if(!image) {
-      return setError('Please upload your image!')
+    if (!image) {
+      return setError("Please upload your image!");
     }
 
-    if(!role) {
-      return setError('Please select your role!');
+    if (!role) {
+      return setError("Please select your role!");
     }
 
-const imgUrl = await uploadImg(image);
+    const imgUrl = await uploadImg(image);
 
-try {
-  const result = await register(email, password);  
-  await updateUser(name, imgUrl);
+    try {
+      const result = await register(email, password);
+      await updateUser(name, imgUrl);
 
-  const user = {
-    email : result?.email,
-    name: result?.displayName,
-    image: result?.photoURL,
-    role: 'role',
-    timeStamp: new Date().now()
-  }
+      const user = {
+        email: result?.email,
+        name: result?.displayName,
+        image: result?.photoURL,
+        role: "role",
+        timeStamp: new Date().now(),
+      };
 
-  await axiosSecureUrl.post(`/user/${email}`, user)
-} catch(err) {
-  toast.error(err.code);
-}
-
-
-  }
+      await axiosSecureUrl.post(`/user/${email}`, user);
+    } catch (err) {
+      toast.error(err.code);
+    }
+  };
 
   return (
     <section className="section max-w-screen-lg flex gap-12 items-center">

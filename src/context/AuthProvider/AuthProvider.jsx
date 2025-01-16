@@ -14,7 +14,7 @@ import {
 // eslint-disable-next-line react/prop-types
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const googleProvider = new GoogleAuthProvider();
 
   const signInWithGoogle = () => {
@@ -23,6 +23,7 @@ const AuthProvider = ({ children }) => {
   };
 
   const register = (email, password) => {
+    setLoading(true)
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
@@ -34,6 +35,7 @@ const AuthProvider = ({ children }) => {
   };
 
   const login = (email, password) => {
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 

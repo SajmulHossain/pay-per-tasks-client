@@ -4,12 +4,27 @@ import GoogleLogin from "../../components/GoogleLogin";
 import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import DefaultLoading from "../../components/DefaultLoading";
 
 const Login = () => {
   const [error, setError] = useState("");
-  const { login } = useAuth();
+  const { login, loading, user } = useAuth();
   const navigate = useNavigate();
+
+
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex justify-center items-center">
+        <DefaultLoading />
+      </div>
+    );
+  }
+
+  if (user) {
+    return <Navigate to="/dashboard" replace />;
+  }
 
   const handleLogin = (e) => {
     e.preventDefault();
