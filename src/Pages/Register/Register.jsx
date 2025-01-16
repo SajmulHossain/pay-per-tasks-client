@@ -100,12 +100,12 @@ const Register = () => {
 
   return (
     <section className="section max-w-screen-lg md:flex md:gap-12 md:items-center overflow-x-hidden">
-      <div data-aos="fade-right" className="flex-1 hidden md:block">
+      <div data-aos="fade-right" className="md:flex-1 hidden md:block">
         <Lottie animationData={registerLottie} />
       </div>
       <div
         data-aos="fade-left"
-        className="flex-1 shadow-xl rounded bg-main-color/10"
+        className="md:flex-1 shadow-xl rounded bg-main-color/10"
       >
         <form onSubmit={handleRegister} className="p-6 py-10">
           <h1 className="text-3xl mb-8 text-center border-b border-main-color py-2 font-bold">

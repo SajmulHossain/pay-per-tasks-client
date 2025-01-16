@@ -103,7 +103,7 @@ const Header = () => {
               {navbarEnd}
             </ul>
           </div>
-          <Link to='/' className="btn btn-ghost text-xl">
+          <Link to='/' className="btn btn-ghost md:p-0">
             <img src={blackLogo} className="w-36" alt="logo" />
           </Link>
         </div>

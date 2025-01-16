@@ -4,12 +4,14 @@ import GoogleLogin from "../../components/GoogleLogin";
 import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import DefaultLoading from "../../components/DefaultLoading";
 
 const Login = () => {
   const [error, setError] = useState("");
   const { login, loading, user, setLoading } = useAuth();
+  const {state} = useLocation();
+  const navigate = useNavigate();
 
   if (loading) {
     return (
@@ -50,6 +52,7 @@ const Login = () => {
 
     login(email, password)
       .then(() => {
+        navigate(state || '/');
         toast.success("Login Successfull");
       })
       .catch(({ code }) => {
@@ -58,13 +61,13 @@ const Login = () => {
       });
   };
   return (
-    <section className="section w-full max-w-screen-lg md:flex md:gap-12 md:items-center">
-      <div data-aos="fade-right" className="flex-1 hidden md:block">
+    <section className="section w-full max-w-screen-lg md:flex md:gap-12 md:items-center overflow-x-hidden">
+      <div data-aos="fade-right" className="md:flex-1 hidden md:block">
         <Lottie animationData={loginLottie} />
       </div>
       <div
         data-aos="fade-left"
-        className="flex-1 rounded shadow-xl bg-main-color/10"
+        className="md:flex-1 rounded shadow-xl bg-main-color/10"
       >
         <form onSubmit={handleLogin} className="p-6 py-10">
           <h1 className="text-3xl mb-8 text-center border-b border-main-color py-2 font-bold">
