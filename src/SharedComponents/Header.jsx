@@ -1,13 +1,16 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import blackLogo from "../assets/images/black-logo.png";
 import useAuth from "../hooks/useAuth";
 import toast from "react-hot-toast";
 
 const Header = () => {
   const { user, logout, loading } = useAuth();
+  const navigate = useNavigate();
   const handleLogOut = () => {
     logout()
-      .then(() => toast.success("Logged out successfully!"))
+      .then(() => {toast.success("Logged out successfully!")
+        navigate('/login')
+      })
       .catch(({ code }) => toast.error(code));
   };
   
@@ -78,7 +81,7 @@ const Header = () => {
                   >
                     Login
                   </Link>
-                  <Link className="btn join-item bg-second-color text-white">
+                  <Link to='/register' className="btn join-item bg-second-color text-white">
                     Register
                   </Link>
                 </>
