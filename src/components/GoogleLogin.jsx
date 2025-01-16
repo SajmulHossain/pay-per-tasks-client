@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { axiosSecureUrl } from "../hooks/useAxiosSecure";
 
 const GoogleLogin = () => {
-  const { signInWithGoogle } = useAuth();
+  const { signInWithGoogle, setLoading } = useAuth();
   const navigate = useNavigate();
 
   const handleGoogleSignIn = () => {
@@ -23,7 +23,10 @@ const GoogleLogin = () => {
         navigate("/dashboard");
         await axiosSecureUrl.post(`/user/${res.user.email}`, user);
       })
-      .catch(({ code }) => toast.error(code));
+      .catch(({ code }) => {
+        toast.error(code);
+        setLoading(false);
+      });
   };
 
   return (

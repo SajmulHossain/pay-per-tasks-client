@@ -1,4 +1,4 @@
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import blackLogo from "../assets/images/black-logo.png";
 import useAuth from "../hooks/useAuth";
 import toast from "react-hot-toast";
@@ -28,9 +28,9 @@ const Header = () => {
             />
           </div>
           <div>
-            <button className="btn bg-second-color text-white">
+            <Link to='/dashboard' className="btn bg-second-color text-white">
               Goto Dashbaord
-            </button>
+            </Link>
           </div>
         </>
       )}
@@ -103,9 +103,9 @@ const Header = () => {
               {navbarEnd}
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl">
+          <Link to='/' className="btn btn-ghost text-xl">
             <img src={blackLogo} className="w-36" alt="logo" />
-          </a>
+          </Link>
         </div>
         <div className="navbar-end gap-4">
           {dashboard}

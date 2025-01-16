@@ -99,13 +99,13 @@ const Register = () => {
   };
 
   return (
-    <section className="section max-w-screen-lg flex gap-12 items-center overflow-x-hidden">
+    <section className="section max-w-screen-lg md:flex md:gap-12 md:items-center overflow-x-hidden">
       <div data-aos="fade-right" className="flex-1 hidden md:block">
         <Lottie animationData={registerLottie} />
       </div>
       <div
         data-aos="fade-left"
-        className="flex-1 shadow-2xl rounded bg-main-color/10"
+        className="flex-1 shadow-xl rounded bg-main-color/10"
       >
         <form onSubmit={handleRegister} className="p-6 py-10">
           <h1 className="text-3xl mb-8 text-center border-b border-main-color py-2 font-bold">
@@ -114,7 +114,7 @@ const Register = () => {
 
           {<p className="text-center text-red-500 text-sm mb-4">{error}</p>}
           <div className="space-y-4">
-            <div className="flex gap-2">
+            <div className="flex flex-col md:flex-row gap-2">
               <div className="form-control">
                 <label htmlFor="name" className="label">
                   <span className="label-text">Name</span>
