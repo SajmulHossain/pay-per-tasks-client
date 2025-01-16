@@ -72,8 +72,8 @@ const Register = () => {
         email: result?.email,
         name: result?.displayName,
         image: result?.photoURL,
-        role: "role",
-        timeStamp: new Date().now(),
+        role: role,
+        timeStamp: result?.metadata.createdAt,
       };
 
       await axiosSecureUrl.post(`/user/${email}`, user);
@@ -146,8 +146,8 @@ const Register = () => {
                 className="select select-bordered w-full"
               >
                 <option disabled>Select Your Role</option>
-                <option>Worker</option>
-                <option>Buyer</option>
+                <option value='worker'>Worker</option>
+                <option value='buyer'>Buyer</option>
               </select>
             </div>
             <div className="form-control">

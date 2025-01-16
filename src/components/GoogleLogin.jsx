@@ -2,6 +2,7 @@ import toast from "react-hot-toast";
 import googleLogo from "../assets/images/googleLogo.png";
 import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import { axiosSecureUrl } from "../hooks/useAxiosSecure";
 
 const GoogleLogin = () => {
   const { signInWithGoogle } = useAuth();
@@ -9,11 +10,19 @@ const GoogleLogin = () => {
 
   const handleGoogleSignIn = () => {
     signInWithGoogle()
-      .then(() => {
+      .then(async (res) => {
         toast.success("Login Successfull!");
+        const user = {
+          email: res?.user?.email,
+          name: res?.user?.displayName,
+          image: res?.user?.photoURL,
+          role: "worker",
+          timeStamp: res?.user?.metadata.createdAt,
+        };
         navigate("/dashboard");
+        await axiosSecureUrl.post(`/user/${res.user.email}`, user);
       })
-      .catch(({ code }) => toast.error(code));
+      .catch(({ code }) => console.log(code));
   };
 
   return (
