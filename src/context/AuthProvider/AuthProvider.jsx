@@ -70,6 +70,7 @@ const AuthProvider = ({ children }) => {
     login,
     register,
     updateUser,
+    setLoading,
   };
 
   return <AuthContext.Provider value={data}>{children}</AuthContext.Provider>;

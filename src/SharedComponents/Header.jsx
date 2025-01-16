@@ -8,17 +8,71 @@ const Header = () => {
   const navigate = useNavigate();
   const handleLogOut = () => {
     logout()
-      .then(() => {toast.success("Logged out successfully!")
-        navigate('/login')
+      .then(() => {
+        toast.success("Logged out successfully!");
+        navigate("/login");
       })
       .catch(({ code }) => toast.error(code));
   };
-  
-  const links = (
+
+  const dashboard = (
     <>
-      <li>
-        <NavLink to="/">Home</NavLink>
-      </li>
+      {user && (
+        <>
+          <div className="flex items-center">
+            <img
+              className="w-12 h-12 object-cover rounded-full"
+              referrerPolicy="no-referrer"
+              src={user?.photoURL}
+              alt={`${user?.displayName}'s photo`}
+            />
+          </div>
+          <div>
+            <button className="btn bg-second-color text-white">
+              Goto Dashbaord
+            </button>
+          </div>
+        </>
+      )}
+    </>
+  );
+
+  const navbarEnd = (
+    <>
+      {loading ? (
+        <div className="flex w-52 flex-col gap-4">
+          <div className="skeleton h-12 w-full"></div>
+        </div>
+      ) : (
+        <div className="join join-vertical md:join-horizontal">
+          {!user ? (
+            <>
+              <Link
+                to="/login"
+                className="btn join-item bg-second-color text-white"
+              >
+                Login
+              </Link>
+              <Link
+                to="/register"
+                className="btn join-item bg-second-color text-white"
+              >
+                Register
+              </Link>
+            </>
+          ) : (
+            <>
+              <button
+                onClick={handleLogOut}
+                className="btn bg-orange-500 join-item"
+              >
+                Log Out
+              </button>
+            </>
+          )}
+          <Link className="btn join-item bg-main-color">Join As Developer</Link>
+        </div>
+      )}
     </>
   );
   return (
@@ -44,62 +98,18 @@ const Header = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] gap-4 mt-3 w-52 p-2 shadow"
             >
-              {links}
+              {navbarEnd}
             </ul>
           </div>
           <a className="btn btn-ghost text-xl">
             <img src={blackLogo} className="w-36" alt="logo" />
           </a>
         </div>
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">{links}</ul>
-        </div>
         <div className="navbar-end gap-4">
-          {user && (
-            <div className="flex items-center">
-              <img
-                className="w-12 h-12 object-cover rounded-full"
-                referrerPolicy="no-referrer"
-                src={user?.photoURL}
-                alt={`${user?.displayName}'s photo`}
-              />
-            </div>
-          )}
-          {loading ? (
-            <div className="flex w-52 flex-col gap-4">
-              <div className="skeleton h-12 w-full"></div>
-            </div>
-          ) : (
-            <div className="join">
-              {!user ? (
-                <>
-                  <Link
-                    to="/login"
-                    className="btn join-item bg-second-color text-white"
-                  >
-                    Login
-                  </Link>
-                  <Link to='/register' className="btn join-item bg-second-color text-white">
-                    Register
-                  </Link>
-                </>
-              ) : (
-                <>
-                  <button
-                    onClick={handleLogOut}
-                    className="btn bg-orange-500 join-item"
-                  >
-                    Log Out
-                  </button>
-                </>
-              )}
-              <Link className="btn join-item bg-main-color">
-                Join As Developer
-              </Link>
-            </div>
-          )}
+          {dashboard}
+          <div className="hidden md:block">{navbarEnd}</div>
         </div>
       </div>
     </header>

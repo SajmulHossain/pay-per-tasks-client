@@ -2,7 +2,7 @@ import GoogleLogin from "../../components/GoogleLogin";
 import registerLottie from "../../assets/lotties/register.json";
 import Lottie from "lottie-react";
 import { useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import uploadImg from "../../Api/imgbb";
 import toast from "react-hot-toast";
@@ -13,7 +13,8 @@ import CrudLoading from "../../components/CrudLoading";
 const Register = () => {
   const [error, setError] = useState();
   const [isSignin, setIsSignin] = useState(false);
-  const { updateUser, register, user, loading } = useAuth();
+  const { updateUser, register, user, loading, setLoading } = useAuth();
+  const navigate = useNavigate();
 
   if (loading) {
     return (
@@ -65,8 +66,7 @@ const Register = () => {
     }
 
     setIsSignin(true);
-    const imgUrl = await uploadImg(image);
-
+    
     try {
       let coin = 0;
       if(role ==='buyer') {
@@ -74,10 +74,11 @@ const Register = () => {
       } else {
         coin = 10;
       }
-
+      
       const result = await register(email, password);
+      const imgUrl = await uploadImg(image);
       await updateUser(name, imgUrl);
-
+      
       const user = {
         email: result?.user?.email,
         name: result?.user?.displayName,
@@ -86,12 +87,14 @@ const Register = () => {
         coin,
         timeStamp: result?.user?.metadata?.createdAt,
       };
-
+      
       await axiosSecureUrl.post(`/user/${email}`, user);
+      navigate('/dashboard');
     } catch (err) {
       toast.error(err.code);
     } finally {
       setIsSignin(false);
+      setLoading(false);
     }
   };
 
