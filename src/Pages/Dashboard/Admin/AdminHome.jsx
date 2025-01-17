@@ -1,70 +1,69 @@
-
+import { useQuery } from "@tanstack/react-query";
+import { FaCoins, FaUserTie } from "react-icons/fa";
+import { GrUserWorker } from "react-icons/gr";
+import { MdPayments } from "react-icons/md";
+import useAuth from "../../../hooks/useAuth";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const AdminHome = () => {
+  const { user, loading } = useAuth();
+  const axiosSecure = useAxiosSecure();
+
+  const { data={}, isLoading } = useQuery({
+    queryKey: ["admin-states"],
+    enabled: !!user && !loading,
+    queryFn: async () => {
+      const { data } = await axiosSecure("/states");
+      return data;
+    },
+  });
+
+
+  const {workers, buyers, coins} = data || {};
+
+  if(isLoading) {
+    return <div className="flex w-full section join gap-[1px]">
+      <div className="skeleton h-20 w-full join-item"></div>
+      <div className="h-20 bg-gray-500 skeleton w-[2px]"></div>
+      <div className="skeleton h-20 w-full join-item"></div>
+      <div className="h-20 bg-gray-500 skeleton w-[2px]"></div>
+      <div className="skeleton h-20 w-full join-item"></div>
+      <div className="h-20 bg-gray-500 skeleton w-[2px]"></div>
+      <div className="skeleton h-20 w-full join-item"></div>
+    </div>
+  }
   return (
     <section className="section">
-      <div className="stats shadow">
+      <div className="stats shadow w-full">
         <div className="stat">
-          <div className="stat-figure text-secondary">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              className="inline-block h-8 w-8 stroke-current"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              ></path>
-            </svg>
+          <div className="stat-figure text-main-color">
+            <GrUserWorker size={30} />
           </div>
-          <div className="stat-title">Downloads</div>
-          <div className="stat-value">31K</div>
-          <div className="stat-desc">Jan 1st - Feb 1st</div>
+          <div className="stat-title">Workers</div>
+          <div className="stat-value">{workers}</div>
         </div>
 
         <div className="stat">
-          <div className="stat-figure text-secondary">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              className="inline-block h-8 w-8 stroke-current"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
-              ></path>
-            </svg>
+          <div className="stat-figure text-main-color">
+            <FaUserTie size={30} />
           </div>
-          <div className="stat-title">New Users</div>
-          <div className="stat-value">4,200</div>
-          <div className="stat-desc">↗︎ 400 (22%)</div>
+          <div className="stat-title">Buyers</div>
+          <div className="stat-value">{buyers}</div>
+        </div>
+        <div className="stat">
+          <div className="stat-figure text-main-color">
+            <FaCoins size={30} />
+          </div>
+          <div className="stat-title">Total Coin</div>
+          <div className="stat-value">{coins}</div>
         </div>
 
         <div className="stat">
-          <div className="stat-figure text-secondary">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              className="inline-block h-8 w-8 stroke-current"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"
-              ></path>
-            </svg>
+          <div className="stat-figure text-main-color">
+            <MdPayments size={30} />
           </div>
-          <div className="stat-title">New Registers</div>
+          <div className="stat-title">Total Payments</div>
           <div className="stat-value">1,200</div>
-          <div className="stat-desc">↘︎ 90 (14%)</div>
         </div>
       </div>
     </section>
