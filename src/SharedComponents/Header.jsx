@@ -76,7 +76,7 @@ const Header = () => {
               Join As Developer
             </Link>
           </div>
-          <Coin />{" "}
+          {user && <Coin />}
         </div>
       )}
     </>

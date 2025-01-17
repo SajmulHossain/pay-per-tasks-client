@@ -6,12 +6,24 @@ import BuyerNav from "./Links/BuyerNav";
 import AdminNav from "./Links/AdminNav";
 import useAuth from "../../hooks/useAuth";
 import DefaultLoading from "../../components/DefaultLoading";
+import { IoIosLogOut } from "react-icons/io";
+import toast from "react-hot-toast";
 
 const Dashboard = () => {
   const [role, isLoading] = useRole();
-  const { loading } = useAuth();
+  const { loading, logout } = useAuth();
 
   const active = ({ isActive }) => (isActive ? "bg-main-color" : "");
+
+  const handleLogOut = () => {
+    logout()
+      .then(() => {
+        toast.success("Logout Successful.");
+      })
+      .catch((err) => {
+        toast.error(err.code);
+      });
+  };
 
   return (
     <>
@@ -34,7 +46,7 @@ const Dashboard = () => {
             className="drawer-overlay"
           ></label>
           <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
-            {isLoading && (
+            {(isLoading || loading) && (
               <div className="flex w-full flex-col gap-4">
                 <div className="skeleton h-8 rounded w-full"></div>
                 <div className="skeleton h-8 rounded w-full"></div>
@@ -46,6 +58,15 @@ const Dashboard = () => {
             {role === "worker" && <WorkerNav design={active} />}
             {role === "buyer" && <BuyerNav design={active} />}
             {role === "admin" && <AdminNav design={active} />}
+
+            <div className="mt-auto">
+              <button
+                onClick={handleLogOut}
+                className="border-y hover:bg-main-color border-main-color w-full flex py-2 items-center gap-2 "
+              >
+                <IoIosLogOut size={24} /> Log out
+              </button>
+            </div>
           </ul>
         </div>
       </div>

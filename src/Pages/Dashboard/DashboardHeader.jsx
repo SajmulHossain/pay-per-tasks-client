@@ -13,11 +13,11 @@ const DashboardHeader = () => {
   
   return (
     <header className="py-2 border-y border-main-color">
-      <section className="container mx-auto flex justify-between items-center">
+      <section className="container mx-auto flex px-4 justify-between items-center">
         <div className="flex items-center">
           <label
             htmlFor="my-drawer-2"
-            className="drawer-button lg:hidden cursor-pointer"
+            className="drawer-button mr-2 lg:hidden cursor-pointer"
           >
             <RiMenuFold4Line size={30} />
           </label>
@@ -34,7 +34,7 @@ const DashboardHeader = () => {
         ) : (
           <div className="flex gap-2 items-center">
             <div className="flex flex-row-reverse items-center gap-2">
-              <div className="flex items-center gap-1">
+              <div className="md:flex items-center gap-1 hidden">
                 <p>
                   <Coin />
                 </p>
@@ -53,7 +53,7 @@ const DashboardHeader = () => {
                 </div>
               </div>
             </div>
-            <div className="w-[2px] h-12 bg-main-color"></div>
+            <div className="w-[2px] hidden md:block h-12 bg-main-color"></div>
             <div>
               <button>
                 <IoMdNotifications size={40} />
