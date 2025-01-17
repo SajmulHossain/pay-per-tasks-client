@@ -40,6 +40,7 @@ const DashboardHeader = () => {
                 </p>
                 <img
                   className="w-12 h-12 rounded-full object-cover"
+                  referrerPolicy="no-referrer"
                   src={user?.photoURL}
                   alt={`${user?.displayName}'s photo`}
                 />
