@@ -25,6 +25,11 @@ const BuyerNav = ({design}) => {
           Purchase Coin
         </NavLink>
       </li>
+      <li>
+        <NavLink to="payment-history" className={design}>
+          Payment History
+        </NavLink>
+      </li>
     </>
   );
 };

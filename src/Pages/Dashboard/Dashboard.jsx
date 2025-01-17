@@ -6,19 +6,17 @@ import BuyerNav from "./Links/BuyerNav";
 import AdminNav from "./Links/AdminNav";
 
 const Dashboard = () => {
-const [role] = useRole();
+  const [role, isLoading] = useRole();
 
-const active = ({ isActive }) => (isActive ? "bg-main-color" : "");
- 
-  
-  
+  const active = ({ isActive }) => (isActive ? "bg-main-color" : "");
+
   return (
     <>
       <DashboardHeader />
       <div className="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col items-center justify-center">
-          <Outlet />         
+          <Outlet />
         </div>
         <div className="drawer-side">
           <label
@@ -27,9 +25,18 @@ const active = ({ isActive }) => (isActive ? "bg-main-color" : "");
             className="drawer-overlay"
           ></label>
           <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
-           {role === 'worker' && <WorkerNav design={active} />}
-           {role === 'buyer' && <BuyerNav design={active} />}
-           {role === 'admin' && <AdminNav design={active} />}
+            {isLoading && (
+              <div className="flex w-full flex-col gap-4">
+                <div className="skeleton h-8 rounded w-full"></div>
+                <div className="skeleton h-8 rounded w-full"></div>
+                <div className="skeleton h-8 rounded w-full"></div>
+                <div className="skeleton h-8 rounded w-full"></div>
+                <div className="skeleton h-8 rounded w-full"></div>
+              </div>
+            )}
+            {role === "worker" && <WorkerNav design={active} />}
+            {role === "buyer" && <BuyerNav design={active} />}
+            {role === "admin" && <AdminNav design={active} />}
           </ul>
         </div>
       </div>
