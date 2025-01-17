@@ -12,12 +12,12 @@ const AdminNav = ({design}) => {
       </li>
       <li>
         <NavLink to="manage-users" className={design}>
-          Add New Task
+          Manage Users
         </NavLink>
       </li>
       <li>
         <NavLink to="manage-tasks" className={design}>
-          My Tasks
+          Manage Tasks
         </NavLink>
       </li>
     </>
