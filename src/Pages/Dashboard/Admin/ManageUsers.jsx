@@ -7,7 +7,7 @@ import UserRow from "./UserRow";
 const ManageUsers = () => {
   const axiosSecure = useAxiosSecure();
   
-  const {data:users=[...Array(10)], isLoading} = useQuery({
+  const {data:users=[...Array(10)], isLoading, refetch} = useQuery({
     queryKey: ['users'],
     queryFn: async() => {
       const { data } = await axiosSecure('/users');
@@ -42,7 +42,7 @@ const ManageUsers = () => {
             ) : (
               <>
                 {users.map((user) => (
-                  <UserRow key={user._id} user={user} />
+                  <UserRow key={user._id} refetch={refetch} user={user} />
                 ))}
               </>
             )}

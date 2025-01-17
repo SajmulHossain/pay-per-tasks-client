@@ -8,7 +8,9 @@ const uploadImg = async (imgData) => {
     formData
   );
 
-  return data.data.display_url;
+  console.log(data);
+
+  return {imgUrl:data.data.display_url, imgDeleteUrl: data.data.delete_url};
 };
 
 export default uploadImg;

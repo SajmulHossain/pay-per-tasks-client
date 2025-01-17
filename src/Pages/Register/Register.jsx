@@ -76,14 +76,16 @@ const Register = () => {
       }
       
       const result = await register(email, password);
-      const imgUrl = await uploadImg(image);
+      const {imgUrl, imgDeleteUrl} = await uploadImg(image);
       await updateUser(name, imgUrl);
+
       
       const user = {
         email: result?.user?.email,
         name: result?.user?.displayName,
         image: result?.user?.photoURL,
         role,
+        imgDeleteUrl,
         coin,
         timeStamp: result?.user?.metadata?.createdAt,
       };
