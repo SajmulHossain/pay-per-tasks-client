@@ -6,23 +6,18 @@ const AdminNav = ({design}) => {
   return (
     <>
       <li>
-        <NavLink to="buyer-home" className={design}>
+        <NavLink to="admin-home" className={design}>
           Home
         </NavLink>
       </li>
       <li>
-        <NavLink to="add-task" className={design}>
+        <NavLink to="manage-users" className={design}>
           Add New Task
         </NavLink>
       </li>
       <li>
-        <NavLink to="my-tasks" className={design}>
+        <NavLink to="manage-tasks" className={design}>
           My Tasks
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to="purchase-coin" className={design}>
-          Purchase Coin
         </NavLink>
       </li>
     </>

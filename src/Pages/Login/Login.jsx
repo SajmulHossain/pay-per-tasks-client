@@ -21,7 +21,7 @@ const Login = () => {
     );
   }
 
-  if (user) {
+  if (user && !loading) {
     return <Navigate to="/dashboard" replace />;
   }
 

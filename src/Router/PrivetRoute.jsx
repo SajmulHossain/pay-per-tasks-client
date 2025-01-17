@@ -3,10 +3,10 @@ import useAuth from "../hooks/useAuth";
 
 // eslint-disable-next-line react/prop-types
 const PrivetRoute = ({ children }) => {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const { pathname } = useLocation();
 
-  if (!user) {
+  if (!user && !loading) {
     return <Navigate to="/login" state={pathname} />;
   }
 

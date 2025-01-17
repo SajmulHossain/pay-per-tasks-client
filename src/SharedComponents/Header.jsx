@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import blackLogo from "../assets/images/black-logo.png";
 import useAuth from "../hooks/useAuth";
 import toast from "react-hot-toast";
+import Coin from "../components/Coin";
 
 const Header = () => {
   const { user, logout, loading } = useAuth();
@@ -28,7 +29,7 @@ const Header = () => {
             />
           </div>
           <div>
-            <Link to='/dashboard' className="btn bg-second-color text-white">
+            <Link to="/dashboard" className="btn bg-second-color text-white">
               Dashbaord
             </Link>
           </div>
@@ -44,33 +45,38 @@ const Header = () => {
           <div className="skeleton h-12 w-full"></div>
         </div>
       ) : (
-        <div className="join join-vertical md:join-horizontal">
-          {!user ? (
-            <>
-              <Link
-                to="/login"
-                className="btn join-item bg-second-color text-white"
-              >
-                Login
-              </Link>
-              <Link
-                to="/register"
-                className="btn join-item bg-second-color text-white"
-              >
-                Register
-              </Link>
-            </>
-          ) : (
-            <>
-              <button
-                onClick={handleLogOut}
-                className="btn bg-orange-500 join-item"
-              >
-                Log Out
-              </button>
-            </>
-          )}
-          <Link className="btn join-item bg-main-color">Join As Developer</Link>
+        <div className="flex items-center gap-1">
+          <div className="join join-vertical md:join-horizontal">
+            {!user ? (
+              <>
+                <Link
+                  to="/login"
+                  className="btn join-item bg-second-color text-white"
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/register"
+                  className="btn join-item bg-second-color text-white"
+                >
+                  Register
+                </Link>
+              </>
+            ) : (
+              <>
+                <button
+                  onClick={handleLogOut}
+                  className="btn bg-orange-500 join-item"
+                >
+                  Log Out
+                </button>
+              </>
+            )}
+            <Link className="btn join-item bg-main-color">
+              Join As Developer
+            </Link>
+          </div>
+          <Coin />{" "}
         </div>
       )}
     </>
@@ -103,7 +109,7 @@ const Header = () => {
               {navbarEnd}
             </ul>
           </div>
-          <Link to='/' className="btn btn-ghost md:p-0">
+          <Link to="/" className="btn btn-ghost md:p-0">
             <img src={blackLogo} className="w-36" alt="logo" />
           </Link>
         </div>
