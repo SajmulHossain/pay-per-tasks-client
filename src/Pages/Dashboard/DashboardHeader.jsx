@@ -1,6 +1,7 @@
 
 import { MdSpaceDashboard } from "react-icons/md";
 import blackLogo from "../../assets/images/black-logo.png";
+import { Link } from "react-router-dom";
 
 const DashboardHeader = () => {
   
@@ -15,9 +16,9 @@ const DashboardHeader = () => {
             <MdSpaceDashboard size={30} />
           </label>
 
-          <div>
+          <Link to='/'>
             <img src={blackLogo} className="h-12" alt="logo" />
-          </div>
+          </Link>
         </div>
       </section>
     </header>

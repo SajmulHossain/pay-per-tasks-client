@@ -5,10 +5,15 @@ import Login from "../Pages/Login/Login";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import Register from "../Pages/Register/Register";
 import PrivetRoute from "./PrivetRoute";
-import UserHome from "../Pages/Dashboard/User/UserHome";
-import TaskList from "../Pages/Dashboard/User/TaskList";
-import Submission from "../Pages/Dashboard/User/Submission";
-import Withdrawal from "../Pages/Dashboard/User/Withdrawal";
+import WorkerHome from "../Pages/Dashboard/Worker/WorkerHome";
+import TaskList from "../Pages/Dashboard/Worker/TaskList";
+import Submission from "../Pages/Dashboard/Worker/Submission";
+import Withdrawal from "../Pages/Dashboard/Worker/Withdrawal";
+import BuyerRoute from "./BuyerRoute";
+import BuyerHome from "../Pages/Dashboard/Buyer/BuyerHome";
+import AddTask from "../Pages/Dashboard/Buyer/AddTask";
+import MyTasks from "../Pages/Dashboard/Buyer/MyTasks";
+import PurchaseCoin from "../Pages/Dashboard/Buyer/PurchaseCoin";
 
 const routes = createBrowserRouter([
   {
@@ -38,10 +43,10 @@ const routes = createBrowserRouter([
     ),
     children: [
       {
-        path: 'home',
+        path: 'worker-home',
         element: (
           <PrivetRoute>
-            <UserHome />
+            <WorkerHome />
           </PrivetRoute>
         ),
       },
@@ -69,6 +74,38 @@ const routes = createBrowserRouter([
           </PrivetRoute>
         ),
       },
+      {
+        path: 'buyer-home',
+        element: <PrivetRoute>
+          <BuyerRoute>
+            <BuyerHome />
+          </BuyerRoute>
+        </PrivetRoute>
+      },
+      {
+        path: 'add-task',
+        element: <PrivetRoute>
+          <BuyerRoute>
+            <AddTask />
+          </BuyerRoute>
+        </PrivetRoute>
+      },
+      {
+        path: 'my-tasks',
+        element: <PrivetRoute>
+          <BuyerRoute>
+            <MyTasks />
+          </BuyerRoute>
+        </PrivetRoute>
+      },
+      {
+        path: 'purchase-coin',
+        element: <PrivetRoute>
+          <BuyerRoute>
+            <PurchaseCoin />
+          </BuyerRoute>
+        </PrivetRoute>
+      }
     ],
   },
 ]);

@@ -29,7 +29,7 @@ const Header = () => {
           </div>
           <div>
             <Link to='/dashboard' className="btn bg-second-color text-white">
-              Goto Dashbaord
+              Dashbaord
             </Link>
           </div>
         </>

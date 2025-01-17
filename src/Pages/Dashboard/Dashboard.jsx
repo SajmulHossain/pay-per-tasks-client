@@ -1,26 +1,17 @@
+import useRole from "../../hooks/useRole";
 import DashboardHeader from "./DashboardHeader";
-import { NavLink, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import WorkerNav from "./Links/WorkerNav";
+import BuyerNav from "./Links/BuyerNav";
+import AdminNav from "./Links/AdminNav";
 
 const Dashboard = () => {
+const [role] = useRole();
 
-  const active = ({isActive}) => isActive ? 'bg-main-color': '';
+const active = ({ isActive }) => (isActive ? "bg-main-color" : "");
+ 
   
-  const links = (
-    <>
-      <li>
-        <NavLink to='home' className={active}>Home</NavLink>
-      </li>
-      <li>
-        <NavLink to='tasks' className={active}>TaskList</NavLink>
-      </li>
-      <li>
-        <NavLink to='submission' className={active}>My Submissions</NavLink>
-      </li>
-      <li>
-        <NavLink to='withdraw' className={active}>Withdrawals</NavLink>
-      </li>
-    </>
-  );
+  
   return (
     <>
       <DashboardHeader />
@@ -36,7 +27,9 @@ const Dashboard = () => {
             className="drawer-overlay"
           ></label>
           <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
-            {links}
+           {role === 'worker' && <WorkerNav design={active} />}
+           {role === 'buyer' && <BuyerNav design={active} />}
+           {role === 'admin' && <AdminNav design={active} />}
           </ul>
         </div>
       </div>

@@ -24,7 +24,7 @@ const Register = () => {
     );
   }
 
-  if (user) {
+  if (user && !isSignin) {
     return <Navigate to="/dashboard" replace />;
   }
 
