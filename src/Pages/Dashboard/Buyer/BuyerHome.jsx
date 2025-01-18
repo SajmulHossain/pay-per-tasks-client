@@ -1,7 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import { FaCoins, FaUserTie } from "react-icons/fa";
+import { FaTasks } from "react-icons/fa";
 import { GrUserWorker } from "react-icons/gr";
-import { MdOutlineFileDownloadDone, MdPayments } from "react-icons/md";
+import {
+  MdOutlineFileDownloadDone,
+  MdOutlinePendingActions,
+  MdPayments,
+} from "react-icons/md";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { RxCross2 } from "react-icons/rx";
@@ -10,17 +14,16 @@ const BuyerHome = () => {
   const { user, loading } = useAuth();
   const axiosSecure = useAxiosSecure();
 
-  const {data:states={}, isLoading} = useQuery({
-    queryKey: ['buyer-states', user?.email],
+  const { data: states = {}, isLoading } = useQuery({
+    queryKey: ["buyer-states", user?.email],
     enabled: user && !loading,
-    queryFn: async() => {
-      const {data} = await axiosSecure(`/states/buyer/${user?.email}`);
+    queryFn: async () => {
+      const { data } = await axiosSecure(`/states/buyer/${user?.email}`);
       return data;
-    }
-  })
+    },
+  });
 
-  const {tasks, pending, workers} = states ||  {};
-  
+  const { tasks, pending, workers } = states || {};
 
   if (isLoading) {
     return (
@@ -45,7 +48,7 @@ const BuyerHome = () => {
       <div className="stats stats-vertical md:stats-horizontal shadow w-full">
         <div className="stat">
           <div className="stat-figure text-main-color">
-            <GrUserWorker size={30} />
+            <FaTasks size={30} />
           </div>
           <div className="stat-title">Total Tasks</div>
           <div className="stat-value">{tasks}</div>
@@ -53,14 +56,14 @@ const BuyerHome = () => {
 
         <div className="stat">
           <div className="stat-figure text-main-color">
-            <FaUserTie size={30} />
+            <MdOutlinePendingActions size={30} />
           </div>
           <div className="stat-title">Pending Tasks</div>
           <div className="stat-value">{pending}</div>
         </div>
         <div className="stat">
           <div className="stat-figure text-main-color">
-            <FaCoins size={30} />
+            <GrUserWorker size={30} />
           </div>
           <div className="stat-title">Required Workers</div>
           <div className="stat-value">{workers}</div>
@@ -96,13 +99,14 @@ const BuyerHome = () => {
               <td>Quality Control Specialist</td>
               <td>10</td>
               <td>
-                <button className="btn btn-xs">
-                  View Details
-                </button>
+                <button className="btn btn-xs">View Details</button>
               </td>
               <td className="space-x-2">
                 <button>
-                  <MdOutlineFileDownloadDone className="text-main-color" size={24} />
+                  <MdOutlineFileDownloadDone
+                    className="text-main-color"
+                    size={24}
+                  />
                 </button>
                 <button>
                   <RxCross2 className="text-red-500" size={24} />
