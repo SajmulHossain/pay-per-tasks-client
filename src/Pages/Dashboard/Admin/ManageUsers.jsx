@@ -5,7 +5,7 @@ import useAuth from "../../../hooks/useAuth";
 
 const ManageUsers = () => {
   const axiosSecure = useAxiosSecure();
-  const {user} = useAuth();
+  const { user } = useAuth();
 
   const {
     data: users = [...Array(10)],

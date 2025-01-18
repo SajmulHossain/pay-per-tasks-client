@@ -9,17 +9,24 @@ import swalModal from "../../../utils/sweetModal";
 import CrudLoading from "../../../components/CrudLoading";
 import toast from "react-hot-toast";
 import uploadImg from "../../../Api/imgbb";
+import useCoin from "../../../hooks/useCoin";
 
 const AddTask = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const [error, setError] = useState("");
   const [completionDate, setCompletionDate] = useState(new Date());
+  const [coin] = useCoin();
 
   const { isPending, mutateAsync } = useMutation({
     mutationKey: ["tasks", user?.email],
-    mutationFn: async (task) => {
-      const { data } = await axiosSecure.post("/tasks", task);
+    mutationFn: async ({ task, imageFile }) => {
+
+      const { imgUrl } = await uploadImg(imageFile);
+      const { data } = await axiosSecure.post("/tasks", {
+        ...task,
+        image: imgUrl,
+      });
       if (data?.insertedId) {
         swalModal("Tasks", "Task added successfully!");
       } else {
@@ -40,6 +47,7 @@ const AddTask = () => {
 
   const handleAddTask = async (e) => {
     e.preventDefault();
+    setError("");
 
     const form = e.target;
 
@@ -50,6 +58,16 @@ const AddTask = () => {
     const info = form.submissionInfo.value;
     const details = form.details.value;
 
+    // console.table({
+    //   title,
+    //   workers,
+    //   amount,
+    //   imageFile,
+    //   date: completionDate,
+    //   info,
+    //   details,
+    // });
+
     if (
       !title ||
       !workers ||
@@ -58,20 +76,22 @@ const AddTask = () => {
       isNaN(amount) ||
       !imageFile ||
       !info ||
-      details
+      !details
     ) {
       return setError("Please valid value. Workers and Amount should number");
     }
 
-    
-
-    const image = await uploadImg(imageFile);
+    const neededTotalPayment = amount * workers;
+    if (neededTotalPayment > coin) {
+      return toast(`You need total ${neededTotalPayment} coins.`, {
+        icon: "⚠️",
+      });
+    }
 
     const task = {
       title,
       workers,
       amount,
-      image,
       date: completionDate,
       info,
       details,
@@ -82,7 +102,7 @@ const AddTask = () => {
     };
 
     try {
-      await mutateAsync(task);
+      await mutateAsync({ task, imageFile });
     } catch {
       toast.error("Something went wrong!");
     }

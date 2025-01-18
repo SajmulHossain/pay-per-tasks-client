@@ -7,10 +7,8 @@ const uploadImg = async (imgData) => {
     `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_imgBB_api}`,
     formData
   );
-
   console.log(data);
-
-  return {imgUrl:data.data.display_url, imgDeleteUrl: data.data.delete_url};
+  return { imgUrl: data.data.display_url, imgDeleteUrl: data.data.delete_url };
 };
 
 export default uploadImg;
