@@ -23,7 +23,7 @@ const MyTasks = () => {
       <div className="overflow-x-auto">
         <table className="table">
           <thead className="text-center">
-            <tr>
+            <tr className="bg-main-color">
               <th>Title</th>
               <th>Workers</th>
               <th>Date</th>
@@ -45,8 +45,8 @@ const MyTasks = () => {
               </>
             ) : (
               <>
-                {tasks.map((task) => (
-                  <TaskRow key={task._id} task={task} />
+                {tasks.map((task, index) => (
+                  <TaskRow key={task._id} index={index} task={task} />
                 ))}
               </>
             )}

@@ -10,26 +10,36 @@ const BuyerHome = () => {
   const { user, loading } = useAuth();
   const axiosSecure = useAxiosSecure();
 
+  const {data:states={}, isLoading} = useQuery({
+    queryKey: ['buyer-states', user?.email],
+    enabled: user && !loading,
+    queryFn: async() => {
+      const {data} = await axiosSecure(`/states/buyer/${user?.email}`);
+      return data;
+    }
+  })
+
+  const {tasks, pending, workers} = states ||  {};
   
 
-  // if (isLoading) {
-  //   return (
-  //     <section className="section">
-  //       <div className="w-full join join-vertical md:join-horizontal gap-[1px]">
-  //         <div className="skeleton h-20 w-full join-item"></div>
-  //         <div className=" h-20 bg-gray-300 hidden skeleton w-[4px] md:block"></div>
-  //         <hr className="md:hidden border-gray-300" />
-  //         <div className="skeleton h-20 w-full join-item"></div>
-  //         <div className=" h-20 bg-gray-300 hidden skeleton w-[4px] md:block"></div>
-  //         <hr className="md:hidden border-gray-300" />
-  //         <div className="skeleton h-20 w-full join-item"></div>
-  //         <div className=" h-20 bg-gray-300 hidden skeleton w-[4px] md:block"></div>
-  //         <hr className="md:hidden border-gray-300" />
-  //         <div className="skeleton h-20 w-full join-item"></div>
-  //       </div>
-  //     </section>
-  //   );
-  // }
+  if (isLoading) {
+    return (
+      <section className="section">
+        <div className="w-full join join-vertical md:join-horizontal gap-[1px]">
+          <div className="skeleton h-20 w-full join-item"></div>
+          <div className=" h-20 bg-gray-300 hidden skeleton w-[4px] md:block"></div>
+          <hr className="md:hidden border-gray-300" />
+          <div className="skeleton h-20 w-full join-item"></div>
+          <div className=" h-20 bg-gray-300 hidden skeleton w-[4px] md:block"></div>
+          <hr className="md:hidden border-gray-300" />
+          <div className="skeleton h-20 w-full join-item"></div>
+          <div className=" h-20 bg-gray-300 hidden skeleton w-[4px] md:block"></div>
+          <hr className="md:hidden border-gray-300" />
+          <div className="skeleton h-20 w-full join-item"></div>
+        </div>
+      </section>
+    );
+  }
   return (
     <section className="section">
       <div className="stats stats-vertical md:stats-horizontal shadow w-full">
@@ -38,7 +48,7 @@ const BuyerHome = () => {
             <GrUserWorker size={30} />
           </div>
           <div className="stat-title">Total Tasks</div>
-          <div className="stat-value">{1}</div>
+          <div className="stat-value">{tasks}</div>
         </div>
 
         <div className="stat">
@@ -46,14 +56,14 @@ const BuyerHome = () => {
             <FaUserTie size={30} />
           </div>
           <div className="stat-title">Pending Tasks</div>
-          <div className="stat-value">{1}</div>
+          <div className="stat-value">{pending}</div>
         </div>
         <div className="stat">
           <div className="stat-figure text-main-color">
             <FaCoins size={30} />
           </div>
           <div className="stat-title">Required Workers</div>
-          <div className="stat-value">{1}</div>
+          <div className="stat-value">{workers}</div>
         </div>
 
         <div className="stat">
