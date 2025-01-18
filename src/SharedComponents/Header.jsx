@@ -4,6 +4,7 @@ import useAuth from "../hooks/useAuth";
 import toast from "react-hot-toast";
 import Coin from "../components/Coin";
 import useRole from "../hooks/useRole";
+import redirect from "../utils/redirectRoute";
 
 const Header = () => {
   const { user, logout, loading } = useAuth();
@@ -18,19 +19,7 @@ const Header = () => {
       .catch(({ code }) => toast.error(code));
   };
 
-  let dashboardPath = "/dashboard";
 
-  if (!isRolling) {
-    if (role === "worker") {
-      dashboardPath = "/dashboard/worker-home";
-    } else if (role === "buyer") {
-      dashboardPath = "/dashboard/buyer-home";
-    } else if (role === "admin") {
-      dashboardPath = "/dashboard/admin-home";
-    } else {
-      dashboardPath = "/";
-    }
-  }
 
   const dashboard = (
     <>
@@ -45,7 +34,7 @@ const Header = () => {
             />
           </div>
           <div>
-            <Link to={dashboardPath} className="btn bg-second-color text-white">
+            <Link to={redirect(role, isRolling)} className="btn bg-second-color text-white">
               Dashbaord
             </Link>
           </div>
