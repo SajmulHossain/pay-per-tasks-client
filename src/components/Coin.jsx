@@ -12,7 +12,7 @@ const Coin = () => {
     enabled: !!user && !loading,
     queryFn: async () => {
       const { data } = await axiosSecure(`/coin/${user.email}`);
-      return data.coin;
+      return data?.coin;
     },
   });
 

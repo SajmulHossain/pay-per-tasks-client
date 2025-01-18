@@ -22,18 +22,22 @@ const AdminHome = () => {
   const {workers, buyers, coins} = data || {};
 
   if(isLoading) {
-    return <div className="w-full section join join-vertical md:join-horizontal gap-[1px]">
-      <div className="skeleton h-20 w-full join-item"></div>
-      <div className=" h-20 bg-gray-300 hidden skeleton w-[4px] md:block"></div>
-      <hr className="md:hidden border-gray-300"/>
-      <div className="skeleton h-20 w-full join-item"></div>
-      <div className=" h-20 bg-gray-300 hidden skeleton w-[4px] md:block"></div>
-      <hr className="md:hidden border-gray-300"/>
-      <div className="skeleton h-20 w-full join-item"></div>
-      <div className=" h-20 bg-gray-300 hidden skeleton w-[4px] md:block"></div>
-      <hr className="md:hidden border-gray-300"/>
-      <div className="skeleton h-20 w-full join-item"></div>
-    </div>
+    return (
+      <section className="section">
+        <div className="w-full join join-vertical md:join-horizontal gap-[1px]">
+          <div className="skeleton h-20 w-full join-item"></div>
+          <div className=" h-20 bg-gray-300 hidden skeleton w-[4px] md:block"></div>
+          <hr className="md:hidden border-gray-300" />
+          <div className="skeleton h-20 w-full join-item"></div>
+          <div className=" h-20 bg-gray-300 hidden skeleton w-[4px] md:block"></div>
+          <hr className="md:hidden border-gray-300" />
+          <div className="skeleton h-20 w-full join-item"></div>
+          <div className=" h-20 bg-gray-300 hidden skeleton w-[4px] md:block"></div>
+          <hr className="md:hidden border-gray-300" />
+          <div className="skeleton h-20 w-full join-item"></div>
+        </div>
+      </section>
+    );
   }
   return (
     <section className="section">

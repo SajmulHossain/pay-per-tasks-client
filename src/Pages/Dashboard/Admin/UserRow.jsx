@@ -6,12 +6,23 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import swalModal from "../../../utils/sweetModal";
+import axios from "axios";
 
 const UserRow = ({ user, refetch }) => {
   const [newRole, setNewRole] = useState(user?.role);
   const axiosSecure = useAxiosSecure();
 
-  const { image, name, role, coin, _id, imgDeleteUrl } = user || {};
+  const { image, name, role, coin, _id, imgDeleteUrl, email } = user || {};
+
+  const handleUpdateRole = async email => {
+    try {
+     await axiosSecure.patch(`/user/${email}`, {newRole});
+     refetch();
+     toast.success('Role Update Role')
+    } catch{
+      toast.error('Something went wrong');
+    }
+  }
 
   const handleDeleteUser = (id) => {
     Swal.fire({
@@ -31,7 +42,7 @@ const UserRow = ({ user, refetch }) => {
 
           if (imgDeleteUrl) {
             try {
-              await axiosSecure.delete(imgDeleteUrl);
+              await axios(imgDeleteUrl);
             } catch {
               toast.error("Something Error With Deleting the photo!");
             }
@@ -83,7 +94,7 @@ const UserRow = ({ user, refetch }) => {
           <MdDelete size={24} color="red" /> Delete
         </button>
         <button
-          // onClick={() => handleUpdateRole(_id)}
+          onClick={() => handleUpdateRole(email)}
           disabled={newRole === role}
           className="btn"
         >

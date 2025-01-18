@@ -2,18 +2,21 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import UserRow from "./UserRow";
 
-
-
 const ManageUsers = () => {
   const axiosSecure = useAxiosSecure();
-  
-  const {data:users=[...Array(10)], isLoading, refetch} = useQuery({
-    queryKey: ['users'],
-    queryFn: async() => {
-      const { data } = await axiosSecure('/users');
+
+  const {
+    data: users = [...Array(10)],
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["users"],
+    queryFn: async () => {
+      const { data } = await axiosSecure("/users");
       return data;
-    }
-  })
+    },
+  });
+
   return (
     <section className="section">
       <div className="overflow-x-auto">

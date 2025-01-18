@@ -3,10 +3,12 @@ import blackLogo from "../assets/images/black-logo.png";
 import useAuth from "../hooks/useAuth";
 import toast from "react-hot-toast";
 import Coin from "../components/Coin";
+import useRole from "../hooks/useRole";
 
 const Header = () => {
   const { user, logout, loading } = useAuth();
   const navigate = useNavigate();
+  const [role, isRolling] = useRole();
   const handleLogOut = () => {
     logout()
       .then(() => {
@@ -15,6 +17,20 @@ const Header = () => {
       })
       .catch(({ code }) => toast.error(code));
   };
+
+  let dashboardPath = "/dashboard";
+
+  if (!isRolling) {
+    if (role === "worker") {
+      dashboardPath = "/dashboard/worker-home";
+    } else if (role === "buyer") {
+      dashboardPath = "/dashboard/buyer-home";
+    } else if (role === "admin") {
+      dashboardPath = "/dashboard/admin-home";
+    } else {
+      dashboardPath = "/";
+    }
+  }
 
   const dashboard = (
     <>
@@ -29,7 +45,7 @@ const Header = () => {
             />
           </div>
           <div>
-            <Link to="/dashboard" className="btn bg-second-color text-white">
+            <Link to={dashboardPath} className="btn bg-second-color text-white">
               Dashbaord
             </Link>
           </div>

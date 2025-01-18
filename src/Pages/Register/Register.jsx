@@ -66,20 +66,19 @@ const Register = () => {
     }
 
     setIsSignin(true);
-    
+
     try {
       let coin = 0;
-      if(role ==='buyer') {
+      if (role === "buyer") {
         coin = 50;
       } else {
         coin = 10;
       }
-      
+
       const result = await register(email, password);
-      const {imgUrl, imgDeleteUrl} = await uploadImg(image);
+      const { imgUrl, imgDeleteUrl } = await uploadImg(image);
       await updateUser(name, imgUrl);
 
-      
       const user = {
         email: result?.user?.email,
         name: result?.user?.displayName,
@@ -89,11 +88,14 @@ const Register = () => {
         coin,
         timeStamp: result?.user?.metadata?.createdAt,
       };
-      
+
+      console.log(user);
+
       await axiosSecureUrl.post(`/user/${email}`, user);
-      navigate('/dashboard');
+      navigate("/dashboard");
     } catch (err) {
-      toast.error(err.code);
+      console.log(err);
+      toast.error("Something Went Wrong!");
     } finally {
       setIsSignin(false);
       setLoading(false);
@@ -164,11 +166,13 @@ const Register = () => {
               </label>
               <select
                 name="role"
-                defaultValue="Select Your Role"
+                defaultValue=""
                 id="role"
                 className="select select-bordered w-full"
               >
-                <option disabled>Select Your Role</option>
+                <option value="" disabled>
+                  Select Your Role
+                </option>
                 <option value="worker">Worker</option>
                 <option value="buyer">Buyer</option>
               </select>
