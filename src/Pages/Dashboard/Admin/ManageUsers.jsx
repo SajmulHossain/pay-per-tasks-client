@@ -1,9 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import UserRow from "./UserRow";
+import useAuth from "../../../hooks/useAuth";
 
 const ManageUsers = () => {
   const axiosSecure = useAxiosSecure();
+  const {user} = useAuth();
 
   const {
     data: users = [...Array(10)],
@@ -12,7 +14,7 @@ const ManageUsers = () => {
   } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const { data } = await axiosSecure("/users");
+      const { data } = await axiosSecure(`/users/${user?.email}`);
       return data;
     },
   });

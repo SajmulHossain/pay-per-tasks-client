@@ -1,6 +1,6 @@
 import useRole from "../../hooks/useRole";
 import DashboardHeader from "./DashboardHeader";
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import WorkerNav from "./Links/WorkerNav";
 import BuyerNav from "./Links/BuyerNav";
 import AdminNav from "./Links/AdminNav";
@@ -8,6 +8,7 @@ import useAuth from "../../hooks/useAuth";
 import DefaultLoading from "../../components/DefaultLoading";
 import { IoIosLogOut } from "react-icons/io";
 import toast from "react-hot-toast";
+import redirect from "../../utils/redirectRoute";
 
 const Dashboard = () => {
   const [role, isLoading] = useRole();
@@ -24,6 +25,7 @@ const Dashboard = () => {
         toast.error(err.code);
       });
   };
+  
 
   return (
     <>
@@ -36,7 +38,10 @@ const Dashboard = () => {
               <DefaultLoading />
             </div>
           ) : (
-            <Outlet />
+            <>
+              <Navigate to={redirect(role, isLoading)} replace={true} />
+              <Outlet />
+            </>
           )}
         </div>
         <div className="drawer-side">

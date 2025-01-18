@@ -89,7 +89,6 @@ const Register = () => {
         timeStamp: result?.user?.metadata?.createdAt,
       };
 
-      console.log(user);
 
       await axiosSecureUrl.post(`/user/${email}`, user);
       navigate("/dashboard");

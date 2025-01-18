@@ -35,9 +35,9 @@ const DashboardHeader = () => {
           <div className="flex gap-2 items-center">
             <div className="flex flex-row-reverse items-center gap-2">
               <div className="md:flex items-center gap-1 hidden">
-                <p>
+                <div>
                   <Coin />
-                </p>
+                </div>
                 <img
                   className="w-12 h-12 rounded-full object-cover"
                   referrerPolicy="no-referrer"

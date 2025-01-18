@@ -1,10 +1,122 @@
-
+import { useQuery } from "@tanstack/react-query";
+import { FaCoins, FaUserTie } from "react-icons/fa";
+import { GrUserWorker } from "react-icons/gr";
+import { MdOutlineFileDownloadDone, MdPayments } from "react-icons/md";
+import useAuth from "../../../hooks/useAuth";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { RxCross2 } from "react-icons/rx";
 
 const BuyerHome = () => {
+  const { user, loading } = useAuth();
+  const axiosSecure = useAxiosSecure();
+
+  
+
+  // if (isLoading) {
+  //   return (
+  //     <section className="section">
+  //       <div className="w-full join join-vertical md:join-horizontal gap-[1px]">
+  //         <div className="skeleton h-20 w-full join-item"></div>
+  //         <div className=" h-20 bg-gray-300 hidden skeleton w-[4px] md:block"></div>
+  //         <hr className="md:hidden border-gray-300" />
+  //         <div className="skeleton h-20 w-full join-item"></div>
+  //         <div className=" h-20 bg-gray-300 hidden skeleton w-[4px] md:block"></div>
+  //         <hr className="md:hidden border-gray-300" />
+  //         <div className="skeleton h-20 w-full join-item"></div>
+  //         <div className=" h-20 bg-gray-300 hidden skeleton w-[4px] md:block"></div>
+  //         <hr className="md:hidden border-gray-300" />
+  //         <div className="skeleton h-20 w-full join-item"></div>
+  //       </div>
+  //     </section>
+  //   );
+  // }
   return (
-    <div>
-      buyer home
-    </div>
+    <section className="section">
+      <div className="stats stats-vertical md:stats-horizontal shadow w-full">
+        <div className="stat">
+          <div className="stat-figure text-main-color">
+            <GrUserWorker size={30} />
+          </div>
+          <div className="stat-title">Total Tasks</div>
+          <div className="stat-value">{1}</div>
+        </div>
+
+        <div className="stat">
+          <div className="stat-figure text-main-color">
+            <FaUserTie size={30} />
+          </div>
+          <div className="stat-title">Pending Tasks</div>
+          <div className="stat-value">{1}</div>
+        </div>
+        <div className="stat">
+          <div className="stat-figure text-main-color">
+            <FaCoins size={30} />
+          </div>
+          <div className="stat-title">Required Workers</div>
+          <div className="stat-value">{1}</div>
+        </div>
+
+        <div className="stat">
+          <div className="stat-figure text-main-color">
+            <MdPayments size={30} />
+          </div>
+          <div className="stat-title">Total Payments</div>
+          <div className="stat-value">1,200</div>
+        </div>
+      </div>
+
+      <div className="overflow-x-auto mt-12">
+        <table className="table">
+          {/* head */}
+          <thead>
+            <tr>
+              <th></th>
+              <th>Worker Name</th>
+              <th>Task Title</th>
+              <th>Payable Amount</th>
+              <th>View Submission</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {/* row 1 */}
+            <tr>
+              <th>1</th>
+              <td>Cy Ganderton</td>
+              <td>Quality Control Specialist</td>
+              <td>10</td>
+              <td>
+                <button className="btn btn-xs">
+                  View Details
+                </button>
+              </td>
+              <td className="space-x-2">
+                <button>
+                  <MdOutlineFileDownloadDone className="text-main-color" size={24} />
+                </button>
+                <button>
+                  <RxCross2 className="text-red-500" size={24} />
+                </button>
+              </td>
+            </tr>
+            {/* row 2 */}
+            <tr>
+              <th>2</th>
+              <td>Hart Hagerty</td>
+              <td>Desktop Support Technician</td>
+              <td>Purple</td>
+            </tr>
+            {/* row 3 */}
+            <tr>
+              <th>3</th>
+              <td>Brice Swyre</td>
+              <td>Tax Accountant</td>
+              <td>Red</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
   );
 };
 
