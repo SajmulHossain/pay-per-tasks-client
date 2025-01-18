@@ -3,7 +3,7 @@
 
 const Heading = ({heading, title}) => {
   return (
-    <div className="max-w-screen-md mx-auto px-4 text-center">
+    <div className="max-w-screen-md mx-auto px-4 text-center mb-8">
       {
         heading && <h3 className="font-bold text-2xl">{heading}</h3>
       }
