@@ -1,20 +1,12 @@
-import { useQuery } from "@tanstack/react-query";
-import useAuth from "../hooks/useAuth";
-import useAxiosSecure from "../hooks/useAxiosSecure";
+
 import { FaCoins } from "react-icons/fa";
+import useCoin from "../hooks/useCoin";
 
 const Coin = () => {
-  const { user, loading } = useAuth();
-  const axiosSecure = useAxiosSecure();
 
-  const { data: coin=0, isLoading } = useQuery({
-    queryKey: ["coin", user?.email],
-    enabled: !!user && !loading,
-    queryFn: async () => {
-      const { data } = await axiosSecure(`/coin/${user.email}`);
-      return data?.coin;
-    },
-  });
+  const [coin, isLoading] = useCoin();
+
+  
 
   if (isLoading) {
     return (

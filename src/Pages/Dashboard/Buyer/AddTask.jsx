@@ -1,35 +1,103 @@
+import { useMutation } from "@tanstack/react-query";
 import { compareAsc } from "date-fns";
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
+import useAuth from "../../../hooks/useAuth";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import swalModal from "../../../utils/sweetModal";
+import CrudLoading from "../../../components/CrudLoading";
+import toast from "react-hot-toast";
+import uploadImg from "../../../Api/imgbb";
 
 const AddTask = () => {
-const [error, setError] = useState('');
-const [completionDate, setCompletionDate] = useState(new Date());
+  const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
+  const [error, setError] = useState("");
+  const [completionDate, setCompletionDate] = useState(new Date());
 
+  const { isPending, mutateAsync } = useMutation({
+    mutationKey: ["tasks", user?.email],
+    mutationFn: async (task) => {
+      const { data } = await axiosSecure.post("/tasks", task);
+      if (data?.insertedId) {
+        swalModal("Tasks", "Task added successfully!");
+      } else {
+        swalModal("Tasks", "Something went wrong", "error");
+      }
+    },
+  });
 
-const changeDate = date => {
-  setError('');
-  if (compareAsc(new Date().toDateString(), new Date(date).toDateString()) !== 0) {
-    return setError('You cannot set a date before today.')
-  }
-  setCompletionDate(date);
-}
+  const changeDate = (date) => {
+    setError("");
+    if (
+      compareAsc(new Date().toDateString(), new Date(date).toDateString()) !== 0
+    ) {
+      return setError("You cannot set a date before today.");
+    }
+    setCompletionDate(date);
+  };
 
-
-  const handleAddTask = e => {
+  const handleAddTask = async (e) => {
     e.preventDefault();
-  }
+
+    const form = e.target;
+
+    const title = form.title.value;
+    const workers = parseInt(form.workers.value);
+    const amount = parseInt(form.amount.value);
+    const imageFile = form.image.files[0];
+    const info = form.submissionInfo.value;
+    const details = form.details.value;
+
+    if (
+      !title ||
+      !workers ||
+      isNaN(workers) ||
+      !amount ||
+      isNaN(amount) ||
+      !imageFile ||
+      !info ||
+      details
+    ) {
+      return setError("Please valid value. Workers and Amount should number");
+    }
+
+    
+
+    const image = await uploadImg(imageFile);
+
+    const task = {
+      title,
+      workers,
+      amount,
+      image,
+      date: completionDate,
+      info,
+      details,
+      buyer: {
+        email: user?.email,
+        name: user?.displayName,
+      },
+    };
+
+    try {
+      await mutateAsync(task);
+    } catch {
+      toast.error("Something went wrong!");
+    }
+  };
   return (
     <section className="section">
       <div>
         <form onSubmit={handleAddTask}>
-          <h3 className="text-center font-bold text-3xl border-b border-second-color mb-4">Add Task</h3>
+          <h3 className="text-center font-bold text-3xl border-b border-second-color mb-4">
+            Add Task
+          </h3>
           <div className="space-y-4">
-            {
-              error && <p className="text-red-500 text-center text-lg">{error}</p>
-            }
+            {error && (
+              <p className="text-red-500 text-center text-lg">{error}</p>
+            )}
             <div className="form-control">
               <label htmlFor="title" className="label">
                 <span className="label-text">Task Title</span>
@@ -46,7 +114,7 @@ const changeDate = date => {
             <div className="flex gap-2 items-center flex-col md:flex-row md:justify-between md:items-start">
               <div className="form-control w-full">
                 <label htmlFor="workers" className="label">
-                  <span className="label-text">Completion Date</span>
+                  <span className="label-text">Required Workers</span>
                 </label>
                 <input
                   type="workers"
@@ -71,13 +139,14 @@ const changeDate = date => {
                 />
               </div>
               <div className="form-control w-full">
-                <label htmlFor="workers" className="label">
-                  <span className="label-text">Required Workers</span>
+                <label htmlFor="date" className="label">
+                  <span className="label-text">Completion Date</span>
                 </label>
                 <DatePicker
                   name="date"
                   className="input input-bordered rounded w-full"
                   dateFormat="PP"
+                  id="date"
                   selected={completionDate}
                   onChange={(value) => changeDate(value)}
                 />
@@ -113,17 +182,19 @@ const changeDate = date => {
               <label htmlFor="details" className="label">
                 <span className="label-text">Submission Details</span>
               </label>
-              <input
+              <textarea
                 type="text"
                 placeholder="Submission Details"
                 id="details"
                 name="details"
-                className="input rounded input-bordered"
+                className="textarea rounded h-40 textarea-bordered"
                 required
               />
             </div>
             <div className="form-control mt-6">
-              <button className="btn bg-second-color text-white">Add Task</button>
+              <button className="btn bg-second-color text-white">
+                Add Task {isPending && <CrudLoading />}
+              </button>
             </div>
           </div>
         </form>
