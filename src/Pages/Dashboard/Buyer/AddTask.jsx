@@ -1,3 +1,4 @@
+import { compareAsc } from "date-fns";
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -8,6 +9,15 @@ const [error, setError] = useState('');
 const [completionDate, setCompletionDate] = useState(new Date());
 
 
+const changeDate = date => {
+  setError('');
+  if (compareAsc(new Date().toDateString(), new Date(date).toDateString()) !== 0) {
+    return setError('You cannot set a date before today.')
+  }
+  setCompletionDate(date);
+}
+
+
   const handleAddTask = e => {
     e.preventDefault();
   }
@@ -15,7 +25,11 @@ const [completionDate, setCompletionDate] = useState(new Date());
     <section className="section">
       <div>
         <form onSubmit={handleAddTask}>
+          <h3 className="text-center font-bold text-3xl border-b border-second-color mb-4">Add Task</h3>
           <div className="space-y-4">
+            {
+              error && <p className="text-red-500 text-center text-lg">{error}</p>
+            }
             <div className="form-control">
               <label htmlFor="title" className="label">
                 <span className="label-text">Task Title</span>
@@ -65,6 +79,7 @@ const [completionDate, setCompletionDate] = useState(new Date());
                   className="input input-bordered rounded w-full"
                   dateFormat="PP"
                   selected={completionDate}
+                  onChange={(value) => changeDate(value)}
                 />
               </div>
             </div>

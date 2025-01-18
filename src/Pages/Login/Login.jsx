@@ -70,9 +70,9 @@ const Login = () => {
         className="md:flex-1 rounded shadow-xl bg-main-color/10"
       >
         <form onSubmit={handleLogin} className="p-6 py-10">
-          <h1 className="text-3xl mb-8 text-center border-b border-main-color py-2 font-bold">
+          <h2 className="text-3xl mb-8 text-center border-b border-main-color py-2 font-bold">
             Login now!
-          </h1>
+          </h2>
 
           {<p className="text-center text-red-500 text-sm mb-4">{error}</p>}
           <div className="space-y-4">
