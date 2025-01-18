@@ -19,6 +19,7 @@ import AdminRoute from "./AdminRoute";
 import AdminHome from "../Pages/Dashboard/Admin/AdminHome";
 import ManageTask from "../Pages/Dashboard/Admin/ManageTask";
 import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers";
+import UpdateTask from "../Pages/Dashboard/Buyer/UpdateTask";
 
 const routes = createBrowserRouter([
   {
@@ -100,6 +101,16 @@ const routes = createBrowserRouter([
         ),
       },
       {
+        path: "update-task/:id",
+        element: (
+          <PrivetRoute>
+            <BuyerRoute>
+              <UpdateTask />
+            </BuyerRoute>
+          </PrivetRoute>
+        ),
+      },
+      {
         path: "my-tasks",
         element: (
           <PrivetRoute>
@@ -130,29 +141,35 @@ const routes = createBrowserRouter([
         ),
       },
       {
-        path: 'admin-home',
-        element: <PrivetRoute>
-          <AdminRoute>
-            <AdminHome />
-          </AdminRoute>
-        </PrivetRoute>
+        path: "admin-home",
+        element: (
+          <PrivetRoute>
+            <AdminRoute>
+              <AdminHome />
+            </AdminRoute>
+          </PrivetRoute>
+        ),
       },
       {
-        path: 'manage-users',
-        element: <PrivetRoute>
-          <AdminRoute>
-            <ManageUsers />
-          </AdminRoute>
-        </PrivetRoute>
+        path: "manage-users",
+        element: (
+          <PrivetRoute>
+            <AdminRoute>
+              <ManageUsers />
+            </AdminRoute>
+          </PrivetRoute>
+        ),
       },
       {
-        path: 'manage-tasks',
-        element: <PrivetRoute>
-          <AdminRoute>
-            <ManageTask />
-          </AdminRoute>
-        </PrivetRoute>
-      }
+        path: "manage-tasks",
+        element: (
+          <PrivetRoute>
+            <AdminRoute>
+              <ManageTask />
+            </AdminRoute>
+          </PrivetRoute>
+        ),
+      },
     ],
   },
 ]);
