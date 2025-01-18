@@ -1,10 +1,11 @@
+import Heading from "../../../components/Heading";
 
 
 const PurchaseCoin = () => {
   return (
-    <div>
-      purchase Coin
-    </div>
+    <section className="section">
+      <Heading heading='Purchase Coin' title='Purchase coin to complete your tasks' />
+    </section>
   );
 };
 
