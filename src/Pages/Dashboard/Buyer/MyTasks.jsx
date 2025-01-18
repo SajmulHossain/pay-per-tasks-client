@@ -17,7 +17,6 @@ const MyTasks = () => {
     }
   })
 
-  console.log(tasks);
   return (
     <section className="section">
       <div className="overflow-x-auto">
