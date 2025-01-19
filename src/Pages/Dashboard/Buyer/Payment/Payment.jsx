@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+
 
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
@@ -15,7 +15,7 @@ const Payment = () => {
 
    
   return (
-    <section className="section">
+    <section className="section max-w-lg bg-second-color/10 border border-second-color my-8 rounded-md">
       <h3 className="font-bold text-xl text-center border-b border-main-color pb-2">
           Payment
         </h3>

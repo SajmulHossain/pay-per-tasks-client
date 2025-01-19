@@ -19,6 +19,7 @@ const CheckOutForm = ({ price=0, coin=0 }) => {
   const navigate = useNavigate();
   const [,,refetch] = useCoin();
   const [clientSecret, setClientSecret] = useState('');
+  const [isDisable, setIsDisable] = useState(false);
 
 useEffect(() => {
   const fetchClientSecrete = async () => {
@@ -50,14 +51,15 @@ useEffect(() => {
 
   const handleSubmit = async (event) => {
     // Block native form submission.
+    setIsDisable(true);
     event.preventDefault();
     if (!stripe || !elements) {
       // Stripe.js has not loaded yet. Make sure to disable
       // form submission until Stripe.js has loaded.
+      setIsDisable(false);
       return toast.error("Something went wrong!");
     }
 
-    document.getElementById("my_modal_3").close();
 
     // Get a reference to a mounted CardElement. Elements knows how
     // to find your CardElement because there can only ever be one of
@@ -65,7 +67,7 @@ useEffect(() => {
     const card = elements.getElement(CardElement);
 
     if (card == null) {
-      return;
+      return setIsDisable(false);
     }
 
     // Use your card Element with other Stripe.js APIs
@@ -92,6 +94,7 @@ useEffect(() => {
 
 
     if(paymentError)  {
+      setIsDisable(false);
       return toast.error('Payment failed!')
     }
 
@@ -138,7 +141,7 @@ useEffect(() => {
       <button
         type="submit"
         className="w-full btn bg-main-color/90 hover:bg-main-color hover:shadow-md"
-        disabled={!stripe}
+        disabled={!stripe || isDisable}
       >
         Pay ${price}
       </button>

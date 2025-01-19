@@ -21,6 +21,7 @@ import ManageTask from "../Pages/Dashboard/Admin/ManageTask";
 import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers";
 import UpdateTask from "../Pages/Dashboard/Buyer/UpdateTask";
 import Payment from "../Pages/Dashboard/Buyer/Payment/Payment";
+import TaskDetails from "../Pages/Dashboard/Worker/TaskDetails";
 
 const routes = createBrowserRouter([
   {
@@ -82,6 +83,12 @@ const routes = createBrowserRouter([
         ),
       },
       {
+        path: "/dashboard/tasks/details/:id",
+        element: <PrivetRoute>
+          <TaskDetails />
+        </PrivetRoute>
+      },
+      {
         path: "buyer-home",
         element: (
           <PrivetRoute>
@@ -110,13 +117,16 @@ const routes = createBrowserRouter([
             </BuyerRoute>
           </PrivetRoute>
         ),
-      },{
-        path: 'payment',
-        element: <PrivetRoute>
-          <BuyerRoute>
-            <Payment />
-          </BuyerRoute>
-        </PrivetRoute>
+      },
+      {
+        path: "payment",
+        element: (
+          <PrivetRoute>
+            <BuyerRoute>
+              <Payment />
+            </BuyerRoute>
+          </PrivetRoute>
+        ),
       },
       {
         path: "my-tasks",

@@ -17,7 +17,7 @@ const UpdateTask = () => {
   const { data: task = {}, isLoading } = useQuery({
     queryKey: ["tasks", id],
     queryFn: async () => {
-      const { data } = await axiosSecure(`/task/${id}?email=${user?.email}`);
+      const { data } = await axiosSecure(`/task/${id}`);
       return data;
     },
   });

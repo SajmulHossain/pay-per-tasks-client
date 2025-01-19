@@ -18,7 +18,7 @@ const PaymentHistory = () => {
     }
   })
 
-  console.log(payments);
+  
   return (
     <section className="section">
       <div className="overflow-x-auto">

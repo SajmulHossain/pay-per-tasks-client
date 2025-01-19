@@ -10,13 +10,15 @@ import CrudLoading from "../../../components/CrudLoading";
 import toast from "react-hot-toast";
 import uploadImg from "../../../Api/imgbb";
 import useCoin from "../../../hooks/useCoin";
+import { useNavigate } from "react-router-dom";
 
 const AddTask = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const [error, setError] = useState("");
   const [completionDate, setCompletionDate] = useState(new Date());
-  const [coin] = useCoin();
+  const [coin,,refetch] = useCoin();
+  const navigate = useNavigate();
 
   const { isPending, mutateAsync } = useMutation({
     mutationKey: ["tasks", user?.email],
@@ -29,6 +31,8 @@ const AddTask = () => {
       });
       if (data?.insertedId) {
         swalModal("Tasks", "Task added successfully!");
+        refetch();
+        navigate('/dashboard/my-tasks')
       } else {
         swalModal("Tasks", "Something went wrong", "error");
       }
