@@ -25,6 +25,16 @@ const BuyerHome = () => {
 
   const { tasks, pending, workers } = states || {};
 
+  const {data:submissions=[]} = useQuery({
+    queryKey: ['submissions', user?.email],
+    queryFn: async() => {
+      const { data } = await axiosSecure(`/pending-tasks/${user?.email}`);
+      return data;
+    }
+  })
+
+  console.log(submissions);
+
   if (isLoading) {
     return (
       <section className="section">
@@ -79,7 +89,7 @@ const BuyerHome = () => {
       </div>
 
       <div className="overflow-x-auto mt-12">
-        <table className="table">
+        <table className="table text-center">
           {/* head */}
           <thead>
             <tr>
@@ -92,41 +102,28 @@ const BuyerHome = () => {
             </tr>
           </thead>
           <tbody>
-            {/* row 1 */}
-            <tr>
-              <th>1</th>
-              <td>Cy Ganderton</td>
-              <td>Quality Control Specialist</td>
-              <td>10</td>
-              <td>
-                <button className="btn btn-xs">View Details</button>
-              </td>
-              <td className="space-x-2">
-                <button>
-                  <MdOutlineFileDownloadDone
-                    className="text-main-color"
-                    size={24}
-                  />
-                </button>
-                <button>
-                  <RxCross2 className="text-red-500" size={24} />
-                </button>
-              </td>
-            </tr>
-            {/* row 2 */}
-            <tr>
-              <th>2</th>
-              <td>Hart Hagerty</td>
-              <td>Desktop Support Technician</td>
-              <td>Purple</td>
-            </tr>
-            {/* row 3 */}
-            <tr>
-              <th>3</th>
-              <td>Brice Swyre</td>
-              <td>Tax Accountant</td>
-              <td>Red</td>
-            </tr>
+            {submissions.map((submission, index) => (
+              <tr key={submission._id}>
+                <th>{index+1}</th>
+                <td>{submission?.worker_name}</td>
+                <td>{submission?.task_title.slice(0,20)}...</td>
+                <td>{submission?.amount}</td>
+                <td>
+                  <button className="btn btn-xs">View Details</button>
+                </td>
+                <td className="space-x-2">
+                  <button title="Accept">
+                    <MdOutlineFileDownloadDone
+                      className="text-main-color"
+                      size={24}
+                    />
+                  </button>
+                  <button title="Reject">
+                    <RxCross2 className="text-red-500" size={24} />
+                  </button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

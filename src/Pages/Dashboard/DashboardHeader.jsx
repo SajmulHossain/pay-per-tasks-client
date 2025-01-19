@@ -13,7 +13,7 @@ const DashboardHeader = () => {
   const [role, isLoading] = useRole();
   
   return (
-    <header className="py-2 border-y sticky top-0 z-50 backdrop-blur-3xl border-main-color">
+    <header className="py-2 border-y lg:sticky lg:top-0 lg:z-50 backdrop-blur-3xl border-main-color">
       <section className="container mx-auto flex px-4 justify-between items-center">
         <div className="flex items-center">
           <label

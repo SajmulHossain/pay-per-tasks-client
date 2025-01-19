@@ -1,11 +1,16 @@
-import { useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router-dom";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { useNavigate, useParams } from "react-router-dom";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import DefaultLoading from "../../../components/DefaultLoading";
+import toast from "react-hot-toast";
+import CrudLoading from "../../../components/CrudLoading";
+import useAuth from "../../../hooks/useAuth";
 
 const TaskDetails = () => {
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
+  const { user } = useAuth();
+  const navigate = useNavigate();
 
   const { data: task = {}, isLoading } = useQuery({
     queryKey: ["task", id],
@@ -26,6 +31,19 @@ const TaskDetails = () => {
     buyer,
   } = task || {};
 
+  const {isPending, mutateAsync} = useMutation({
+    mutationFn: async(submissionInfo) => {
+      const {data} = await axiosSecure.post('/submit', submissionInfo);
+
+      if(data.insertedId) {
+        toast.success('Task submitted successfully!');
+        navigate('/dashboard');
+      } else {
+        toast.error('Submission error!');
+      }
+    }
+  })
+
   if (isLoading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
@@ -33,6 +51,23 @@ const TaskDetails = () => {
       </div>
     );
   }
+
+
+  const handleSubmitTask = async () => {
+    const data = {
+      taskId: id,
+      worker_email: user?.email,
+      worker_name: user?.displayName,
+      worker_image: user?.photoURL,
+    }
+
+    try {
+      await mutateAsync(data);
+    } catch {
+      toast.error('Something went wrong!')
+    }
+  }
+
   return (
     <div className="min-h-screen bg-gray-100 py-10 px-4">
       <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
@@ -89,8 +124,8 @@ const TaskDetails = () => {
             <p className="text-gray-600 leading-relaxed">{details}</p>
           </div>
           <div className="mt-8 text-center">
-            <button className="bg-main-color/80 hover:bg-main-color btn">
-              Submit Task
+            <button onClick={handleSubmitTask} className="bg-main-color/80 hover:bg-main-color btn">
+              Submit Task {isPending && <CrudLoading />}
             </button>
           </div>
         </div>
