@@ -2,13 +2,12 @@ import { useQuery } from "@tanstack/react-query";
 import { FaTasks } from "react-icons/fa";
 import { GrUserWorker } from "react-icons/gr";
 import {
-  MdOutlineFileDownloadDone,
   MdOutlinePendingActions,
   MdPayments,
 } from "react-icons/md";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { RxCross2 } from "react-icons/rx";
+import PendingTaskRow from "./PendingTaskRow";
 
 const BuyerHome = () => {
   const { user, loading } = useAuth();
@@ -25,15 +24,15 @@ const BuyerHome = () => {
 
   const { tasks, pending, workers } = states || {};
 
-  const {data:submissions=[]} = useQuery({
-    queryKey: ['submissions', user?.email],
-    queryFn: async() => {
+  const { data: submissions = [], refetch } = useQuery({
+    queryKey: ["submissions", user?.email],
+    queryFn: async () => {
       const { data } = await axiosSecure(`/pending-tasks/${user?.email}`);
       return data;
-    }
-  })
+    },
+  });
 
-  console.log(submissions);
+ 
 
   if (isLoading) {
     return (
@@ -103,26 +102,12 @@ const BuyerHome = () => {
           </thead>
           <tbody>
             {submissions.map((submission, index) => (
-              <tr key={submission._id}>
-                <th>{index+1}</th>
-                <td>{submission?.worker_name}</td>
-                <td>{submission?.task_title.slice(0,20)}...</td>
-                <td>{submission?.amount}</td>
-                <td>
-                  <button className="btn btn-xs">View Details</button>
-                </td>
-                <td className="space-x-2">
-                  <button title="Accept">
-                    <MdOutlineFileDownloadDone
-                      className="text-main-color"
-                      size={24}
-                    />
-                  </button>
-                  <button title="Reject">
-                    <RxCross2 className="text-red-500" size={24} />
-                  </button>
-                </td>
-              </tr>
+              <PendingTaskRow
+                key={submission._id}
+                refetch={refetch}
+                submission={submission}
+                index={index}
+              />
             ))}
           </tbody>
         </table>
