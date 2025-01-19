@@ -7,7 +7,7 @@ const useCoin = () => {
 const axiosSecure = useAxiosSecure();
 const { user, loading } = useAuth();
 
-const { data: coin = 0, isLoading } = useQuery({
+const { data: coin = 0, isLoading, refetch } = useQuery({
   queryKey: ["coin", user?.email],
   enabled: !!user && !loading,
   queryFn: async () => {
@@ -16,7 +16,7 @@ const { data: coin = 0, isLoading } = useQuery({
   },
 });
 
-  return  [coin, isLoading];
+  return  [coin, isLoading, refetch];
 };
 
 export default useCoin;

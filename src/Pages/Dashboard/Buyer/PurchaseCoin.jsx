@@ -1,15 +1,14 @@
-import { useState } from "react";
+
 import Heading from "../../../components/Heading";
-import Payment from "./Payment/Payment";
+import { useNavigate } from "react-router-dom";
 
 
 const PurchaseCoin = () => {
-  const [data, setData] = useState({});
+  const navigate = useNavigate();
 
-  const handleModal = (data) => {
-    setData(data)
- document.getElementById("my_modal_3").showModal()
-  }
+  const handlePurchase = (data) => {
+    navigate('/dashboard/payment', {state: data})
+  };
   
   return (
     <section className="section">
@@ -46,7 +45,7 @@ const PurchaseCoin = () => {
             <div className="mt-6">
               <button
                 onClick={() =>
-                  handleModal({
+                  handlePurchase({
                     package: "Most Popular",
                     price: 35,
                     coin: 1000,
@@ -88,7 +87,7 @@ const PurchaseCoin = () => {
             <div className="mt-6">
               <button
                 onClick={() =>
-                  handleModal({
+                  handlePurchase({
                     package: "Premium",
                     price: 20,
                     coin: 500,
@@ -130,7 +129,7 @@ const PurchaseCoin = () => {
             <div className="mt-6">
               <button
                 onClick={() =>
-                  handleModal({
+                  handlePurchase({
                     package: "Advance",
                     coin: 150,
                     price: 10,
@@ -172,7 +171,7 @@ const PurchaseCoin = () => {
             <div className="mt-6">
               <button
                 onClick={() =>
-                  handleModal({
+                  handlePurchase({
                     package: "Basic",
                     coin: 10,
                     price: 1,
@@ -187,8 +186,6 @@ const PurchaseCoin = () => {
           </div>
         </div>
       </div>
-
-      <Payment data={data} />
     </section>
   );
 };

@@ -8,28 +8,34 @@ import useAxiosSecure from "../hooks/useAxiosSecure";
 import useAuth from "../hooks/useAuth";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import useCoin from "../hooks/useCoin";
+import { useEffect, useState } from "react";
 
-const CheckOutForm = ({ price=0 }) => {
-  console.log(price);
+const CheckOutForm = ({ price=0, coin=0 }) => {
   const stripe = useStripe();
   const elements = useElements();
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const navigate = useNavigate();
+  const [,,refetch] = useCoin();
+  const [clientSecret, setClientSecret] = useState('');
 
-  const { data: clientSecret = "" } = useMutation({
-    queryKey: ["client-secrete"],
-    queryFn: async () => {
-      try {
-        const { data } = await axiosSecure.post("/payment", { price: parseFloat(price) });
-        return data?.clientSecret;
-      } catch (err) {
-        console.log(err);
-      }
-    },
-  });
+useEffect(() => {
+  const fetchClientSecrete = async () => {
+    try {
+      const { data } = await axiosSecure.post("/payment", {
+        price: parseFloat(price),
+      });
+      setClientSecret(data?.clientSecret);
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
-  console.log(clientSecret);
+  fetchClientSecrete();
+},[axiosSecure, price])
+
+
 
   const {mutateAsync, isPending} = useMutation({
     mutationKey: ['payments', user?.email],
@@ -74,7 +80,7 @@ const CheckOutForm = ({ price=0 }) => {
       console.log("PaymentMethod successfull");
     }
 
-    const { paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+    const { error:paymentError,paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
       payment_method: {
         card: card,
         billing_details: {
@@ -85,18 +91,24 @@ const CheckOutForm = ({ price=0 }) => {
     });
 
 
+    if(paymentError)  {
+      return toast.error('Payment failed!')
+    }
+
+
     const {amount, currency, id} = paymentIntent || {};
     if (paymentIntent?.status === "succeeded") {
       toast.success("Payment Successfull");      
       navigate('/dashboard/payment-history', {state: isPending});
       const data = {
-        amount, currency, id,
+        amount, currency, id,coin,
         email:user?.email,
         name: user?.displayName
       }
 
       try {
         await mutateAsync(data);
+        refetch();
       } catch (err) {
         console.log(err);
       }

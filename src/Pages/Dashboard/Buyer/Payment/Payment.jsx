@@ -3,23 +3,20 @@
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import CheckOutForm from "../../../../components/CheckOutForm";
+import { useLocation } from "react-router-dom";
 
 const stripePromise = loadStripe(import.meta.env.VITE_stripe_public_key);
 
 
-const Payment = ({data}) => {
-  const {package: type, price,coin,save} = data;
+const Payment = () => {
+  const {state} = useLocation();
+  const {package: type, price,coin,save} = state || {};
+  
 
    
   return (
-    <dialog id="my_modal_3" className="modal">
-      <div className="modal-box">
-        <form method="dialog">
-          <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-            ✕
-          </button>
-        </form>
-        <h3 className="font-bold text-xl text-center border-b border-main-color pb-2">
+    <section className="section">
+      <h3 className="font-bold text-xl text-center border-b border-main-color pb-2">
           Payment
         </h3>
         <div className="py-4 flex flex-col gap-4">
@@ -32,11 +29,10 @@ const Payment = ({data}) => {
         </div>
         <div>
           <Elements stripe={stripePromise}>
-            <CheckOutForm price={price} />
+            <CheckOutForm price={price} coin={coin} />
           </Elements>
         </div>
-      </div>
-    </dialog>
+    </section>
   );
 };
 
