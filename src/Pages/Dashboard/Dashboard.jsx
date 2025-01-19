@@ -44,7 +44,7 @@ const Dashboard = () => {
             </>
           )}
         </div>
-        <div className="drawer-side">
+        <div className="drawer-side mt-16 lg:mt-0">
           <label
             htmlFor="my-drawer-2"
             aria-label="close sidebar"

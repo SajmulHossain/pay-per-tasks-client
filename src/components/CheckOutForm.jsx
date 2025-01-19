@@ -1,77 +1,108 @@
 /* eslint-disable react/prop-types */
 
-
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 
 import "../styles/common.css";
 import toast from "react-hot-toast";
-import { useState } from "react";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import useAuth from "../hooks/useAuth";
+import { useMutation } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
-const CheckOutForm = ({price}) => {
+const CheckOutForm = ({ price=0 }) => {
+  console.log(price);
   const stripe = useStripe();
   const elements = useElements();
-  const [clientSecret, setClientSecret] = useState('');
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
+  const navigate = useNavigate();
 
+  const { data: clientSecret = "" } = useMutation({
+    queryKey: ["client-secrete"],
+    queryFn: async () => {
+      try {
+        const { data } = await axiosSecure.post("/payment", { price: parseFloat(price) });
+        return data?.clientSecret;
+      } catch (err) {
+        console.log(err);
+      }
+    },
+  });
 
-  
-  const getPaymentIntent = async () => {
-    try {
-      console.log(price);
-      const { data } = await axiosSecure.post('/payment', {price});
-setClientSecret(data.clientSecret);
-    } catch(err) {
+  console.log(clientSecret);
+
+  const {mutateAsync, isPending} = useMutation({
+    mutationKey: ['payments', user?.email],
+    mutationFn: async(data) => {
+     try {
+       await axiosSecure.post(`/payments/${user?.email}`, data);
+     } catch (err) {
       console.log(err);
+     }
     }
-  }
+  })
 
   const handleSubmit = async (event) => {
-    
-    getPaymentIntent();
     // Block native form submission.
     event.preventDefault();
     if (!stripe || !elements) {
       // Stripe.js has not loaded yet. Make sure to disable
       // form submission until Stripe.js has loaded.
-      return toast.error('Something went wrong!');
+      return toast.error("Something went wrong!");
     }
-    
+
+    document.getElementById("my_modal_3").close();
+
     // Get a reference to a mounted CardElement. Elements knows how
     // to find your CardElement because there can only ever be one of
     // each type of element.
     const card = elements.getElement(CardElement);
-    
+
     if (card == null) {
       return;
     }
-    
+
     // Use your card Element with other Stripe.js APIs
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
+    const { error,/* paymentMethod*/ } = await stripe.createPaymentMethod({
       type: "card",
       card,
     });
-    
+
     if (error) {
       console.log("[error]", error);
     } else {
-      console.log("[PaymentMethod]", paymentMethod);
+      console.log("PaymentMethod successfull");
     }
 
-     const { paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
-       payment_method: {
-         card: card,
-         billing_details: {
-           name: user?.displayName,
-           email: user?.email,
-         },
-       },
-     });
-if(paymentIntent.status === 'succeeded') {
-  console.log('do something');
-}
+    const { paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+      payment_method: {
+        card: card,
+        billing_details: {
+          name: user?.displayName,
+          email: user?.email,
+        },
+      },
+    });
+
+
+    const {amount, currency, id} = paymentIntent || {};
+    if (paymentIntent?.status === "succeeded") {
+      toast.success("Payment Successfull");      
+      navigate('/dashboard/payment-history', {state: isPending});
+      const data = {
+        amount, currency, id,
+        email:user?.email,
+        name: user?.displayName
+      }
+
+      try {
+        await mutateAsync(data);
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      toast.error('Something Went Wrong!')
+    }
   };
 
   return (
@@ -92,12 +123,15 @@ if(paymentIntent.status === 'succeeded') {
           },
         }}
       />
-      <button type="submit" className="w-full" disabled={!stripe}>
+      <button
+        type="submit"
+        className="w-full btn bg-main-color/90 hover:bg-main-color hover:shadow-md"
+        disabled={!stripe}
+      >
         Pay ${price}
       </button>
     </form>
   );
 };
-
 
 export default CheckOutForm;

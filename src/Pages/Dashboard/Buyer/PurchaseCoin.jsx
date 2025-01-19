@@ -19,7 +19,7 @@ const PurchaseCoin = () => {
       />
 
       <div className="flex justify-center gap-4 flex-wrap">
-        <div className="border min-w-96 max-w-[400px] border-second-color rounded-md overflow-hidden">
+        <div className="border w-full max-w-[400px] border-second-color rounded-md overflow-hidden">
           <h3 className="text-center py-3 bg-second-color font-semibold text-white">
             Most Popular
           </h3>
@@ -61,7 +61,7 @@ const PurchaseCoin = () => {
           </div>
         </div>
 
-        <div className="border min-w-96 max-w-[400px] border-second-color rounded-md overflow-hidden">
+        <div className="border w-full max-w-[400px] border-second-color rounded-md overflow-hidden">
           <h3 className="text-center bg-second-color text-white font-semibold py-3">
             Premium
           </h3>
@@ -103,7 +103,7 @@ const PurchaseCoin = () => {
           </div>
         </div>
 
-        <div className="border min-w-96 max-w-[400px] border-second-color rounded-md overflow-hidden">
+        <div className="border w-full max-w-[400px] border-second-color rounded-md overflow-hidden">
           <h3 className="text-center py-3 border-b border-second-color">
             Advance
           </h3>
@@ -145,7 +145,7 @@ const PurchaseCoin = () => {
           </div>
         </div>
 
-        <div className="border min-w-96 max-w-[400px] border-second-color rounded-md overflow-hidden">
+        <div className="border w-full max-w-[400px] border-second-color rounded-md overflow-hidden">
           <h3 className="text-center py-3 border-b border-second-color">
             Basic
           </h3>

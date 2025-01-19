@@ -51,7 +51,7 @@ const Header = () => {
           <div className="skeleton h-12 w-full"></div>
         </div>
       ) : (
-        <div className="flex items-center gap-1">
+        <div className="flex md:items-center flex-col md:flex-row  gap-1">
           <div className="join join-vertical md:join-horizontal">
             {!user ? (
               <>

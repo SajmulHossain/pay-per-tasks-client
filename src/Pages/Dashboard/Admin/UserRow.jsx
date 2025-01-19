@@ -89,7 +89,7 @@ const UserRow = ({ user, refetch }) => {
           <option value="admin">Admin</option>
         </select>
       </td>
-      <td className="text-center space-x-2">
+      <td className="text-center flex gap-2">
         <button onClick={() => handleDeleteUser(_id)} className="btn">
           <MdDelete size={24} color="red" /> Delete
         </button>
