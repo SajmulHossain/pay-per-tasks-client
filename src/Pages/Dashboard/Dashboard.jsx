@@ -67,7 +67,7 @@ const Dashboard = () => {
             <div className="mt-auto">
               <button
                 onClick={handleLogOut}
-                className="border-y hover:bg-main-color border-main-color w-full flex py-2 items-center gap-2 "
+                className="uppercase transition-all duration-500 font-semibold hover:shadow-md hover:-translate-y-1 bg-second-color px-4 rounded-md text-white w-full flex py-2 items-center gap-2 "
               >
                 <IoIosLogOut size={24} /> Log out
               </button>

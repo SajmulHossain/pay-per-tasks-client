@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import Coin from "../components/Coin";
 import useRole from "../hooks/useRole";
 import redirect from "../utils/redirectRoute";
+import simplifiedLogo from "../assets/images/simplifiedLogo.png";
 
 const Header = () => {
   const { user, logout, loading } = useAuth();
@@ -114,8 +115,13 @@ const Header = () => {
               {navbarEnd}
             </ul>
           </div>
-          <Link to="/" className="btn btn-ghost md:p-0">
-            <img src={blackLogo} className="w-36" alt="logo" />
+          <Link to="/" className="ml-4 md:ml-0">
+            <img src={blackLogo} className="h-12 hidden" alt="logo" />
+            <img
+              src={simplifiedLogo}
+              className="h-12 w-12 object-cover"
+              alt="logo for small device"
+            />
           </Link>
         </div>
         <div className="navbar-end gap-4">

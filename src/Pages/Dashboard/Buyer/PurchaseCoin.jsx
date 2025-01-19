@@ -1,7 +1,16 @@
+import { useState } from "react";
 import Heading from "../../../components/Heading";
+import Payment from "./Payment/Payment";
 
 
 const PurchaseCoin = () => {
+  const [data, setData] = useState({});
+
+  const handleModal = (data) => {
+    setData(data)
+ document.getElementById("my_modal_3").showModal()
+  }
+  
   return (
     <section className="section">
       <Heading
@@ -35,7 +44,17 @@ const PurchaseCoin = () => {
             </div>
 
             <div className="mt-6">
-              <button className="btn w-full bg-main-color hover:bg-inherit">
+              <button
+                onClick={() =>
+                  handleModal({
+                    package: "Most Popular",
+                    price: 35,
+                    coin: 1000,
+                    save: 75,
+                  })
+                }
+                className="btn w-full bg-main-color hover:bg-inherit"
+              >
                 Choose this plan
               </button>
             </div>
@@ -67,7 +86,17 @@ const PurchaseCoin = () => {
             </div>
 
             <div className="mt-6">
-              <button className="btn w-full bg-main-color hover:bg-inherit">
+              <button
+                onClick={() =>
+                  handleModal({
+                    package: "Premium",
+                    price: 20,
+                    coin: 500,
+                    save: 60,
+                  })
+                }
+                className="btn w-full bg-main-color hover:bg-inherit"
+              >
                 Choose this plan
               </button>
             </div>
@@ -99,13 +128,23 @@ const PurchaseCoin = () => {
             </div>
 
             <div className="mt-6">
-              <button className="btn w-full bg-main-color hover:bg-inherit">
+              <button
+                onClick={() =>
+                  handleModal({
+                    package: "Advance",
+                    coin: 150,
+                    price: 10,
+                    save: 66.67,
+                  })
+                }
+                className="btn w-full bg-main-color hover:bg-inherit"
+              >
                 Choose this plan
               </button>
             </div>
           </div>
         </div>
-        
+
         <div className="border min-w-96 max-w-[400px] border-second-color rounded-md overflow-hidden">
           <h3 className="text-center py-3 border-b border-second-color">
             Basic
@@ -131,13 +170,25 @@ const PurchaseCoin = () => {
             </div>
 
             <div className="mt-6">
-              <button className="btn w-full bg-main-color hover:bg-inherit">
+              <button
+                onClick={() =>
+                  handleModal({
+                    package: "Basic",
+                    coin: 10,
+                    price: 1,
+                    save: '00',
+                  })
+                }
+                className="btn w-full bg-main-color hover:bg-inherit"
+              >
                 Choose this plan
               </button>
             </div>
           </div>
         </div>
       </div>
+
+      <Payment data={data} />
     </section>
   );
 };

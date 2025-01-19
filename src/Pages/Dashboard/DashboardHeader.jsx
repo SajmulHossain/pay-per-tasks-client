@@ -1,5 +1,6 @@
 
 import blackLogo from "../../assets/images/black-logo.png";
+import simplifiedLogo from '../../assets/images/simplifiedLogo.png'
 import { Link } from "react-router-dom";
 import Coin from "../../components/Coin";
 import useAuth from "../../hooks/useAuth";
@@ -23,7 +24,8 @@ const DashboardHeader = () => {
           </label>
 
           <Link to="/">
-            <img src={blackLogo} className="h-12" alt="logo" />
+            <img src={blackLogo} className="h-12 hidden" alt="logo" />
+            <img src={simplifiedLogo} className="h-12 w-12 object-cover" alt="logo for small device" />
           </Link>
         </div>
 
