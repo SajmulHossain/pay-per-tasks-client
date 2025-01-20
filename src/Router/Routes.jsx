@@ -22,7 +22,6 @@ import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers";
 import UpdateTask from "../Pages/Dashboard/Buyer/UpdateTask";
 import Payment from "../Pages/Dashboard/Buyer/Payment/Payment";
 import TaskDetails from "../Pages/Dashboard/Worker/TaskDetails";
-import SubmissionDetails from "../Pages/Dashboard/Buyer/SubmissionDetails";
 
 const routes = createBrowserRouter([
   {
@@ -99,14 +98,6 @@ const routes = createBrowserRouter([
           </PrivetRoute>
         ),
       },
-      // {
-      //   path: 'submission/details/:id', 
-      //   element: <PrivetRoute>
-      //     <BuyerRoute>
-      //       <SubmissionDetails />
-      //     </BuyerRoute>
-      //   </PrivetRoute>
-      // },
       {
         path: "add-task",
         element: (

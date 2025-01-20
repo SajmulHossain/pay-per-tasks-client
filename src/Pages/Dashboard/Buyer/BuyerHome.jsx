@@ -24,7 +24,7 @@ const BuyerHome = () => {
 
   const { tasks, pending, workers } = states || {};
 
-  const { data: submissions = [], refetch } = useQuery({
+  const { data: submissions = [...Array(10)],isLoading:loadingSubmissions, refetch } = useQuery({
     queryKey: ["submissions", user?.email],
     queryFn: async () => {
       const { data } = await axiosSecure(`/pending-tasks/${user?.email}`);
@@ -101,15 +101,31 @@ const BuyerHome = () => {
             </tr>
           </thead>
           <tbody>
-            {submissions.map((submission, index) => (
-              <PendingTaskRow
-                key={submission._id}
-                refetch={refetch}
-                submission={submission}
-                index={index}
-                statesReload={statesReload}
-              />
-            ))}
+            {loadingSubmissions ? (
+              <>
+                {submissions.map((i, index) => (
+                  <tr key={index}>
+                    <td colSpan="6">
+                      <div className="w-full">
+                        <div className="skeleton my-0 w-full h-16"></div>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </>
+            ) : (
+              <>
+                {submissions.map((submission, index) => (
+                  <PendingTaskRow
+                    key={submission._id}
+                    refetch={refetch}
+                    submission={submission}
+                    index={index}
+                    statesReload={statesReload}
+                  />
+                ))}
+              </>
+            )}
           </tbody>
         </table>
       </div>

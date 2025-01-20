@@ -74,7 +74,6 @@ const PendingTaskRow = ({ submission, refetch, index, statesReload }) => {
         <td>{task_title.slice(0, 20)}...</td>
         <td>{amount}</td>
         <td>
-          {/* <Link to={`/dashboard/submission/details/${_id}`} className="btn btn-xs">View Details</Link> */}
           <button
             onClick={() => document.getElementById("my_modal_3").showModal()}
             className="btn btn-xs"
@@ -137,7 +136,9 @@ const PendingTaskRow = ({ submission, refetch, index, statesReload }) => {
               </p>
               <p className="flex flex-col gap-1">
                 <span className="font-semibold ">Submission Date</span>
-                <span className="text-gray-600">{format(new Date(date), 'PP')}</span>
+                <span className="text-gray-600">
+                  {format(new Date(date), "PP")}
+                </span>
               </p>
               <p className="flex flex-col gap-1">
                 <span className="font-semibold ">Submission Info</span>
@@ -148,6 +149,16 @@ const PendingTaskRow = ({ submission, refetch, index, statesReload }) => {
                 <span className="text-gray-600">{details}</span>
               </p>
 
+              <div>
+                <button
+                  onClick={() =>
+                    document.getElementById("my_modal_3").close()
+                  }
+                  className="btn w-full bg-second-color/80 hover:bg-second-color hover:text-white hover:shadow-lg"
+                >
+                  Close
+                </button>
+              </div>
             </div>
           </div>
         </div>
