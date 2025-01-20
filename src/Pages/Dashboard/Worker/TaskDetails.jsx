@@ -61,7 +61,7 @@ const TaskDetails = () => {
       worker_email: user?.email,
       worker_name: user?.displayName,
       worker_image: user?.photoURL,
-      buyer_email: buyer?.email
+      buyer_email: buyer?.email,amount
     }
 
     try {
