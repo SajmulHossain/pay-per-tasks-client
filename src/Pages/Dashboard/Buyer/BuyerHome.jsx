@@ -106,11 +106,11 @@ const BuyerHome = () => {
         </div>
       )}
 
-      <div className="overflow-x-auto mt-12">
         <Heading
           heading="Pending Submissions"
           title="Check to approve or reject submissions"
         />
+      <div className="overflow-x-auto mt-12">
         <table className="table text-center">
           {/* head */}
           <thead>

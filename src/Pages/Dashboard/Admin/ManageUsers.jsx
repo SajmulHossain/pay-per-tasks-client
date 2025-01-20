@@ -2,6 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import UserRow from "./UserRow";
 import useAuth from "../../../hooks/useAuth";
+import Heading from "../../../components/Heading";
+import NoData from "../../../components/NoData";
 
 const ManageUsers = () => {
   const axiosSecure = useAxiosSecure();
@@ -19,41 +21,55 @@ const ManageUsers = () => {
     },
   });
 
+  
+
   return (
     <section className="section">
-      <div className="overflow-x-auto">
-        <table className="table">
-          <thead className="text-center">
-            <tr>
-              <th className="text-left">User</th>
-              <th>Coin</th>
-              <th>Update Role</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {isLoading ? (
-              <>
-                {users.map((i, index) => (
-                  <tr key={index}>
-                    <td colSpan="4">
-                      <div className="w-full">
-                        <div className="skeleton my-0 w-full h-16"></div>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </>
-            ) : (
-              <>
-                {users.map((user) => (
-                  <UserRow key={user._id} refetch={refetch} user={user} />
-                ))}
-              </>
-            )}
-          </tbody>
-        </table>
-      </div>
+      <Heading heading="User List" />
+
+      {users?.length ? (
+        <div className="overflow-x-auto">
+          <table className="table text-center">
+            <thead>
+              <tr>
+                <td></td>
+                <th>User</th>
+                <th>Coin</th>
+                <th>Update Role</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {isLoading ? (
+                <>
+                  {users.map((i, index) => (
+                    <tr key={index}>
+                      <td colSpan="5">
+                        <div className="w-full">
+                          <div className="skeleton my-0 w-full h-16"></div>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </>
+              ) : (
+                <>
+                  {users.map((user, index) => (
+                    <UserRow
+                      key={user._id}
+                      index={index}
+                      refetch={refetch}
+                      user={user}
+                    />
+                  ))}
+                </>
+              )}
+            </tbody>
+          </table>
+        </div>
+      ) : (
+        <NoData />
+      )}
     </section>
   );
 };

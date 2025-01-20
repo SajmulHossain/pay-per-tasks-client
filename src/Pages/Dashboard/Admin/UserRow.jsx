@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 import swalModal from "../../../utils/sweetModal";
 import axios from "axios";
 
-const UserRow = ({ user, refetch }) => {
+const UserRow = ({ user, refetch, index }) => {
   const [newRole, setNewRole] = useState(user?.role);
   const axiosSecure = useAxiosSecure();
 
@@ -56,6 +56,7 @@ const UserRow = ({ user, refetch }) => {
 
   return (
     <tr>
+      <td>{index + 1}</td>
       <td>
         <div className="flex items-center gap-3">
           <div className="avatar">
@@ -89,7 +90,7 @@ const UserRow = ({ user, refetch }) => {
           <option value="admin">Admin</option>
         </select>
       </td>
-      <td className="text-center flex gap-2">
+      <td className="text-center flex justify-center gap-2">
         <button onClick={() => handleDeleteUser(_id)} className="btn">
           <MdDelete size={24} color="red" /> Delete
         </button>
