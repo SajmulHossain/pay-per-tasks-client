@@ -13,7 +13,7 @@ const BuyerHome = () => {
   const { user, loading } = useAuth();
   const axiosSecure = useAxiosSecure();
 
-  const { data: states = {}, isLoading } = useQuery({
+  const { data: states = {}, isLoading, refetch:statesReload } = useQuery({
     queryKey: ["buyer-states", user?.email],
     enabled: user && !loading,
     queryFn: async () => {
@@ -107,6 +107,7 @@ const BuyerHome = () => {
                 refetch={refetch}
                 submission={submission}
                 index={index}
+                statesReload={statesReload}
               />
             ))}
           </tbody>
