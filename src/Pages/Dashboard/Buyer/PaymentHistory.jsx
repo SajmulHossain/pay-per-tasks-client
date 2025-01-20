@@ -23,7 +23,6 @@ const PaymentHistory = () => {
     <section className="section">
       <div className="overflow-x-auto">
         <table className="table">
-          {/* head */}
           <thead className="text-center">
             <tr>
               <th></th>
