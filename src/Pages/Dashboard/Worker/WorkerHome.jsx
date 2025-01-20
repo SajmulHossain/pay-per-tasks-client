@@ -5,6 +5,8 @@ import { FaTasks } from "react-icons/fa";
 import { MdOutlinePendingActions } from "react-icons/md";
 import { BiCoinStack } from "react-icons/bi";
 import ApprovedTask from "./ApprovedTask";
+import NoData from "../../../components/NoData";
+import Heading from "../../../components/Heading";
 
 const WorkerHome = () => {
   const { user, loading } = useAuth();
@@ -21,13 +23,16 @@ const WorkerHome = () => {
 
   const { pendingSubmissions, totalSubmissions, totalEarning } = states || {};
 
-  const {data:approvedTasks=[...Array(10)], isLoading:taskLoading} = useQuery({
-    queryKey: ['approvedTasks', user?.email],
-    queryFn: async () => {
-      const { data } = await axiosSecure(`/approved-submissions/${user?.email}`);
-      return data;
-    }
-  })
+  const { data: approvedTasks = [...Array(10)], isLoading: taskLoading } =
+    useQuery({
+      queryKey: ["approvedTasks", user?.email],
+      queryFn: async () => {
+        const { data } = await axiosSecure(
+          `/approved-submissions/${user?.email}`
+        );
+        return data;
+      },
+    });
 
   return (
     <section className="section">
@@ -68,40 +73,48 @@ const WorkerHome = () => {
         </div>
       )}
 
-      <div className="overflow-x-auto mt-12">
-        <table className="table">
-          <thead className="text-center">
-            <tr>
-              <th></th>
-              <th>Task Title</th>
-              <th>Payable Amount</th>
-              <th>Buyer Name</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody className="text-center">
-            {taskLoading ? (
-              <>
-                {approvedTasks.map((i, index) => (
-                  <tr key={index}>
-                    <td colSpan="5">
-                      <div className="w-full">
-                        <div className="skeleton rounded my-0 w-full h-16"></div>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </>
-            ) : (
-              <>
-                {approvedTasks.map((task, index) => (
-                  <ApprovedTask key={task._id} index={index} task={task} />
-                ))}
-              </>
-            )}
-          </tbody>
-        </table>
+      <div className="mt-12">
+        <Heading heading='Pending Tasks' />
       </div>
+
+      {!approvedTasks?.length ? (
+        <div className="overflow-x-auto mt-12">
+          <table className="table">
+            <thead className="text-center">
+              <tr>
+                <th></th>
+                <th>Task Title</th>
+                <th>Payable Amount</th>
+                <th>Buyer Name</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody className="text-center">
+              {taskLoading ? (
+                <>
+                  {approvedTasks.map((i, index) => (
+                    <tr key={index}>
+                      <td colSpan="5">
+                        <div className="w-full">
+                          <div className="skeleton rounded my-0 w-full h-16"></div>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </>
+              ) : (
+                <>
+                  {approvedTasks.map((task, index) => (
+                    <ApprovedTask key={task._id} index={index} task={task} />
+                  ))}
+                </>
+              )}
+            </tbody>
+          </table>
+        </div>
+      ) : (
+        <NoData />
+      )}
     </section>
   );
 };

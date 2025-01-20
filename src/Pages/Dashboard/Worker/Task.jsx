@@ -5,7 +5,7 @@ import { format } from "date-fns";
 
 
 const Task = ({task}) => {
-  const {_id:id, title, workers, amount, image, date, /**info, details, */ buyer } =
+  const {_id:id, title, workers, amount, image, date, buyer } =
     task || {};
   return (
     <Link

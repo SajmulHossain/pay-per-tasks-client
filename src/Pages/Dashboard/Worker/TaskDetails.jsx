@@ -70,10 +70,13 @@ const TaskDetails = () => {
 
     const data = {
       taskId: id,
+      task_title: title,
       worker_email: user?.email,
       worker_name: user?.displayName,
       worker_image: user?.photoURL,
-      buyer_email: buyer?.email,amount,
+      buyer_email: buyer?.email,
+      buyer_name: buyer?.name,
+      amount,
       submission_details,
       submission_date : new Date().toISOString()
     }

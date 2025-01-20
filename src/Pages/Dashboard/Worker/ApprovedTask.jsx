@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
 const ApprovedTask = ({ task, index }) => {
-  const {title, amount, buyer_name, status} = task || {}
+  const {task_title, amount, buyer_name, status} = task || {}
 
   return (
     <tr>
       <td>{index + 1}</td>
-      <td>{title}</td>
+      <td>{task_title}</td>
       <td>{amount}</td>
       <td>{buyer_name}</td>
       <td>
