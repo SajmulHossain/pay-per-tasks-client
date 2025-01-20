@@ -37,9 +37,11 @@ const TaskDetails = () => {
 
       if(data.insertedId) {
         toast.success('Task submitted successfully!');
-        navigate('/dashboard');
+        navigate('/dashboard/worker-home');
+      } else if (data?.inserted) {
+        toast.error('You already submitted this.')
       } else {
-        toast.error('Submission error!');
+        toast.error("Submission error!");
       }
     }
   })
