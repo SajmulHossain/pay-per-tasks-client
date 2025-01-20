@@ -8,7 +8,7 @@ const MyTasks = () => {
   const {user, loading} = useAuth();
   const axiosSecure = useAxiosSecure();
 
-  const {data:tasks=[...Array(10)], isLoading} = useQuery({
+  const {data:tasks=[...Array(10)], isLoading, refetch} = useQuery({
     queryKey:['tasks', user?.email ],
     enabled: user && !loading,
     queryFn: async() => {
@@ -45,7 +45,12 @@ const MyTasks = () => {
             ) : (
               <>
                 {tasks.map((task, index) => (
-                  <TaskRow key={task._id} index={index} task={task} />
+                  <TaskRow
+                    key={task._id}
+                    index={index}
+                    refetch={refetch}
+                    task={task}
+                  />
                 ))}
               </>
             )}

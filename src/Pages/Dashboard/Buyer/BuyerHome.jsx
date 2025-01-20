@@ -6,6 +6,7 @@ import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import PendingTaskRow from "./PendingTaskRow";
 import Heading from "../../../components/Heading";
+import NoData from "../../../components/NoData";
 
 const BuyerHome = () => {
   const { user, loading } = useAuth();
@@ -106,11 +107,14 @@ const BuyerHome = () => {
         </div>
       )}
 
+      <div className="mt-12">
         <Heading
           heading="Pending Submissions"
           title="Check to approve or reject submissions"
         />
-      <div className="overflow-x-auto mt-12">
+      </div>
+      {
+        submissions?.length ? <div className="overflow-x-auto mt-12">
         <table className="table text-center">
           {/* head */}
           <thead>
@@ -151,7 +155,8 @@ const BuyerHome = () => {
             )}
           </tbody>
         </table>
-      </div>
+      </div> : <NoData />
+      }
     </section>
   );
 };
