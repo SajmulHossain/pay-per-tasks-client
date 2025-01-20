@@ -7,7 +7,7 @@ import Register from "../Pages/Register/Register";
 import PrivetRoute from "./PrivetRoute";
 import WorkerHome from "../Pages/Dashboard/Worker/WorkerHome";
 import TaskList from "../Pages/Dashboard/Worker/TaskList";
-import Submission from "../Pages/Dashboard/Worker/Submission";
+import Submissions from "../Pages/Dashboard/Worker/Submissions";
 import Withdrawal from "../Pages/Dashboard/Worker/Withdrawal";
 import BuyerRoute from "./BuyerRoute";
 import BuyerHome from "../Pages/Dashboard/Buyer/BuyerHome";
@@ -70,7 +70,7 @@ const routes = createBrowserRouter([
         path: "submission",
         element: (
           <PrivetRoute>
-            <Submission />
+            <Submissions />
           </PrivetRoute>
         ),
       },
