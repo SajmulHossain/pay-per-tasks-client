@@ -68,7 +68,7 @@ const UserRow = ({ user, refetch, index }) => {
               />
             </div>
           </div>
-          <div>
+          <div className="text-left">
             <div className="font-bold">{name}</div>
             <div className="text-sm opacity-50 capitalize">{role}</div>
           </div>

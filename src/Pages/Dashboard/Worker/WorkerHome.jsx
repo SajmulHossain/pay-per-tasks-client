@@ -77,7 +77,7 @@ const WorkerHome = () => {
         <Heading heading='Pending Tasks' />
       </div>
 
-      {!approvedTasks?.length ? (
+      {approvedTasks?.length ? (
         <div className="overflow-x-auto mt-12">
           <table className="table">
             <thead className="text-center">

@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
 import Heading from "../../../components/Heading";
+import NoData from "../../../components/NoData";
 
 
 const Submissions = () => {
@@ -23,7 +24,8 @@ const {data:submissions=[...Array(10)], isLoading} = useQuery({
   return (
     <section className="section">
       <Heading heading='My Submissions' />
-      <div className="overflow-x-auto">
+     {
+      submissions?.length ?  <div className="overflow-x-auto">
         <table className="table text-center">
           <thead>
             <tr>
@@ -64,7 +66,8 @@ const {data:submissions=[...Array(10)], isLoading} = useQuery({
             )}
           </tbody>
         </table>
-      </div>
+      </div> : <NoData />
+     }
     </section>
   );
 };

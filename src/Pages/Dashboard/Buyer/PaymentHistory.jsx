@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import PaymentRow from "./PaymentRow";
+import NoData from "../../../components/NoData";
 
 
 const PaymentHistory = () => {
@@ -21,7 +22,8 @@ const PaymentHistory = () => {
   
   return (
     <section className="section">
-      <div className="overflow-x-auto">
+     {
+      payments.length ?  <div className="overflow-x-auto">
         <table className="table">
           <thead className="text-center">
             <tr>
@@ -52,7 +54,8 @@ const PaymentHistory = () => {
             )}
           </tbody>
         </table>
-      </div>
+      </div> : <NoData />
+     }
     </section>
   );
 };
