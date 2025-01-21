@@ -24,8 +24,8 @@ const DashboardHeader = () => {
           </label>
 
           <Link to="/">
-            <img src={blackLogo} className="h-12 hidden" alt="logo" />
-            <img src={simplifiedLogo} className="h-12 w-12 object-cover" alt="logo for small device" />
+            <img src={blackLogo} className="h-12 hidden lg:block" alt="logo" />
+            <img src={simplifiedLogo} className="h-12 w-12 lg:hidden object-cover" alt="logo for small device" />
           </Link>
         </div>
 
