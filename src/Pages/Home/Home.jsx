@@ -1,10 +1,11 @@
+import HomeSlider from "./HomeSlider";
 
 
 const Home = () => {
   return (
-    <div>
-      Home
-    </div>
+    <section>
+      <HomeSlider />
+    </section>
   );
 };
 
