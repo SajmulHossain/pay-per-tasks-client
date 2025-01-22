@@ -13,7 +13,7 @@ const AvailableTask = () => {
     },
   });
 
-  console.log(tasks);
+  
   return (
     <section className="section">
       <Heading heading="Available Task" />

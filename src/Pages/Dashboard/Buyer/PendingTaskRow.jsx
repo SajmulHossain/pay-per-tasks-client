@@ -17,8 +17,8 @@ const PendingTaskRow = ({ submission, refetch, index, statesReload }) => {
     taskId,
     worker_email,
     worker_image,
-    date, 
-    details,
+    submission_date, 
+    submission_details,
     info
   } = submission || {};
 
@@ -81,7 +81,7 @@ const PendingTaskRow = ({ submission, refetch, index, statesReload }) => {
             View Submission
           </button>
         </td>
-        <td className="flex items-center gap-3">
+        <td className="flex items-center gap-3 justify-center">
           <button onClick={handleAcceptTask} title="Accept">
             {accepting ? (
               <CrudLoading />
@@ -116,6 +116,7 @@ const PendingTaskRow = ({ submission, refetch, index, statesReload }) => {
               <div>
                 <img
                   src={worker_image}
+                  referrerPolicy="no-referrer"
                   className="h-20 w-20 rounded-full"
                   alt={`${worker_name}'s image`}
                 />
@@ -137,7 +138,7 @@ const PendingTaskRow = ({ submission, refetch, index, statesReload }) => {
               <p className="flex flex-col gap-1">
                 <span className="font-semibold ">Submission Date</span>
                 <span className="text-gray-600">
-                  {format(new Date(date), "PP")}
+                  {format(new Date(submission_date), "PP")}
                 </span>
               </p>
               <p className="flex flex-col gap-1">
@@ -146,14 +147,12 @@ const PendingTaskRow = ({ submission, refetch, index, statesReload }) => {
               </p>
               <p className="flex flex-col gap-1">
                 <span className="font-semibold ">Details</span>
-                <span className="text-gray-600">{details}</span>
+                <span className="text-gray-600">{submission_details}</span>
               </p>
 
               <div>
                 <button
-                  onClick={() =>
-                    document.getElementById("my_modal_3").close()
-                  }
+                  onClick={() => document.getElementById("my_modal_3").close()}
                   className="btn w-full bg-second-color/80 hover:bg-second-color hover:text-white hover:shadow-lg"
                 >
                   Close

@@ -54,7 +54,7 @@ const {data:submissions=[...Array(10)], isLoading} = useQuery({
                 {submissions.map((submission, index) => (
                   <tr key={submission._id}>
                     <td>{index + 1}</td>
-                    <td>{submission?.title?.slice(0, 20)}...</td>
+                    <td>{submission?.task_title?.slice(0, 20)}...</td>
                     <td>{submission?.buyer_email}</td>
                     <td>{submission?.amount}</td>
                     <td>

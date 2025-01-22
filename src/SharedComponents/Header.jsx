@@ -115,7 +115,7 @@ const Header = () => {
               {navbarEnd}
             </ul>
           </div>
-          <Link to="/" className="ml-4 md:ml-0">
+          <Link to="/" className="ml-4 lg:ml-0">
             <img src={blackLogo} className="h-12 hidden lg:block" alt="logo" />
             <img
               src={simplifiedLogo}
@@ -126,7 +126,7 @@ const Header = () => {
         </div>
         <div className="navbar-end gap-4">
           {dashboard}
-          <div className="hidden md:block">{navbarEnd}</div>
+          <div className="hidden lg:block">{navbarEnd}</div>
         </div>
       </div>
     </header>

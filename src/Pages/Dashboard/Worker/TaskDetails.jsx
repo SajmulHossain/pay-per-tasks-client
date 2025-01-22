@@ -102,11 +102,11 @@ const TaskDetails = () => {
               className="w-full h-64 lg:h-96 object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/30 to-black/70"></div>
-            <h1 className="absolute bottom-4 left-4 text-3xl font-bold text-white">
+            <h2 className="absolute bottom-4 left-4 text-3xl font-bold text-white">
               {title}
-            </h1>
+            </h2>
           </div>
-          <div className="p-6">
+          <div className="p-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <h2 className="text-xl font-semibold text-gray-800 mb-3">

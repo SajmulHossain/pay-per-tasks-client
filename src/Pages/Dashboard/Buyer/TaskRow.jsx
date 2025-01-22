@@ -6,10 +6,12 @@ import { Link } from "react-router-dom";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 import CrudLoading from "../../../components/CrudLoading";
+import useCoin from "../../../hooks/useCoin";
 
 const TaskRow = ({ task, index, refetch }) => {
   const { title, date, workers, _id } = task || {};
   const axiosSecure = useAxiosSecure();
+  const [,,reloadCoin] = useCoin();
 
   const {mutateAsync, isPending} = useMutation({
     mutationFn: async () => {
@@ -17,6 +19,7 @@ const TaskRow = ({ task, index, refetch }) => {
 
       if (data?.deletedCount && data?.modifiedCount) {
         refetch();
+        reloadCoin();
         toast.success("Task deleted successfully");
       } else {
         toast.error("Something went wrong!");
