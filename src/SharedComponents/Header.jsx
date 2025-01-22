@@ -116,10 +116,10 @@ const Header = () => {
             </ul>
           </div>
           <Link to="/" className="ml-4 md:ml-0">
-            <img src={blackLogo} className="h-12 hidden" alt="logo" />
+            <img src={blackLogo} className="h-12 hidden lg:block" alt="logo" />
             <img
               src={simplifiedLogo}
-              className="h-12 w-12 object-cover"
+              className="h-12 w-12 object-cover lg:hidden"
               alt="logo for small device"
             />
           </Link>

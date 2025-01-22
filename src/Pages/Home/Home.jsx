@@ -1,11 +1,13 @@
+import BestWorkers from "./BestWorkers";
 import HomeSlider from "./HomeSlider";
 
 
 const Home = () => {
   return (
-    <section>
+    <>
       <HomeSlider />
-    </section>
+      <BestWorkers />
+    </>
   );
 };
 

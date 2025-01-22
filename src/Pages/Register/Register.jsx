@@ -1,18 +1,16 @@
-import GoogleLogin from "../../components/GoogleLogin";
-import registerLottie from "../../assets/lotties/register.json";
 import Lottie from "lottie-react";
 import { useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
-import useAuth from "../../hooks/useAuth";
-import uploadImg from "../../Api/imgbb";
 import toast from "react-hot-toast";
-import { axiosSecureUrl } from "../../hooks/useAxiosSecure";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import uploadImg from "../../Api/imgbb";
+import registerLottie from "../../assets/lotties/register.json";
 import DefaultLoading from "../../components/DefaultLoading";
-import CrudLoading from "../../components/CrudLoading";
+import GoogleLogin from "../../components/GoogleLogin";
+import useAuth from "../../hooks/useAuth";
+import { axiosSecureUrl } from "../../hooks/useAxiosSecure";
 
 const Register = () => {
   const [error, setError] = useState();
-  const [isSignin, setIsSignin] = useState(false);
   const { updateUser, register, user, loading, setLoading } = useAuth();
   const navigate = useNavigate();
 
@@ -24,7 +22,7 @@ const Register = () => {
     );
   }
 
-  if (user && !isSignin) {
+  if (user && !loading) {
     return <Navigate to="/dashboard" replace />;
   }
 
@@ -65,7 +63,7 @@ const Register = () => {
       return setError("Please select your role!");
     }
 
-    setIsSignin(true);
+    setLoading(true);
 
     try {
       let coin = 0;
@@ -96,7 +94,6 @@ const Register = () => {
       console.log(err);
       toast.error("Something Went Wrong!");
     } finally {
-      setIsSignin(false);
       setLoading(false);
     }
   };
@@ -197,7 +194,7 @@ const Register = () => {
           </div>
           <div className="form-control mt-6">
             <button className="btn rounded bg-main-color hover:bg-second-color">
-              {isSignin ? <CrudLoading /> : "Register"}
+             Register
             </button>
 
             <p className="text-sm mt-1">
