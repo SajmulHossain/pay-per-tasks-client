@@ -41,7 +41,7 @@ const {data:submissions=[...Array(10)], isLoading} = useQuery({
               <>
                 {submissions.map((i, index) => (
                   <tr key={index}>
-                    <td colSpan="4">
+                    <td colSpan="5">
                       <div className="w-full">
                         <div className="skeleton my-0 w-full h-16"></div>
                       </div>

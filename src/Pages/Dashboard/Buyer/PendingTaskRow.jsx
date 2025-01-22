@@ -6,9 +6,11 @@ import CrudLoading from "../../../components/CrudLoading";
 import { useMutation } from "@tanstack/react-query";
 import { MdOutlineFileDownloadDone } from "react-icons/md";
 import { format } from "date-fns";
+import useAuth from "../../../hooks/useAuth";
 
 const PendingTaskRow = ({ submission, refetch, index, statesReload }) => {
   const axiosSecure = useAxiosSecure();
+  const { user } = useAuth();
   const {
     worker_name,
     amount,
@@ -28,6 +30,8 @@ const PendingTaskRow = ({ submission, refetch, index, statesReload }) => {
       const { data } = await axiosSecure.patch(`/submit/${_id}`, {
         amount,
         worker_email,
+        buyer_name: user?.displayName,
+        task_title,
       });
 
       if (data?.modifiedCount) {

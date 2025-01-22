@@ -52,7 +52,7 @@ const Login = () => {
 
     login(email, password)
       .then(() => {
-        navigate(state || '/');
+        navigate(state || '/dashboard');
         toast.success("Login Successfull");
       })
       .catch(({ code }) => {
