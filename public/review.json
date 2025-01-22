@@ -1,0 +1,62 @@
+[
+  {
+    "photo": "https://randomuser.me/api/portraits/men/1.jpg",
+    "name": "John Doe",
+    "role": "Buyer",
+    "quote": "Great platform to get tasks done quickly!"
+  },
+  {
+    "photo": "https://randomuser.me/api/portraits/women/2.jpg",
+    "name": "Sarah Johnson",
+    "role": "Worker",
+    "quote": "Freelancing has never been this easy and flexible!"
+  },
+  {
+    "photo": "https://randomuser.me/api/portraits/men/3.jpg",
+    "name": "Michael Brown",
+    "role": "Buyer",
+    "quote": "Reliable workers and smooth payment system."
+  },
+  {
+    "photo": "https://randomuser.me/api/portraits/women/4.jpg",
+    "name": "Emma Williams",
+    "role": "Worker",
+    "quote": "I love the user-friendly interface!"
+  },
+  {
+    "photo": "https://randomuser.me/api/portraits/men/5.jpg",
+    "name": "David Smith",
+    "role": "Buyer",
+    "quote": "The escrow system gives me peace of mind."
+  },
+  {
+    "photo": "https://randomuser.me/api/portraits/women/6.jpg",
+    "name": "Sophia Davis",
+    "role": "Worker",
+    "quote": "Payments are quick, and tasks are easy to complete."
+  },
+  {
+    "photo": "https://randomuser.me/api/portraits/men/7.jpg",
+    "name": "James Wilson",
+    "role": "Buyer",
+    "quote": "Excellent experience with task management!"
+  },
+  {
+    "photo": "https://randomuser.me/api/portraits/women/8.jpg",
+    "name": "Olivia Martinez",
+    "role": "Worker",
+    "quote": "I enjoy working on this platform daily!"
+  },
+  {
+    "photo": "https://randomuser.me/api/portraits/men/9.jpg",
+    "name": "William Taylor",
+    "role": "Buyer",
+    "quote": "Fast and efficient system for both clients and workers."
+  },
+  {
+    "photo": "https://randomuser.me/api/portraits/women/10.jpg",
+    "name": "Isabella Anderson",
+    "role": "Worker",
+    "quote": "A fantastic platform to earn part-time income!"
+  }
+]

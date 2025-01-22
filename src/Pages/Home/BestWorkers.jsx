@@ -31,10 +31,10 @@ const BestWorkers = () => {
           </div>)
         }</> : <>
           {
-            workers.map(worker => <div key={worker?._id} className="border px-4 py-8">
+            workers.map(worker => <div key={worker?._id} className="border px-4 py-8 bg-main-color/20 rounded-md hover:scale-105 transition-all duration-300">
               <div className="flex items-center text-center flex-col">
                 <div>
-                  <img src={worker?.image} className="h-40 w-40 object-cover rounded-full" alt={`${worker?.name}'s image`} />
+                  <img src={worker?.image} referrerPolicy="no-referrer" className="h-40 w-40 object-cover rounded-full" alt={`${worker?.name}'s image`} />
                 </div>
                 <div>
                   <h3 className="text-xl font-semibold mt-1">{worker?.name}</h3>
