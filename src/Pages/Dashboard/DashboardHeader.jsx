@@ -1,14 +1,15 @@
+import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
+import { IoMdNotifications } from "react-icons/io";
+import { RiMenuFold4Line, RiNotificationBadgeFill } from "react-icons/ri";
+import { Link } from "react-router-dom";
 import blackLogo from "../../assets/images/black-logo.png";
 import simplifiedLogo from "../../assets/images/simplifiedLogo.png";
-import { Link } from "react-router-dom";
 import Coin from "../../components/Coin";
 import useAuth from "../../hooks/useAuth";
-import useRole from "../../hooks/useRole";
-import { RiMenuFold4Line } from "react-icons/ri";
-import { IoMdNotifications } from "react-icons/io";
-import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import { useState } from "react";
+import useRole from "../../hooks/useRole";
+import { formatDistanceToNowStrict } from "date-fns";
 
 const DashboardHeader = () => {
   const { user, loading } = useAuth();
@@ -16,13 +17,15 @@ const DashboardHeader = () => {
   const axiosSecure = useAxiosSecure();
   const [showNotice, setShowNotice] = useState(false);
 
-  const { data: notifications = [...Array(5)] } = useQuery({
+  const { data: notifications = [...Array(5)],isLoading:noticeLoading } = useQuery({
     queryKey: ["notifications"],
     queryFn: async () => {
       const { data } = await axiosSecure(`/notifications/${user?.email}`);
       return data;
     },
   });
+
+  
 
   return (
     <header className="py-2 relative z-50 border-y lg:sticky lg:top-0 lg:z-50 backdrop-blur-3xl border-main-color">
@@ -80,8 +83,43 @@ const DashboardHeader = () => {
           </div>
         )}
       </section>
-      <div className={`absolute bg-second-color/40 top-16 right-6 ${showNotice ? 'block' : 'hidden'} p-4 rounded-xl z-50`}>
-        kire vai aios na ka
+      <div
+        className={`absolute bg-main-color/80 top-16 right-6 ${
+          showNotice ? "block" : "hidden"
+        } p-4 rounded z-50 w-60`}
+      >
+        {notifications?.length ? (
+          <>
+            {notifications?.map((notice) => (
+              <>
+                {noticeLoading ? (
+                  <div className="w-full">
+                    <div className="skeleton rounded w-full h-10"></div>
+                  </div>
+                ) : (
+                  <div className="flex flex-col gap-4">
+                    <Link to={notice?.actionRoute}>
+                      <div className="flex gap-2">
+                        <p>
+                          <RiNotificationBadgeFill size={24} />
+                        </p>
+                        <div>
+                          <p className="text-sm">{notice?.message}</p>
+                          <p className="mt-1 text-xs">
+                            {formatDistanceToNowStrict(new Date(notice?.time))}{" "}
+                            ago
+                          </p>
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
+                )}
+              </>
+            ))}
+          </>
+        ) : (
+          <p>No notification found</p>
+        )}
       </div>
     </header>
   );
