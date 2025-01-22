@@ -42,7 +42,7 @@ const AddTask = () => {
   const changeDate = (date) => {
     setError("");
     if (
-      compareAsc(new Date().toDateString(), new Date(date).toDateString()) !== 0
+      compareAsc(new Date().toDateString(), new Date(date).toDateString()) === 1
     ) {
       return setError("You cannot set a date before today.");
     }
@@ -216,7 +216,7 @@ const AddTask = () => {
               />
             </div>
             <div className="form-control mt-6">
-              <button className="btn bg-second-color text-white">
+              <button disabled={isPending} className="btn bg-second-color text-white">
                 Add Task {isPending && <CrudLoading />}
               </button>
             </div>

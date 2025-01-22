@@ -15,7 +15,7 @@ const States = () => {
   })
 
   const {workers, buyers, tasks, completedTasks} = states || {};
-  console.log(states);
+  
   return (
     <section className="bg-main-color/10">
       <div className="section">

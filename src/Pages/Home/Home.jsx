@@ -1,3 +1,4 @@
+import AvailableTask from "./AvailableTask";
 import BestWorkers from "./BestWorkers";
 import HomeSlider from "./HomeSlider";
 import States from "./States";
@@ -9,6 +10,7 @@ const Home = () => {
     <>
       <HomeSlider />
       <States />
+      <AvailableTask />
       <BestWorkers />
       <Testimonial />
     </>

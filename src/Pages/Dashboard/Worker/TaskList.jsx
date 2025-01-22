@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import Task from "./Task";
+import Task from "../../../components/Task";
 import DefaultLoading from "../../../components/DefaultLoading";
 import NoData from "../../../components/NoData";
 
