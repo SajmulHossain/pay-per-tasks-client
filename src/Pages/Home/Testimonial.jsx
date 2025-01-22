@@ -16,7 +16,7 @@ const Testimonial = () => {
 
   
   return (
-    <section className="section">
+    <section className="bg-second-color/20 py-8 md:py-10 lg:py-16">
       <Heading heading="Testimonial" title="Our honorable customers brief" />
 
       <div>
