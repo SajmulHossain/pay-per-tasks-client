@@ -24,18 +24,33 @@ const HomeSlider = () => {
       className="mySwiper rounded"
     >
       <SwiperSlide>
-        <div className="min-h-[400px] bg-cover bg-center" style={{backgroundImage: `url(${img1})`}}>
-          <Heading heading='Earn money buy like and follow.' />
+        <div
+          className="min-h-[400px] bg-black bg-opacity-60 bg-blend-overlay flex justify-center items-center text-white bg-cover h-[60vh] lg:h-[80vh]"
+          style={{ backgroundImage: `url(${img1})` }}
+        >
+          <Heading heading="Earn money buy like and follow." title='You should like and follow the post or youtube video given by buyer.' />
         </div>
       </SwiperSlide>
       <SwiperSlide>
-        <div className="min-h-[400px] bg-cover bg-center md:h-[500px] lg:h-[550px]" style={{backgroundImage: `url(${img2})`, backgroundPosition: 'cover'}}>
-          <Heading heading='Earn money with share anything' />
+        <div
+          className="min-h-[400px] bg-black bg-opacity-60 bg-blend-overlay flex justify-center items-center text-white bg-cover h-[60vh] lg:h-[80vh]"
+          style={{
+            backgroundImage: `url(${img2})`,
+            backgroundPosition: "cover",
+          }}
+        >
+          <Heading heading="Earn money with share anything" title='Buyer will give to link or anything to share to your friends, family, reletive or neighbours, You have share this to them and get your rewards.' />
         </div>
       </SwiperSlide>
       <SwiperSlide>
-        <div className="min-h-[400px] bg-cover bg-center md:h-[500px] lg:h-[550px]" style={{backgroundImage: `url(${img3})`, backgroundPosition: 'cover'}}>
-          <Heading heading='Earn money by click' />
+        <div
+          className="min-h-[400px] bg-black bg-opacity-60 bg-blend-overlay flex justify-center items-center text-white bg-cover h-[60vh] lg:h-[80vh]"
+          style={{
+            backgroundImage: `url(${img3})`,
+            backgroundPosition: "cover",
+          }}
+        >
+          <Heading heading="Earn money by click" title='Buyer should give you something task, if you fill it properly then you will get your rewards.' />
         </div>
       </SwiperSlide>
     </Swiper>
