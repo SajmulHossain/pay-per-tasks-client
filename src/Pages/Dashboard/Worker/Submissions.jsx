@@ -67,7 +67,7 @@ const numberOfPages = [...Array(totalPages).keys()];
                 <>
                   {submissions.map((submission, index) => (
                     <tr key={submission._id}>
-                      <td>{((currentPage * 6) + index + 1)}</td>
+                      <td>{currentPage * 6 + index + 1}</td>
                       <td>{submission?.task_title?.slice(0, 20)}...</td>
                       <td>{submission?.buyer_email}</td>
                       <td>{submission?.amount}</td>
@@ -93,9 +93,27 @@ const numberOfPages = [...Array(totalPages).keys()];
 
           <div className="mt-12 flex justify-center">
             <div className="join">
-              {
-                numberOfPages.map(i => <button onClick={() => setCurrentPage(i)} className={`join-item btn ${i === currentPage ? 'bg-main-color': ''}`} key={i}>{i+1}</button>)
-              }
+              <button
+                onClick={() => setCurrentPage(currentPage - 1)}
+                disabled={currentPage === 0}
+                className="btn join-item"
+              >{`<`}</button>
+              {numberOfPages.map((i) => (
+                <button
+                  onClick={() => setCurrentPage(i)}
+                  className={`join-item btn ${
+                    i === currentPage ? "bg-main-color" : ""
+                  }`}
+                  key={i}
+                >
+                  {i + 1}
+                </button>
+              ))}
+              <button
+                onClick={() => setCurrentPage(currentPage + 1)}
+                disabled={currentPage === numberOfPages.length - 1}
+                className="btn join-item"
+              >{`>`}</button>
             </div>
           </div>
         </div>

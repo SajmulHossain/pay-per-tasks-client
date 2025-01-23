@@ -23,10 +23,10 @@ const Task = ({task}) => {
       />
       <h2 className="text-xl text-black font-bold mb-2">{title}</h2>
       <p className="text-gray-600 mb-1">
-        <span className="font-semibold">Remain:</span> <span>{workers}</span>
+        <span className="font-semibold">Required Workers:</span> <span>{workers}</span>
       </p>
       <p className="text-gray-600 mb-1">
-        <span className="font-semibold">Amount:</span> <span>{amount}$</span>
+        <span className="font-semibold">Payable Amount:</span> <span>{amount}$</span>
       </p>
       <p className="text-gray-600 mb-1">
         <span className="font-semibold">Last Submit Date:</span>{" "}

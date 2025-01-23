@@ -53,6 +53,13 @@ const Header = () => {
       ) : (
         <div className="flex md:items-center flex-col md:flex-row  gap-1">
           <div className="join join-vertical md:join-horizontal">
+            <Link
+              to="https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-SajmulHossain"
+              target="_blank"
+              className="btn join-item bg-main-color"
+            >
+              Join As Developer
+            </Link>
             {!user ? (
               <>
                 <Link
@@ -78,9 +85,6 @@ const Header = () => {
                 </button>
               </>
             )}
-            <Link to='https://github.com/sajmulhossain' target="_blank" className="btn join-item bg-main-color">
-              Join As Developer
-            </Link>
           </div>
           {user && <Coin />}
         </div>

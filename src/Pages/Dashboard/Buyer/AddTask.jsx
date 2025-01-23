@@ -77,7 +77,8 @@ const AddTask = () => {
 
     const neededTotalPayment = amount * workers;
     if (neededTotalPayment > coin) {
-      return toast(`You need total ${neededTotalPayment} coins.`, {
+      navigate("/dashboard/purchase-coin");
+      return toast(`Not available Coin.  Purchase Coin`, {
         icon: "⚠️",
       });
     }

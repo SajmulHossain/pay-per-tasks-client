@@ -10,6 +10,7 @@ import { IoIosLogOut } from "react-icons/io";
 import toast from "react-hot-toast";
 import redirect from "../../utils/redirectRoute";
 import { useEffect } from "react";
+import Footer from "../../SharedComponents/Footer";
 
 const Dashboard = () => {
   const [role, isLoading] = useRole();
@@ -45,7 +46,10 @@ const Dashboard = () => {
           ) : (
             <>
               <Navigate to={redirect(role, isLoading)} replace={true} />
-              <Outlet />
+              <main className="min-h-screen">
+                <Outlet />
+              </main>
+              <Footer />
             </>
           )}
         </div>
