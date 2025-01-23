@@ -78,7 +78,7 @@ const Header = () => {
                 </button>
               </>
             )}
-            <Link className="btn join-item bg-main-color">
+            <Link to='https://github.com/sajmulhossain' target="_blank" className="btn join-item bg-main-color">
               Join As Developer
             </Link>
           </div>
