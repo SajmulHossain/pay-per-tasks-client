@@ -7,6 +7,7 @@ import CrudLoading from "../../../components/CrudLoading";
 import useAuth from "../../../hooks/useAuth";
 import { format } from "date-fns";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const TaskDetails = () => {
   const { id } = useParams();
@@ -93,6 +94,9 @@ const TaskDetails = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Task Details || Pay Per Tasks</title>
+      </Helmet>
       <div className="min-h-screen bg-gray-100 py-10 px-4">
         <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
           <div className="relative">
@@ -169,11 +173,11 @@ const TaskDetails = () => {
           <h3 className="font-bold text-lg">Submit Task!</h3>
           <div className="py-4">
             <form onSubmit={handleSubmitTask}>
-              {
-                error && <p className="text-center text-red-700">{error}</p>
-              }
+              {error && <p className="text-center text-red-700">{error}</p>}
               <div className="form-control mb-4">
-                <label className="label" htmlFor="submission_details">Submit Details</label>
+                <label className="label" htmlFor="submission_details">
+                  Submit Details
+                </label>
                 <textarea
                   name="submission_details"
                   placeholder="Submit Details"

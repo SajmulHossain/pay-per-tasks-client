@@ -7,6 +7,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import WithdrawRequestRow from "./WithdrawRequestRow";
 import NoData from "../../../components/NoData";
 import Heading from "../../../components/Heading";
+import { Helmet } from "react-helmet-async";
 
 const AdminHome = () => {
   const { user, loading } = useAuth();
@@ -36,6 +37,9 @@ const AdminHome = () => {
   
   return (
     <section className="section">
+      <Helmet>
+        <title>Admin Home || Pay Per Tasks</title>
+      </Helmet>
       {isLoading ? (
         <div className="w-full join join-vertical lg:join-horizontal gap-[1px]">
           <div className="skeleton h-20 w-full join-item"></div>

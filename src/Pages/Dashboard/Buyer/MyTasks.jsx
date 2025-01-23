@@ -3,6 +3,7 @@ import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import TaskRow from "./TaskRow";
 import NoData from "../../../components/NoData";
+import { Helmet } from "react-helmet-async";
 
 const MyTasks = () => {
   const { user, loading } = useAuth();
@@ -23,6 +24,9 @@ const MyTasks = () => {
 
   return (
     <section className="section">
+      <Helmet>
+        <title>My Tasks || Pay Per Tasks</title>
+      </Helmet>
       {tasks?.length ? (
         <div className="overflow-x-auto">
           <table className="table">

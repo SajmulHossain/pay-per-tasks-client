@@ -1,4 +1,5 @@
 
+import { Helmet } from "react-helmet-async";
 import Heading from "../../../components/Heading";
 import { useNavigate } from "react-router-dom";
 
@@ -12,6 +13,9 @@ const PurchaseCoin = () => {
   
   return (
     <section className="section">
+      <Helmet>
+        <title>Purchase Coin || Pay Per Tasks</title>
+      </Helmet>
       <Heading
         heading="Purchase Coin"
         title="Purchase coin to complete your tasks"
@@ -175,7 +179,7 @@ const PurchaseCoin = () => {
                     package: "Basic",
                     coin: 10,
                     price: 1,
-                    save: '00',
+                    save: "00",
                   })
                 }
                 className="btn w-full bg-main-color hover:bg-inherit"

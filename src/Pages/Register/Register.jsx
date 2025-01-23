@@ -8,6 +8,7 @@ import DefaultLoading from "../../components/DefaultLoading";
 import GoogleLogin from "../../components/GoogleLogin";
 import useAuth from "../../hooks/useAuth";
 import { axiosSecureUrl } from "../../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const Register = () => {
   const [error, setError] = useState();
@@ -100,6 +101,9 @@ const Register = () => {
 
   return (
     <section className="section max-w-screen-lg md:flex md:gap-12 md:items-center overflow-x-hidden">
+      <Helmet>
+        <title>Register || Pay Per Tasks</title>
+      </Helmet>
       <div data-aos="fade-right" className="md:flex-1 hidden md:block">
         <Lottie animationData={registerLottie} />
       </div>
@@ -194,7 +198,7 @@ const Register = () => {
           </div>
           <div className="form-control mt-6">
             <button className="btn rounded bg-main-color hover:bg-second-color">
-             Register
+              Register
             </button>
 
             <p className="text-sm mt-1">

@@ -4,6 +4,7 @@ import UserRow from "./UserRow";
 import useAuth from "../../../hooks/useAuth";
 import Heading from "../../../components/Heading";
 import NoData from "../../../components/NoData";
+import { Helmet } from "react-helmet-async";
 
 const ManageUsers = () => {
   const axiosSecure = useAxiosSecure();
@@ -21,10 +22,11 @@ const ManageUsers = () => {
     },
   });
 
-  
-
   return (
     <section className="section">
+      <Helmet>
+        <title>Manage Users || Pay Per Tasks</title>
+      </Helmet>
       <Heading heading="User List" />
 
       {users?.length ? (

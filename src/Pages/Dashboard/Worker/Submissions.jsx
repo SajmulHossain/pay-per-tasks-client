@@ -4,6 +4,7 @@ import useAuth from "../../../hooks/useAuth";
 import Heading from "../../../components/Heading";
 import NoData from "../../../components/NoData";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 
 const Submissions = () => {
@@ -36,6 +37,9 @@ const numberOfPages = [...Array(totalPages).keys()];
   
   return (
     <section className="section">
+      <Helmet>
+        <title>Submissions || Pay Per Tasks</title>
+      </Helmet>
       <Heading heading="My Submissions" />
 
       {submissions?.length ? (

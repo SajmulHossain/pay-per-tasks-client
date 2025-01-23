@@ -1,16 +1,15 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { useNavigate, useParams } from "react-router-dom";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import DefaultLoading from "../../../components/DefaultLoading";
-import useAuth from "../../../hooks/useAuth";
 import { useState } from "react";
-import CrudLoading from "../../../components/CrudLoading";
+import { Helmet } from "react-helmet-async";
 import toast from "react-hot-toast";
+import { useNavigate, useParams } from "react-router-dom";
+import CrudLoading from "../../../components/CrudLoading";
+import DefaultLoading from "../../../components/DefaultLoading";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const UpdateTask = () => {
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
-  const { user } = useAuth();
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -61,6 +60,9 @@ const UpdateTask = () => {
   };
   return (
     <section className="section">
+      <Helmet>
+        <title>Update Task || Pay Per Tasks</title>
+      </Helmet>
       {isLoading ? (
         <div className="min-h-screen flex justify-center items-center">
           <DefaultLoading />

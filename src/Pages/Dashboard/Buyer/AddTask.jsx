@@ -11,19 +11,19 @@ import toast from "react-hot-toast";
 import uploadImg from "../../../Api/imgbb";
 import useCoin from "../../../hooks/useCoin";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const AddTask = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const [error, setError] = useState("");
   const [completionDate, setCompletionDate] = useState(new Date());
-  const [coin,,refetch] = useCoin();
+  const [coin, , refetch] = useCoin();
   const navigate = useNavigate();
 
   const { isPending, mutateAsync } = useMutation({
     mutationKey: ["tasks", user?.email],
     mutationFn: async ({ task, imageFile }) => {
-
       const { imgUrl } = await uploadImg(imageFile);
       const { data } = await axiosSecure.post("/tasks", {
         ...task,
@@ -32,7 +32,7 @@ const AddTask = () => {
       if (data?.insertedId) {
         swalModal("Tasks", "Task added successfully!");
         refetch();
-        navigate('/dashboard/my-tasks')
+        navigate("/dashboard/my-tasks");
       } else {
         swalModal("Tasks", "Something went wrong", "error");
       }
@@ -104,6 +104,9 @@ const AddTask = () => {
   };
   return (
     <section className="section">
+      <Helmet>
+        <title>Add Task || Pay Per Tasks</title>
+      </Helmet>
       <div>
         <form onSubmit={handleAddTask}>
           <h3 className="text-center font-bold text-3xl border-b border-second-color mb-4">
@@ -207,7 +210,10 @@ const AddTask = () => {
               />
             </div>
             <div className="form-control mt-6">
-              <button disabled={isPending} className="btn bg-second-color text-white">
+              <button
+                disabled={isPending}
+                className="btn bg-second-color text-white"
+              >
                 Add Task {isPending && <CrudLoading />}
               </button>
             </div>

@@ -4,6 +4,7 @@ import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import PaymentRow from "./PaymentRow";
 import NoData from "../../../components/NoData";
+import { Helmet } from "react-helmet-async";
 
 
 const PaymentHistory = () => {
@@ -22,19 +23,22 @@ const PaymentHistory = () => {
   
   return (
     <section className="section">
-     {
-      payments.length ?  <div className="overflow-x-auto">
-        <table className="table">
-          <thead className="text-center">
-            <tr>
-              <th></th>
-              <th>Name</th>
-              <th>Amount</th>
-              <th>Transaction ID</th>
-            </tr>
-          </thead>
-          <tbody className="text-center">
-            {(isLoading || state) ? (
+      <Helmet>
+        <title>Payment History || Pay Per Tasks</title>
+      </Helmet>
+      {payments.length ? (
+        <div className="overflow-x-auto">
+          <table className="table">
+            <thead className="text-center">
+              <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Amount</th>
+                <th>Transaction ID</th>
+              </tr>
+            </thead>
+            <tbody className="text-center">
+              {isLoading || state ? (
                 <>
                   {payments.map((i, index) => (
                     <tr key={index}>
@@ -45,17 +49,24 @@ const PaymentHistory = () => {
                       </td>
                     </tr>
                   ))}
-              </>
-            ) : (
-              <>
-              {
-                payments.map((payment,index) => <PaymentRow key={payment._id} index={index} payment={payment} />)
-              }</>
-            )}
-          </tbody>
-        </table>
-      </div> : <NoData />
-     }
+                </>
+              ) : (
+                <>
+                  {payments.map((payment, index) => (
+                    <PaymentRow
+                      key={payment._id}
+                      index={index}
+                      payment={payment}
+                    />
+                  ))}
+                </>
+              )}
+            </tbody>
+          </table>
+        </div>
+      ) : (
+        <NoData />
+      )}
     </section>
   );
 };

@@ -3,11 +3,16 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { format } from "date-fns";
 import NoData from "../../../components/NoData";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const ManageTask = () => {
   const axiosSecure = useAxiosSecure();
 
-  const { data: tasks = [...Array(10)], isLoading, refetch } = useQuery({
+  const {
+    data: tasks = [...Array(10)],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["tasks"],
     queryFn: async () => {
       const { data } = await axiosSecure("/tasks");
@@ -15,21 +20,24 @@ const ManageTask = () => {
     },
   });
 
-  const {mutateAsync, isPending} = useMutation({
-    mutationFn:async(id) => {
+  const { mutateAsync, isPending } = useMutation({
+    mutationFn: async (id) => {
       const { data } = await axiosSecure.delete(`/task/${id}`);
-      
-      if(data?.deletedCount && data?.modifiedCount) {
+
+      if (data?.deletedCount && data?.modifiedCount) {
         refetch();
-        toast.success('Task deleted successfully');
+        toast.success("Task deleted successfully");
       } else {
-        toast.error('Something went wrong!');
+        toast.error("Something went wrong!");
       }
-    }
-  }) 
+    },
+  });
 
   return (
     <section className="section">
+      <Helmet>
+        <title>Manage Tasks || Pay Per Tasks</title>
+      </Helmet>
       {tasks.length ? (
         <div className="overflow-x-auto">
           <table className="table">
@@ -44,7 +52,7 @@ const ManageTask = () => {
               </tr>
             </thead>
             <tbody className="text-center">
-              {(isLoading || isPending) ? (
+              {isLoading || isPending ? (
                 <>
                   {tasks.map((i, index) => (
                     <tr key={index}>
@@ -65,7 +73,12 @@ const ManageTask = () => {
                       <td>{task?.buyer?.name}</td>
                       <td>{format(new Date(task?.date), "PP")}</td>
                       <td>
-                        <button onClick={async() => await mutateAsync(task?._id)} className="btn btn-sm">Delete</button>
+                        <button
+                          onClick={async () => await mutateAsync(task?._id)}
+                          className="btn btn-sm"
+                        >
+                          Delete
+                        </button>
                       </td>
                     </tr>
                   ))}

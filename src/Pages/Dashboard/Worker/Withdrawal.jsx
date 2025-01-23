@@ -7,6 +7,7 @@ import { useMutation } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 import CrudLoading from "../../../components/CrudLoading";
+import { Helmet } from "react-helmet-async";
 
 const Withdrawal = () => {
   const [coin, isLoading] = useCoin();
@@ -65,6 +66,9 @@ const Withdrawal = () => {
 
   return (
     <section className="section">
+      <Helmet>
+        <title>Withdrawal || Pay Per Tasks</title>
+      </Helmet>
       {isLoading ? (
         <div className="w-full join join-vertical md:join-horizontal gap-[1px]">
           <div className="skeleton h-20 w-full join-item"></div>
@@ -147,18 +151,33 @@ const Withdrawal = () => {
               </div>
 
               <div className="form-control">
-                <label className="label" htmlFor="payment_method">Payment Method</label>
-                <select className="select select-bordered" defaultValue='' name="payment_method" id="payment_method">
-                  <option value=''>Select payment method</option>
-                  <option value='bkash'>Bkash</option>
-                  <option value='nagad'>Nagad</option>
-                  <option value='rocket'>Rocket</option>
+                <label className="label" htmlFor="payment_method">
+                  Payment Method
+                </label>
+                <select
+                  className="select select-bordered"
+                  defaultValue=""
+                  name="payment_method"
+                  id="payment_method"
+                >
+                  <option value="">Select payment method</option>
+                  <option value="bkash">Bkash</option>
+                  <option value="nagad">Nagad</option>
+                  <option value="rocket">Rocket</option>
                 </select>
               </div>
 
               <div className="form-control">
-                <label htmlFor="accountNumber" className="label">Account Number</label>
-                <input type="text" placeholder="Enter Account Number" className="input input-bordered" id="accountNumber" name="accountNumber" />
+                <label htmlFor="accountNumber" className="label">
+                  Account Number
+                </label>
+                <input
+                  type="text"
+                  placeholder="Enter Account Number"
+                  className="input input-bordered"
+                  id="accountNumber"
+                  name="accountNumber"
+                />
               </div>
             </div>
 
@@ -170,7 +189,16 @@ const Withdrawal = () => {
               >
                 Close
               </button>
-              <button disabled={(withdrawCoin > coin) || isClicked || (withdrawCoin < 200)} className="btn bg-main-color/70 hover:bg-main-color" type="submit">{withdrawCoin > coin ? 'Insufficient Coin': 'Submit'}{isPending && <CrudLoading />}</button>
+              <button
+                disabled={
+                  withdrawCoin > coin || isClicked || withdrawCoin < 200
+                }
+                className="btn bg-main-color/70 hover:bg-main-color"
+                type="submit"
+              >
+                {withdrawCoin > coin ? "Insufficient Coin" : "Submit"}
+                {isPending && <CrudLoading />}
+              </button>
             </div>
           </form>
         </div>

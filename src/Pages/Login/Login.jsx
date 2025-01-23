@@ -6,6 +6,7 @@ import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import DefaultLoading from "../../components/DefaultLoading";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
   const [error, setError] = useState("");
@@ -62,6 +63,9 @@ const Login = () => {
   };
   return (
     <section className="section w-full max-w-screen-lg md:flex md:gap-12 md:items-center overflow-x-hidden">
+      <Helmet>
+        <title>Login || Pay Per Tasks</title>
+      </Helmet>
       <div data-aos="fade-right" className="md:flex-1 hidden md:block">
         <Lottie animationData={loginLottie} />
       </div>

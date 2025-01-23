@@ -9,7 +9,7 @@ const ErrorPage = () => {
   return (
     <section className="min-h-screen flex justify-center items-center max-w-screen-xl mx-auto px-4">
       <Helmet>
-        <title>Error || Food Hunter</title>
+        <title>Error || Pay Per Tasks</title>
       </Helmet>
       <div className="p-4 rounded border border-green-500">
         <div>

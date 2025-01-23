@@ -7,6 +7,7 @@ import { BiCoinStack } from "react-icons/bi";
 import ApprovedTask from "./ApprovedTask";
 import NoData from "../../../components/NoData";
 import Heading from "../../../components/Heading";
+import { Helmet } from "react-helmet-async";
 
 const WorkerHome = () => {
   const { user, loading } = useAuth();
@@ -36,6 +37,9 @@ const WorkerHome = () => {
 
   return (
     <section className="section">
+      <Helmet>
+        <title>Worker Home || Pay Per Tasks</title>
+      </Helmet>
       {isLoading ? (
         <div className="w-full join join-vertical lg:join-horizontal gap-[1px]">
           <div className="skeleton h-20 w-full join-item"></div>
@@ -74,7 +78,7 @@ const WorkerHome = () => {
       )}
 
       <div className="mt-12">
-        <Heading heading='Approved Submission' />
+        <Heading heading="Approved Submission" />
       </div>
 
       {approvedTasks?.length ? (

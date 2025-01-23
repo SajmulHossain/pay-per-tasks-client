@@ -7,6 +7,7 @@ import NoData from "../../../components/NoData";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import PendingTaskRow from "./PendingTaskRow";
+import { Helmet } from "react-helmet-async";
 
 const BuyerHome = () => {
   const { user, loading } = useAuth();
@@ -41,6 +42,9 @@ const BuyerHome = () => {
 
   return (
     <section className="section">
+      <Helmet>
+        <title>Buyer Home || Pay Per Tasks</title>
+      </Helmet>
       {isLoading ? (
         <div className="w-full join join-vertical lg:join-horizontal gap-[1px]">
           <div className="skeleton h-20 w-full join-item"></div>
