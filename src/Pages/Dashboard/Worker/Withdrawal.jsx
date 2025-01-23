@@ -18,12 +18,14 @@ const Withdrawal = () => {
 
   const {mutateAsync, isPending} = useMutation({
     mutationFn: async(withdrawData) => {
-      const { data } = await axiosSecure.post(`/withdraws`, withdrawData);
+      const { data } = await axiosSecure.post(`/withdraws/${user?.email}`, withdrawData);
 
       if(data?.insertedId) {
         toast.success('Payment withdraw request sent successfully!');
+      } else if(data?.exist) {
+        toast.error('You already submitted a request. Please wait for confirmation.')
       } else {
-        toast.error('Something went wrong!')
+        toast.error('Something went wrong!');
       }
     }
   })
@@ -35,6 +37,7 @@ const Withdrawal = () => {
     const form = e.target;
     const payment_method = form.payment_method.value;
     const accountNumber = form.accountNumber.value;
+
 
     if(!withdrawCoin || isNaN(withdrawCoin) || !payment_method || !accountNumber ) {
       setIsClicked(false);
@@ -87,7 +90,7 @@ const Withdrawal = () => {
                 <CiDollar size={30} />
               </div>
               <div className="stat-title">Dollars</div>
-              <div className="stat-value">{coin * 0.05}$</div>
+              <div className="stat-value">{(coin * 0.05).toFixed(2)}$</div>
             </div>
           </div>
           <p className="mt-2 italic text-gray-500 text-sm">
@@ -167,7 +170,7 @@ const Withdrawal = () => {
               >
                 Close
               </button>
-              <button disabled={(withdrawCoin > coin) || isClicked} className="btn bg-main-color/70 hover:bg-main-color" type="submit">{withdrawCoin > coin ? 'Insufficient Coin': 'Submit'}{isPending && <CrudLoading />}</button>
+              <button disabled={(withdrawCoin > coin) || isClicked || (withdrawCoin < 200)} className="btn bg-main-color/70 hover:bg-main-color" type="submit">{withdrawCoin > coin ? 'Insufficient Coin': 'Submit'}{isPending && <CrudLoading />}</button>
             </div>
           </form>
         </div>

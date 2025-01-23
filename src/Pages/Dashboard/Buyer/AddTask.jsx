@@ -62,16 +62,6 @@ const AddTask = () => {
     const info = form.submissionInfo.value;
     const details = form.details.value;
 
-    // console.table({
-    //   title,
-    //   workers,
-    //   amount,
-    //   imageFile,
-    //   date: completionDate,
-    //   info,
-    //   details,
-    // });
-
     if (
       !title ||
       !workers ||
@@ -185,7 +175,7 @@ const AddTask = () => {
                 placeholder="Email"
                 name="image"
                 id="image"
-                accept="image/png, image/jpeg, image/jpg"
+                accept="image/png, image/jpeg, image/jpg, image/webp"
                 className="file-input rounded text-main-color file-input-bordered"
                 required
               />

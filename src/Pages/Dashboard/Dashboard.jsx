@@ -9,6 +9,7 @@ import DefaultLoading from "../../components/DefaultLoading";
 import { IoIosLogOut } from "react-icons/io";
 import toast from "react-hot-toast";
 import redirect from "../../utils/redirectRoute";
+import { useEffect } from "react";
 
 const Dashboard = () => {
   const [role, isLoading] = useRole();
@@ -25,6 +26,10 @@ const Dashboard = () => {
         toast.error(err.code);
       });
   };
+
+  useEffect(() => {
+    
+  },[])
   
 
   return (
@@ -44,7 +49,7 @@ const Dashboard = () => {
             </>
           )}
         </div>
-        <div className="drawer-side">
+        <div className="drawer-side z-50">
           <label
             htmlFor="my-drawer-2"
             aria-label="close sidebar"

@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import Heading from "../../components/Heading";
-import { axiosSecureUrl } from "../../hooks/useAxiosSecure";
 import NoData from "../../components/NoData";
 import Task from "../../components/Task";
+import { axiosSecureUrl } from "../../hooks/useAxiosSecure";
 
 const AvailableTask = () => {
-  const { data: tasks = [...Array(8)], isLoading } = useQuery({
+  const { data: tasks = [...Array(6)], isLoading } = useQuery({
     queryKey: ["available-tasks"],
     queryFn: async () => {
       const { data } = await axiosSecureUrl("/available-tasks?limit=6");
@@ -13,23 +13,27 @@ const AvailableTask = () => {
     },
   });
 
+  const latestTasks = tasks.reverse();
+
   
   return (
     <section className="section">
       <Heading heading="Available Task" />
 
       {tasks.length ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {tasks.map((task) => (
-            <>
-              {isLoading ? (
-                <div className="w-full h-80 skeleton"></div>
-              ) : (
-                <Task key={task?._id} task={task} />
-              )}
-            </>
-          ))}
-        </div>
+        <>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {latestTasks.map((task, index) => (
+              <>
+                {isLoading ? (
+                  <div key={index} className="w-full h-80 skeleton"></div>
+                ) : (
+                  <Task key={task?._id} task={task} />
+                )}
+              </>
+            ))}
+          </div>
+        </>
       ) : (
         <NoData />
       )}

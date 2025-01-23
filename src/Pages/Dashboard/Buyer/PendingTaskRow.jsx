@@ -49,6 +49,9 @@ const PendingTaskRow = ({ submission, refetch, index, statesReload }) => {
     mutationFn: async () => {
       const { data } = await axiosSecure.patch(`/submit/reject/${_id}`, {
         taskId,
+        worker_email,
+        buyer_name: user?.displayName,
+        task_title,
       });
       if (data.modifiedCount) {
         toast.success("Rejected Successfully");

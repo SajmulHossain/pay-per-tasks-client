@@ -19,6 +19,7 @@ const DashboardHeader = () => {
 
   const { data: notifications = [...Array(5)],isLoading:noticeLoading } = useQuery({
     queryKey: ["notifications"],
+    enabled: !!user && !loading,
     queryFn: async () => {
       const { data } = await axiosSecure(`/notifications/${user?.email}`);
       return data;
@@ -28,7 +29,7 @@ const DashboardHeader = () => {
   
 
   return (
-    <header className="py-2 relative z-50 border-y lg:sticky lg:top-0 lg:z-50 backdrop-blur-3xl border-main-color">
+    <header className="py-2 z-50 relative border-y lg:sticky lg:top-0 lg:z-50 backdrop-blur-3xl border-main-color">
       <section className="container mx-auto flex px-4 justify-between items-center">
         <div className="flex items-center">
           <label
@@ -49,8 +50,8 @@ const DashboardHeader = () => {
         </div>
 
         {isLoading || loading ? (
-          <div className="w-80">
-            <div className="skeleton w-full h-12"></div>
+          <div className="w-full">
+            <div className="skeleton w-20 h-12"></div>
           </div>
         ) : (
           <div className="flex gap-2 items-center">
@@ -84,9 +85,9 @@ const DashboardHeader = () => {
         )}
       </section>
       <div
-        className={`absolute bg-main-color/80 top-16 right-6 ${
+        className={`absolute z-50 bg-main-color top-16 right-6 ${
           showNotice ? "block" : "hidden"
-        } p-4 rounded z-50 w-60`}
+        } p-4 rounded z-50 w-80 flex flex-col gap-6 max-h-96 overflow-y-auto`}
       >
         {notifications?.length ? (
           <>
@@ -106,7 +107,7 @@ const DashboardHeader = () => {
                         <div>
                           <p className="text-sm">{notice?.message}</p>
                           <p className="mt-1 text-xs">
-                            {formatDistanceToNowStrict(new Date(notice?.time))}{" "}
+                            {formatDistanceToNowStrict(new Date(notice?.time || new Date()))}{" "}
                             ago
                           </p>
                         </div>
