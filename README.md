@@ -3,8 +3,6 @@
 ## Overview
 Pay Per Task is a web application that allows users to complete tasks and get paid instantly. The platform enables employers to post tasks and freelancers to complete them efficiently. The system ensures transparency, security, and ease of payment processing.
 
-## Screenshot
-![Project Screenshot](https://your-image-link.com) *(Replace with an actual screenshot)*
 
 ## Technologies Used
 - React.js
