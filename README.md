@@ -31,8 +31,8 @@ Pay Per Task is a web application that allows users to complete tasks and get pa
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/your-username/pay-per-task.git
-   cd pay-per-task
+   git clone https://github.com/SajmulHossain/pay-per-tasks-client
+   cd pay-per-task-client
    ```
 
 2. **Install dependencies:**
