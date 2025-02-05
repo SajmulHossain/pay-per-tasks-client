@@ -44,18 +44,18 @@ Pay Per Task is a web application that allows users to complete tasks and get pa
    Create a `.env.local` file in the root directory and add:
    ```env
    VITE_apiKey = AIzaSyCrGxq4owJ2iTTXEaV0FqJIj6sjlbkOoJA
-VITE_authDomain = your-domain
-VITE_projectId = your-project-id
-VITE_storageBucket = your-firebase-storageBucket
-VITE_messagingSenderId = your-messageSenderId
-VITE_appId = your-app-id
-VITE_measurementId = your-measurement-id
+   VITE_authDomain = your-domain
+   VITE_projectId = your-project-id
+   VITE_storageBucket = your-firebase-storageBucket
+   VITE_messagingSenderId = your-messageSenderId
+   VITE_appId = your-app-id
+   VITE_measurementId = your-measurement-id
 
-VITE_imgBB_api = your-imgBB-api-key
-# VITE_api_url = http://localhost:3000
-VITE_api_url = your-live-link
+   VITE_imgBB_api = your-imgBB-api-key
+   # VITE_api_url = http://localhost:3000
+   VITE_api_url = your-live-link
 
-VITE_stripe_public_key = your-stripe-key
+   VITE_stripe_public_key = your-stripe-key
    ```
 
 4. **Start the backend server:**
