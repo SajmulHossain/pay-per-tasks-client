@@ -61,4 +61,4 @@ Pay Per Task is a web application that allows users to complete tasks and get pa
 6. Open `http://localhost:3000` in your browser.
 
 ## Live Project & Resources
-- 🔗 [Live Demo]([Live-Link](https://pay-per-tasks.web.app))
+- 🔗 [Live Demo]((https://pay-per-tasks.web.app))
