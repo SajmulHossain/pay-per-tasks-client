@@ -58,18 +58,6 @@ Pay Per Task is a web application that allows users to complete tasks and get pa
    VITE_stripe_public_key = your-stripe-key
    ```
 
-4. **Start the backend server:**
-   ```bash
-   cd backend
-   npm install
-   node server.js
-   ```
-
-5. **Start the frontend:**
-   ```bash
-   npm start
-   ```
-
 6. Open `http://localhost:3000` in your browser.
 
 ## Live Project & Resources
