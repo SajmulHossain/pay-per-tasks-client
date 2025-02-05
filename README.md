@@ -43,7 +43,7 @@ Pay Per Task is a web application that allows users to complete tasks and get pa
 3. **Set up environment variables:**
    Create a `.env.local` file in the root directory and add:
    ```env
-   VITE_apiKey = AIzaSyCrGxq4owJ2iTTXEaV0FqJIj6sjlbkOoJA
+   VITE_apiKey = your-api-key
    VITE_authDomain = your-domain
    VITE_projectId = your-project-id
    VITE_storageBucket = your-firebase-storageBucket
@@ -73,4 +73,4 @@ Pay Per Task is a web application that allows users to complete tasks and get pa
 6. Open `http://localhost:3000` in your browser.
 
 ## Live Project & Resources
-- 🔗 [Live Demo]([https://your-live-demo-link.com](https://pay-per-tasks.web.app))
+- 🔗 [Live Demo]([Live-Link](https://pay-per-tasks.web.app))
