@@ -54,7 +54,7 @@ const Header = () => {
         <div className="flex md:items-center flex-col md:flex-row  gap-1">
           <div className="join join-vertical md:join-horizontal">
             <Link
-              to="https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-SajmulHossain"
+              to="https://github.com/SajmulHossain/pay-per-tasks-client"
               target="_blank"
               className="btn join-item bg-main-color"
             >

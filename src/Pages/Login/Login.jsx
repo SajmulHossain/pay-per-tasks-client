@@ -23,7 +23,7 @@ const Login = () => {
   }
 
   if (user && !loading) {
-    return <Navigate to="/dashboard" replace />;
+    return <Navigate to="/dashboard" replace={true} />;
   }
 
   const handleLogin = (e) => {
