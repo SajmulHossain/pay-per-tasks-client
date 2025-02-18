@@ -1,88 +1,64 @@
-# Pay Per Tasks
+# Pay Per Task
 
-## 📌 Project Overview
-Pay Per Tasks is a Micro-Task and Earning Platform that allows users to complete small tasks and earn money. The platform includes three distinct roles: Worker, Buyer, and Admin, each with specific functionalities to ensure seamless task management, task creation, and platform administration.
+## Overview
+Pay Per Task is a web application that allows users to complete tasks and get paid instantly. The platform enables employers to post tasks and freelancers to complete them efficiently. The system ensures transparency, security, and ease of payment processing.
 
-## 🔑 Admin Credentials
-- **Admin Email:** admin@sajmul.com
-- **Admin Password:** Admin@Sajmul
 
-## 🌐 Live Site URL
-https://pay-per-tasks.web.app
-
-## 📂 GitHub Repository Links
-- **Client Side Repository:** https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-SajmulHossain
-- **Server Side Repository:** https://github.com/Programming-Hero-Web-Course4/b10a12-server-side-SajmulHossain
-
----
-
-## 🚀 Features
-1. **Responsive Design:**
-   - Fully responsive for mobile, tablet, and desktop views, including the dashboard.
-
-2. **User Authentication:**
-   - Email/password login and Google sign-in.
-   - Role-based authentication and protected routes.
-
-3. **Dashboard:**
-   - Different views for Workers, Buyers, and Admins.
-   - Secure authorization with JWT.
-
-4. **Task Management:**
-   - Buyers can create, update, and delete tasks.
-   - Workers can view and submit tasks.
-
-5. **Coin System:**
-   - Workers earn coins for completed tasks.
-   - Buyers can purchase coins using Stripe payments.
-
-6. **Withdrawals:**
-   - Workers can withdraw earnings via multiple payment methods (Bkash, Rocket, Nagad).
-
-7. **Notifications System:**
-   - Notifications for task approvals, rejections, and withdrawals.
-
-8. **Admin Controls:**
-   - Manage users, tasks, and withdrawal requests.
-
-9. **Pagination:**
-   - Paginated task lists and submission pages.
-
-10. **Security Features:**
-   - Sensitive data secured with environment variables.
-   - Proper access control and error handling.
-
----
-
-## 🛠️ Technologies Used
-
-### Frontend:
+## Technologies Used
 - React.js
-- TailwindCSS
+- Tailwind CSS
+- Firebase (Authentication & Database)
+- Express.js (Backend API)
+- MongoDB (Database)
+
+## Core Features
+- User authentication (Sign up, Login, Logout)
+- Task creation and management
+- Payment integration for instant payouts
+- Secure database handling
+- Real-time notifications
+- Responsive design for all devices
+
+## Dependencies
 - React Router
-- Firebase Authentication
-- Swiper.js for sliders
-
-### Backend:
-- Node.js
+- Firebase SDK
+- Axios
 - Express.js
-- MongoDB
-- JWT Authentication
-- Stripe Payment Integration
+- MongoDB Driver
+- TailwindCSS
 
----
+## How to Run the Project Locally
 
-## 🎯 Future Improvements
-- Implement advanced search and filtering.
-- Add automated email notifications.
-- Enhance the reporting system for invalid submissions.
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/SajmulHossain/pay-per-tasks-client
+   cd pay-per-task-client
+   ```
 
----
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-## 🤝 Contributing
-Feel free to contribute to the project by submitting issues or pull requests via GitHub.
+3. **Set up environment variables:**
+   Create a `.env.local` file in the root directory and add:
+   ```env
+   VITE_apiKey = your-api-key
+   VITE_authDomain = your-domain
+   VITE_projectId = your-project-id
+   VITE_storageBucket = your-firebase-storageBucket
+   VITE_messagingSenderId = your-messageSenderId
+   VITE_appId = your-app-id
+   VITE_measurementId = your-measurement-id
 
----
+   VITE_imgBB_api = your-imgBB-api-key
+   # VITE_api_url = http://localhost:3000
+   VITE_api_url = your-live-link
 
-Thank you for visiting **Pay Per Tasks**! 🎉
+   VITE_stripe_public_key = your-stripe-key
+   ```
 
+6. Open `http://localhost:3000` in your browser.
+
+## Live Project & Resources
+- 🔗 [Live Demo](https://pay-per-tasks.web.app)
