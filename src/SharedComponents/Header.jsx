@@ -92,7 +92,7 @@ const Header = () => {
     </>
   );
   return (
-    <header className="backdrop-blur-3xl sticky z-50 top-0 border-y border-main-color">
+    <header className="backdrop-blur-3xl sticky z-50 top-0 bg-main-color">
       <div className="navbar p-0 max-w-screen-xl px-4 mx-auto">
         <div className="navbar-start">
           <div className="dropdown">
@@ -119,7 +119,7 @@ const Header = () => {
               {navbarEnd}
             </ul>
           </div>
-          <Link to="/" className="ml-4 lg:ml-0">
+          <Link to="/" className="ml-4 lg:ml-0 bg-second-color/20 rounded-md">
             <img src={blackLogo} className="h-12 hidden lg:block" alt="logo" />
             <img
               src={simplifiedLogo}
