@@ -10,6 +10,7 @@ import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useRole from "../../hooks/useRole";
 import { formatDistanceToNowStrict } from "date-fns";
+import DarkMode from "../../components/DarkMode";
 
 const DashboardHeader = () => {
   const { user, loading } = useAuth();
@@ -56,7 +57,7 @@ const DashboardHeader = () => {
         ) : (
           <div className="flex gap-2 items-center">
             <div className="flex flex-row-reverse items-center gap-2">
-              <div className="md:flex items-center gap-1 hidden">
+              <div className="md:flex items-center hidden gap-2">
                 <div>
                   <Coin />
                 </div>
@@ -66,6 +67,7 @@ const DashboardHeader = () => {
                   src={user?.photoURL}
                   alt={`${user?.displayName}'s photo`}
                 />
+                <DarkMode />
               </div>
               <div className="w-[2px] h-12 bg-main-color"></div>
               <div>
