@@ -1,3 +1,5 @@
+import { FaRegUser, FaTasks } from "react-icons/fa";
+import { IoHomeOutline } from "react-icons/io5";
 import { NavLink } from "react-router-dom";
 
 
@@ -7,17 +9,17 @@ const AdminNav = ({design}) => {
     <>
       <li>
         <NavLink to="admin-home" className={design}>
-          Home
+          <IoHomeOutline size={24} /> Home
         </NavLink>
       </li>
       <li>
         <NavLink to="manage-users" className={design}>
-          Manage Users
+          <FaRegUser size={24} /> Manage Users
         </NavLink>
       </li>
       <li>
         <NavLink to="manage-tasks" className={design}>
-          Manage Tasks
+          <FaTasks size={24} /> Manage Tasks
         </NavLink>
       </li>
     </>

@@ -140,7 +140,7 @@ useEffect(() => {
       />
       <button
         type="submit"
-        className="w-full btn bg-main-color/90 hover:bg-main-color hover:shadow-md"
+        className="w-full btn bg-main-color/90 dark:text-black hover:bg-main-color hover:shadow-md"
         disabled={!stripe || isDisable}
       >
         Pay ${price}

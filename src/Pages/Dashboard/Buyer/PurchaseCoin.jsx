@@ -56,7 +56,7 @@ const PurchaseCoin = () => {
                     save: 75,
                   })
                 }
-                className="btn w-full bg-main-color hover:bg-inherit"
+                className="btn w-full bg-main-color hover:bg-inherit dark:text-black hover:text-white"
               >
                 Choose this plan
               </button>
@@ -98,7 +98,7 @@ const PurchaseCoin = () => {
                     save: 60,
                   })
                 }
-                className="btn w-full bg-main-color hover:bg-inherit"
+                className="btn w-full bg-main-color hover:bg-inherit dark:text-black hover:text-white"
               >
                 Choose this plan
               </button>
@@ -140,7 +140,7 @@ const PurchaseCoin = () => {
                     save: 66.67,
                   })
                 }
-                className="btn w-full bg-main-color hover:bg-inherit"
+                className="btn w-full bg-main-color hover:bg-inherit dark:text-black hover:text-white"
               >
                 Choose this plan
               </button>
@@ -182,7 +182,7 @@ const PurchaseCoin = () => {
                     save: "00",
                   })
                 }
-                className="btn w-full bg-main-color hover:bg-inherit"
+                className="btn w-full bg-main-color hover:bg-inherit dark:text-black hover:text-white"
               >
                 Choose this plan
               </button>

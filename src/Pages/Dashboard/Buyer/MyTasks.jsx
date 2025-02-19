@@ -31,7 +31,7 @@ const MyTasks = () => {
         <div className="overflow-x-auto">
           <table className="table">
             <thead className="text-center">
-              <tr className="bg-main-color">
+              <tr className="bg-main-color dark:text-black">
                 <th>Title</th>
                 <th>Workers</th>
                 <th>Date</th>

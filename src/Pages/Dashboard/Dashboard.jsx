@@ -16,7 +16,7 @@ const Dashboard = () => {
   const [role, isLoading] = useRole();
   const { loading, logout } = useAuth();
 
-  const active = ({ isActive }) => (isActive ? "bg-main-color" : "");
+  const active = ({ isActive }) => (isActive ? "bg-main-color dark:text-black" : "");
 
   const handleLogOut = () => {
     logout()

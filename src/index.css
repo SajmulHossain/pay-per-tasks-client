@@ -10,7 +10,7 @@
   }
 
   ul li a {
-    @apply border-y;
+    @apply border-y dark:border-y-0;
   }
 }
 
@@ -23,6 +23,10 @@
  
   .btn:hover {
     @apply bg-main-color;
+  }
+
+  .btn {
+    @apply dark:hover:text-black;
   }
   
 }
