@@ -1,4 +1,8 @@
 /* eslint-disable react/prop-types */
+import { BsListTask } from 'react-icons/bs';
+import { FaTasks } from 'react-icons/fa';
+import { IoHomeOutline } from 'react-icons/io5';
+import { PiHandWithdraw } from 'react-icons/pi';
 import { NavLink } from 'react-router-dom';
 
 const WorkerNav = ({design}) => {
@@ -7,23 +11,22 @@ const WorkerNav = ({design}) => {
     <>
       <li>
         <NavLink to="worker-home" className={design}>
-          Home
+          <IoHomeOutline /> Home
         </NavLink>
       </li>
       <li>
         <NavLink to="tasks" className={design}>
-          TaskList
+          <BsListTask /> TaskList
         </NavLink>
       </li>
       <li>
-        <NavLink
-         to="submission" className={design}>
-          My Submissions
+        <NavLink to="submission" className={design}>
+          <FaTasks /> My Submissions
         </NavLink>
       </li>
       <li>
         <NavLink to="withdraw" className={design}>
-          Withdrawals
+          <PiHandWithdraw /> Withdrawals
         </NavLink>
       </li>
     </>

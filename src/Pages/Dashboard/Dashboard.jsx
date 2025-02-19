@@ -9,7 +9,6 @@ import DefaultLoading from "../../components/DefaultLoading";
 import { IoIosLogOut } from "react-icons/io";
 import toast from "react-hot-toast";
 import redirect from "../../utils/redirectRoute";
-import { useEffect } from "react";
 import Footer from "../../SharedComponents/Footer";
 import { IoSettingsOutline } from "react-icons/io5";
 
@@ -28,10 +27,6 @@ const Dashboard = () => {
         toast.error(err.code);
       });
   };
-
-  useEffect(() => {
-    
-  },[])
   
 
   return (
