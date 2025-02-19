@@ -7,7 +7,7 @@ const About = () => {
     <section className="section">
       <Heading heading="About Us" />
 
-      <div className="flex items-center">
+      <div className="flex items-center flex-col lg:flex-row">
         <div>
           <Lottie animationData={aboutLottie} />
         </div>
