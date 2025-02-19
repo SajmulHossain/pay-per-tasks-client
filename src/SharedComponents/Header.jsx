@@ -56,7 +56,7 @@ const Header = () => {
             <Link
               to="https://github.com/SajmulHossain/pay-per-tasks-client"
               target="_blank"
-              className="btn join-item bg-main-color"
+              className="btn join-item bg-main-color dark:bg-second-color dark:text-white"
             >
               Join As Developer
             </Link>
@@ -79,7 +79,7 @@ const Header = () => {
               <>
                 <button
                   onClick={handleLogOut}
-                  className="btn bg-orange-500 join-item"
+                  className="btn bg-red-500 dark:bg-red-700 dark:text-white join-item"
                 >
                   Log Out
                 </button>
@@ -92,7 +92,7 @@ const Header = () => {
     </>
   );
   return (
-    <header className="backdrop-blur-3xl sticky z-50 top-0 bg-main-color">
+    <header className="backdrop-blur-3xl sticky z-50 top-0 bg-main-color dark:bg-opacity-40">
       <div className="navbar p-0 max-w-screen-xl px-4 mx-auto">
         <div className="navbar-start">
           <div className="dropdown">
@@ -119,7 +119,7 @@ const Header = () => {
               {navbarEnd}
             </ul>
           </div>
-          <Link to="/" className="ml-4 lg:ml-0 bg-second-color/20 rounded-md">
+          <Link to="/" className="ml-4 lg:ml-0 bg-second-color/20 dark:bg-main-color/40 rounded-md">
             <img src={blackLogo} className="h-12 hidden lg:block" alt="logo" />
             <img
               src={simplifiedLogo}
