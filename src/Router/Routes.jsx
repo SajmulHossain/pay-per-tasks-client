@@ -23,6 +23,7 @@ import UpdateTask from "../Pages/Dashboard/Buyer/UpdateTask";
 import Payment from "../Pages/Dashboard/Buyer/Payment/Payment";
 import TaskDetails from "../Pages/Dashboard/Worker/TaskDetails";
 import ErrorPage from "../Pages/ErrorPage";
+import Profile from "../Pages/Dashboard/Profile";
 
 const routes = createBrowserRouter([
   {
@@ -59,6 +60,10 @@ const routes = createBrowserRouter([
             <WorkerHome />
           </PrivetRoute>
         ),
+      },
+      {
+        path: 'profile',
+        element: <Profile />
       },
       {
         path: "tasks",

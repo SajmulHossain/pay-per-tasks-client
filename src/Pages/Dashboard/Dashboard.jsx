@@ -1,6 +1,6 @@
 import useRole from "../../hooks/useRole";
 import DashboardHeader from "./DashboardHeader";
-import { Navigate, Outlet } from "react-router-dom";
+import { Link, Navigate, Outlet } from "react-router-dom";
 import WorkerNav from "./Links/WorkerNav";
 import BuyerNav from "./Links/BuyerNav";
 import AdminNav from "./Links/AdminNav";
@@ -11,6 +11,7 @@ import toast from "react-hot-toast";
 import redirect from "../../utils/redirectRoute";
 import { useEffect } from "react";
 import Footer from "../../SharedComponents/Footer";
+import { IoSettingsOutline } from "react-icons/io5";
 
 const Dashboard = () => {
   const [role, isLoading] = useRole();
@@ -73,10 +74,13 @@ const Dashboard = () => {
             {role === "buyer" && <BuyerNav design={active} />}
             {role === "admin" && <AdminNav design={active} />}
 
-            <div className="mt-auto">
+            <div className="mt-auto flex flex-col gap-2">
+              <Link to='profile' className="uppercase transition-all duration-500 font-semibold hover:shadow-md hover:-translate-y-1 bg-main-color px-4 rounded-md text-black w-full flex py-2 items-center gap-2">
+                <IoSettingsOutline size={24} /> Profile
+              </Link>
               <button
                 onClick={handleLogOut}
-                className="uppercase transition-all duration-500 font-semibold hover:shadow-md hover:-translate-y-1 bg-second-color px-4 rounded-md text-white w-full flex py-2 items-center gap-2 "
+                className="uppercase transition-all duration-500 font-semibold hover:shadow-md hover:-translate-y-1 bg-red-500 px-4 rounded-md text-white w-full flex py-2 items-center gap-2"
               >
                 <IoIosLogOut size={24} /> Log out
               </button>

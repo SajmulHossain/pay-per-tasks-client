@@ -5,6 +5,7 @@ import Faq from "./Faq";
 import HomeSlider from "./HomeSlider";
 import States from "./States";
 import Testimonial from "./Testimonial";
+import About from "./About";
 
 
 const Home = () => {
@@ -19,6 +20,7 @@ const Home = () => {
       <BestWorkers />
       <Testimonial />
       <Faq />
+      <About />
     </>
   );
 };
