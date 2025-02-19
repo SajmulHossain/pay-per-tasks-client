@@ -113,7 +113,7 @@ const Login = () => {
             </div>
           </div>
           <div className="form-control mt-6">
-            <button className="btn rounded bg-main-color hover:bg-second-color">
+            <button className="btn rounded bg-main-color dark:bg-second-color dark:text-white hover:bg-second-color">
               Login
             </button>
             <p className="text-sm mt-1">

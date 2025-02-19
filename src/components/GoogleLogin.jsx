@@ -34,7 +34,7 @@ const GoogleLogin = () => {
       <button
         type="button"
         onClick={handleGoogleSignIn}
-        className="btn w-full bg-main-color/20 rounded"
+        className="btn w-full bg-main-color/20 dark:hover:bg-second-color/25 rounded"
       >
         <img src={googleLogo} className="w-8" alt="googleIcon" />
         Log in with google
