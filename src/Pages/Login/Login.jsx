@@ -1,7 +1,7 @@
 import Lottie from "lottie-react";
 import loginLottie from "../../assets/lotties/login.json";
 import GoogleLogin from "../../components/GoogleLogin";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
@@ -13,6 +13,18 @@ const Login = () => {
   const { login, loading, user, setLoading } = useAuth();
   const {state} = useLocation();
   const navigate = useNavigate();
+  const emailRef = useRef(null);
+  const passRef = useRef(null);
+
+  const handleAdminRole = () => {
+    emailRef.current.value = 'admin@sajmul.com';
+    passRef.current.value = 'Admin@Sajmul'
+  }
+
+  const handleBuyerRole = () => {
+    emailRef.current.value = 'buyer@sajmul.com';
+    passRef.current.value = 'Sajmul';
+  }
 
   if (loading) {
     return (
@@ -77,7 +89,10 @@ const Login = () => {
           <h2 className="text-3xl mb-8 text-center border-b border-main-color py-2 font-bold">
             Login now!
           </h2>
-
+          <div className="flex justify-between">
+            <button onClick={handleAdminRole} type="button" className="btn">Admin Credintial</button>
+            <button onClick={handleBuyerRole} type="button" className="btn">Buyer Credintial</button>
+          </div>
           {<p className="text-center text-red-500 text-sm mb-4">{error}</p>}
           <div className="space-y-4">
             <div className="form-control">
@@ -91,6 +106,7 @@ const Login = () => {
                 id="email"
                 className="input rounded input-bordered"
                 required
+                ref={emailRef}
               />
             </div>
             <div className="form-control">
@@ -99,6 +115,7 @@ const Login = () => {
               </label>
               <input
                 type="password"
+                ref={passRef}
                 placeholder="Password"
                 id="password"
                 name="password"

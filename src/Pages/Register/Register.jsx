@@ -104,7 +104,7 @@ const Register = () => {
       <Helmet>
         <title>Register || Pay Per Tasks</title>
       </Helmet>
-      <div data-aos="fade-right" className="md:flex-1 hidden md:block">
+      <div data-aos="fade-right" className="lg:flex-1 hidden lg:block">
         <Lottie animationData={registerLottie} />
       </div>
       <div
